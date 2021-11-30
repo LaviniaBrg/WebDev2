@@ -1,7 +1,7 @@
 //const Datastore = require('nedb');
 //exports.echo = new Datastore({ filename: './databases/echo.db', autoload: true });
 
-const { PromisedDatabase } = require("promised-sqlite3"); // import the class
+import { PromisedDatabase } from "promised-sqlite3"; // import the class
 
 const db = new PromisedDatabase(); // create a instance of PromisedDatabase
 // note: at this stade, the wrapped sqlite3.Database object is not created.
@@ -49,7 +49,7 @@ async function init() {
         // close the database
         await db.close();
 
-    } catch(err) {
+    } catch (err) {
         console.error(err);
     }
 }
