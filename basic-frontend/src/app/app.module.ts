@@ -16,6 +16,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+//import { KundeComponent } from './pages/kunde/kunde.component';
+//import { ArtikelComponent } from './pages/artikel/artikel.component';
+//import { BestellungComponent } from './pages/bestellung/bestellung.component';
 
 registerLocaleData(de);
 
@@ -24,7 +27,8 @@ registerLocaleData(de);
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+
   ],
   imports: [
     CommonModule,
