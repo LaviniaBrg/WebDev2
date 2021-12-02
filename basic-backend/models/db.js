@@ -2,9 +2,10 @@
 const sqlite = require('sqlite3');
 //const Database = require('sqlite3');
 
-const db = new sqlite.Database('../databases/db.sqlite', (err) => {
+const db = new sqlite.Database(`$(__dirname)/../databases/db.sqlite`, (err) => {
     if (err) {
         console.log(err);
+
     } else {
         init();
     }
