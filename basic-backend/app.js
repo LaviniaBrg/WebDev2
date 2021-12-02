@@ -3,11 +3,11 @@ const path = require('path');
 const api = require('./api');
 
 const dotenv = require('dotenv');
-dotenv.config({ path: './config/app.env'});
+dotenv.config({ path: './config/app.env' });
 
 const app = express();
 
-app.use('/api', api);
+//app.use('/api', api);
 
 app.use(express.static(process.env.FRONTEND_DIST_PATH));
 app.use((req, res) => {

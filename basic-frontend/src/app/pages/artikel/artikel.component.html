@@ -1,1 +1,19 @@
 <p>artikel works!</p>
+<table class="Artikeltabelle">
+    <tr>
+        <th>Nummer</th>
+        <th>Name</th>
+        <th>Beschreibung</th>
+        <th>Preis</th>
+        <th></th>
+        <th><button>neu</button></th>
+    </tr>
+    <tr *ngFor="let eintrag of eintraege">
+        <td>{{eintrag.Nummer}}</td>
+        <td>{{eintrag.Name}}</td>
+        <td>{{eintrag.Beschreibung}}</td>
+        <td>{{eintrag.Preis}}</td>
+        <td><a href="">löschen</a></td>
+        <td><a href="">editieren</a></td>
+    </tr>
+</table>
