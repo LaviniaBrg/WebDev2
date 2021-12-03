@@ -1,6 +1,6 @@
 import { db } from './db.js';
 
-async function getAlleArtikel() {
+export async function getAlleArtikel() {
     return new Promise((resolve, reject) => {
         db.all("SELECT * FROM Artikel;", (err, results) => {
             if (err) {
@@ -11,5 +11,3 @@ async function getAlleArtikel() {
         })
     });
 }
-
-export default [getAlleArtikel];

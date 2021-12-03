@@ -1,6 +1,6 @@
-const db = require('./db.js').db;
+import { db } from './db.js';
 
-async function getAlleKunden() {
+export async function getAlleKunden() {
     return new Promise((resolve, reject) => {
         db.all("SELECT * FROM Kunden;", (err, results) => {
             if (err) {
@@ -11,5 +11,3 @@ async function getAlleKunden() {
         })
     });
 }
-
-module.exports = [getAlleKunden];

@@ -1,8 +1,6 @@
-import bestellungenModel from '../models/bestellungen-model';
+import { getAlleBestellungen } from '../models/bestellungen-model.js';
 
-async function fetchAlleBestellungen() {
+export async function fetchAlleBestellungen() {
     const BestellungenUebersicht = await bestellungenModel.getAlleBestellungen();
     return BestellungenUebersicht;
 }
-
-export default [fetchAlleBestellungen];

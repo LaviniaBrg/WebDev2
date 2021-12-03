@@ -3,6 +3,7 @@ import path from 'path';
 import express from 'express';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { router as api } from './api.js';
 
 const __filename = fileURLToPath(
     import.meta.url);
@@ -11,7 +12,7 @@ config({ path: './config/app.env' });
 
 const app = express();
 
-//app.use('/api', api);
+app.use('/api', api);
 
 app.use(express.static(process.env.FRONTEND_DIST_PATH));
 app.use((req, res) => {

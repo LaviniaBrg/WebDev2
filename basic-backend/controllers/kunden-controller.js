@@ -1,10 +1,8 @@
 import { Router } from 'express';
-const router = Router();
-
-import { fetchAlleKunden } from '../services/kunden-service.js';
+export const router = Router();
 
 router.get('/', (req, res) => {
-    fetchAlleKunden().then((KundenUebersicht) => {
+    KundenService.KundenServicefetchAlleKunden().then((KundenUebersicht) => {
         res.status(200);
         res.json(KundenUebersicht);
     }).catch((err) => {
@@ -13,4 +11,4 @@ router.get('/', (req, res) => {
     })
 });
 
-export default router;
+export default KundenUebersicht;

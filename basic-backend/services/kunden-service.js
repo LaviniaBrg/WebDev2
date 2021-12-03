@@ -1,8 +1,6 @@
-import { getAlleKunden } from '../models/kunden-model';
+import { getAlleKunden } from '../models/kunden-model.js';
 
-async function fetchAlleKunden() {
+export async function fetchAlleKunden() {
     const KundenUebersicht = await getAlleKunden();
     return KundenUebersicht;
 }
-
-export default [fetchAlleKunden];

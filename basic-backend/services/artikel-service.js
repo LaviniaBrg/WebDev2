@@ -1,8 +1,6 @@
-import { getAlleArtikel } from '../models/artikel-model';
+import { getAlleArtikel } from '../models/artikel-model.js';
 
-async function fetchAlleArtikel() {
+export async function fetchAlleArtikel() {
     const ArtikelUebersicht = await getAlleArtikel();
     return ArtikelUebersicht;
 }
-
-export default [fetchAlleArtikel];
