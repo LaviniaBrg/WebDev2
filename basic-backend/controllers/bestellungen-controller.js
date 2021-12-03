@@ -1,8 +1,9 @@
 import { Router } from 'express';
+import {fetchAlleBestellungen} from "../services/bestellungen-service.js";
 export const router = Router();
 
 router.get('/', (req, res) => {
-    BestellungenService.BestellungenServicefetchAlleBestellungen().then((BestellungenUebersicht) => {
+    fetchAlleBestellungen().then((BestellungenUebersicht) => {
         res.status(200);
         res.json(BestellungenUebersicht);
     }).catch((err) => {
@@ -10,5 +11,3 @@ router.get('/', (req, res) => {
         res.send();
     })
 });
-
-export default { BestellungenUebersicht };

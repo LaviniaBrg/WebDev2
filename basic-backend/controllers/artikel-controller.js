@@ -1,8 +1,9 @@
 import { Router } from 'express';
+import {fetchAlleArtikel} from "../services/artikel-service.js";
 export const router = Router();
 
 router.get('/', (req, res) => {
-    ArtikelService.fetchAlleArtikel().then((ArtikelUebersicht) => {
+    fetchAlleArtikel().then((ArtikelUebersicht) => {
         res.status(200);
         res.json(ArtikelUebersicht);
     }).catch((err) => {
@@ -10,5 +11,3 @@ router.get('/', (req, res) => {
         res.send();
     })
 });
-
-export default { ArtikelUebersicht };

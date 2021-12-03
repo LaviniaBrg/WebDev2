@@ -3,9 +3,9 @@ import express from 'express';
 export const router = Router();
 
 //import echoController from './controllers/echo';
-import { BestellungenUebersicht } from './controllers/bestellungen-controller.js';
-import { ArtikelUebersicht } from './controllers/artikel-controller.js';
-import { KundenUebersicht } from './controllers/kunden-controller.js';
+import { router as bestellungenRouter } from './controllers/bestellungen-controller.js';
+import { router as artikelRouter } from './controllers/artikel-controller.js';
+import { router as kundenRouter } from './controllers/kunden-controller.js';
 import { logToConsole } from './util/logger.js';
 import cors from "cors";
 
@@ -14,9 +14,9 @@ router.use(express.json());
 router.use(logToConsole);
 
 //router.use('/echo', echoController);
-router.use('/artikel', ArtikelUebersicht);
-router.use('/kunden', KundenUebersicht);
-router.use('/bestellungen', BestellungenUebersicht);
+router.use('/artikel', artikelRouter);
+router.use('/kunden', kundenRouter);
+router.use('/bestellungen', bestellungenRouter);
 
 router.use((req, res) => {
     res.status(404);
