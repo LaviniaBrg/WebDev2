@@ -1,8 +1,8 @@
-const artikelModel = require('../models/artikel-model');
+import { getAlleArtikel } from '../models/artikel-model';
 
 async function fetchAlleArtikel() {
-    const ArtikelUebersicht = await artikelModel.getAlleArtikel();
+    const ArtikelUebersicht = await getAlleArtikel();
     return ArtikelUebersicht;
 }
 
-module.exports = [fetchAlleArtikel];
+export default [fetchAlleArtikel];

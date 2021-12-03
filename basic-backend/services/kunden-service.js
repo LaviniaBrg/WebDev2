@@ -1,8 +1,8 @@
-const kundenModel = require('../models/kunden-model');
+import { getAlleKunden } from '../models/kunden-model';
 
 async function fetchAlleKunden() {
-    const KundenUebersicht = await kundenModel.getAlleKunden();
+    const KundenUebersicht = await getAlleKunden();
     return KundenUebersicht;
 }
 
-module.exports = [fetchAlleKunden];
+export default [fetchAlleKunden];

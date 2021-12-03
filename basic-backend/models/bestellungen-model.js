@@ -1,4 +1,4 @@
-const db = require('./db.js').db;
+import { db } from './db.js';
 
 async function getAlleBestellungen() {
     return new Promise((resolve, reject) => {
@@ -12,4 +12,4 @@ async function getAlleBestellungen() {
     });
 }
 
-module.exports = [getAlleBestellungen];
+export default [getAlleBestellungen];

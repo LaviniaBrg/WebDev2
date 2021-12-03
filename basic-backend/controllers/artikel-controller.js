@@ -1,7 +1,7 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from 'express';
+const router = Router();
 
-const ArtikelService = require('../services/artikel-service.js');
+import ArtikelService from '../services/artikel-service.js';
 
 router.get('/', (req, res) => {
     ArtikelService.fetchAlleArtikel().then((ArtikelUebersicht) => {
@@ -13,4 +13,4 @@ router.get('/', (req, res) => {
     })
 });
 
-module.exports = router;
+export default router;

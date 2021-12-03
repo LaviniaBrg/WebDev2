@@ -1,9 +1,13 @@
-const express = require('express');
-const path = require('path');
-const api = require('./api');
+import { config } from 'dotenv';
+import path from 'path';
+import express from 'express';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-const dotenv = require('dotenv');
-dotenv.config({ path: './config/app.env' });
+const __filename = fileURLToPath(
+    import.meta.url);
+const __dirname = dirname(__filename);
+config({ path: './config/app.env' });
 
 const app = express();
 

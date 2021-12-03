@@ -1,10 +1,10 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from 'express';
+const router = Router();
 
-const KundenService = require('../services/kunden-service.js');
+import { fetchAlleKunden } from '../services/kunden-service.js';
 
 router.get('/', (req, res) => {
-    KundenService.fetchAlleKunden().then((KundenUebersicht) => {
+    fetchAlleKunden().then((KundenUebersicht) => {
         res.status(200);
         res.json(KundenUebersicht);
     }).catch((err) => {
@@ -13,4 +13,4 @@ router.get('/', (req, res) => {
     })
 });
 
-module.exports = router;
+export default router;

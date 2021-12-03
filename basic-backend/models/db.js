@@ -1,11 +1,10 @@
 //import { PromisedDatabase } from "promised-sqlite3"; // import the class
-const sqlite = require('sqlite3');
+import { Database } from 'sqlite3';
 //const Database = require('sqlite3');
 
-const db = new sqlite.Database(`$(__dirname)/../databases/db.sqlite`, (err) => {
+const db = new Database(`$(__dirname)/../databases/db.sqlite`, (err) => {
     if (err) {
         console.log(err);
-
     } else {
         init();
     }
@@ -22,4 +21,4 @@ function init() {
     db.run("CREATE TABLE IF NOT EXISTS Rechnungen (RechnungsNr INTEGER PRIMARY KEY NOT NULL, RechnungsDatum Date, BestellNr INTEGER, KundenNr INTEGER, ReAdressNr INTEGER, BestellPosNr INTEGER, FOREIGN KEY (BestellNr) REFERENCES Bestellungen(BestellNr), FOREIGN KEY (KundenNr) REFERNECES Kunden(KundenNr), FOREIGN KEY (ReAdressNr) REFERNECES RechnungsAdressen(ReAdressNr), FOREIGN KEY (BestellPosNr) REFERENCES Bestellpositionen(BestellPosNr)");
 }
 
-module.exports = db;
+export default db;

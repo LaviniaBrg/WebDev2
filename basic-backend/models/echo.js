@@ -1,10 +1,10 @@
-const db = require('./db.js');
+import { echo } from './db.js';
 
-exports.createEchoLog = (message, callback) => {
+export function createEchoLog(message, callback) {
     const doc = {
         message: message
     };
-    db.echo.insert(doc, (err, newDoc) => {
+    echo.insert(doc, (err, newDoc) => {
         if (err) {
             callback(err, null);
         } else {
@@ -12,8 +12,8 @@ exports.createEchoLog = (message, callback) => {
         }
     });
 }
-exports.queryEchos = (containsString, callback) => {
-    db.echo.find(containsString ? { message: new RegExp(containsString) } : {}, (err, data) => {
+export function queryEchos(containsString, callback) {
+    echo.find(containsString ? { message: new RegExp(containsString) } : {}, (err, data) => {
         if (err) {
             callback(err, null);
         } else {

@@ -1,21 +1,25 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from 'express';
+const router = Router();
 
-const echoController = require('./controllers/echo');
-const artikelController = require('./controllers/artikel-controller').default;
-const logger = require('./util/logger');
-const cors = require("cors");
-/*
+import echoController from './controllers/echo';
+import artikelController from './controllers/artikel-controller';
+import bestellungenController from './controllers/bestellungen-controller';
+import kundenController from './controllers/kunden-controller';
+import logger from './util/logger';
+import cors from "cors";
+
 router.use(cors());
 router.use(express.json());
 router.use(logger.logToConsole);
 
 router.use('/echo', echoController);
 router.use('/artikel', artikelController);
+router.use('/kunden', kundenController);
+router.use('/bestellungen', bestellungenController);
 
 router.use((req, res) => {
     res.status(404);
     res.send('Route does not exist');
 });
-*/
-module.exports = router;
+
+export default router;

@@ -1,12 +1,12 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from 'express';
+const router = Router();
 
-const echoService = require('../services/echo.js');
+import { saveEcho, listEchos } from '../services/echo.js';
 
 router.post('/', validateEcho, (req, res) => {
     const message = req.body.message;
 
-    echoService.saveEcho(message, (err, data) => {
+    saveEcho(message, (err, data) => {
         if (err) {
             res.status(500);
             res.send(err.message);
@@ -17,7 +17,7 @@ router.post('/', validateEcho, (req, res) => {
 });
 router.get('/', (req, res) => {
     const containsString = req.query.contains;
-    echoService.listEchos(containsString, (err, data) => {
+    listEchos(containsString, (err, data) => {
         if (err) {
             res.status(500);
             res.send(err.message);
@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
     });
 });
 
-function validateEcho (req, res, next) {
+function validateEcho(req, res, next) {
     if (req.body.message) {
         next();
     } else {
@@ -36,4 +36,4 @@ function validateEcho (req, res, next) {
     }
 }
 
-module.exports = router;
+export default router;

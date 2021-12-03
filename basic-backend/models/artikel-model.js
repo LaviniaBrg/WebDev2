@@ -1,4 +1,4 @@
-const db = require('./db.js').db;
+import { db } from './db.js';
 
 async function getAlleArtikel() {
     return new Promise((resolve, reject) => {
@@ -12,4 +12,4 @@ async function getAlleArtikel() {
     });
 }
 
-module.exports = [getAlleArtikel];
+export default [getAlleArtikel];
