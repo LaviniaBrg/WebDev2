@@ -1,8 +1,4 @@
-//import { PromisedDatabase } from "promised-sqlite3"; // import the class
-// noinspection SqlNoDataSourceInspection
-
 import sqlite from 'sqlite3';
-//const Database = require('sqlite3');
 
 export const db = new sqlite.Database('./databases/db.sqlite', (err) => {
     if (err) {
@@ -69,4 +65,23 @@ function init() {
             FOREIGN KEY (KundenNr) REFERENCES Kunden(KundenNr), 
             FOREIGN KEY (ReAdressNr) REFERENCES RechnungsAdressen(ReAdressNr), 
             FOREIGN KEY (BestellPosNr) REFERENCES Bestellpositionen(BestellPosNr))`);
+
+    db.run(`INSERT INTO Kunden VALUES 
+            (1, 'Frau', 'Lavinia', 'Berger', 'Alexanderstraße 146 70180 Stuttgart', 'Alexanderstraße 146 70180 Stuttgart'),
+            (2, 'Herr', 'Max', 'Mustermann', 'Musterstraße 1 12345 Musterort', 'Musterstraße 1 12345 Musterort'),
+            (3, 'Herr', 'Harry', 'Potter', 'Ligusterweg 4 01980 Little Whining', 'Ligusterweg 4 01980 Little Whining')
+            (4, 'Frau', 'Hermoine', 'Granger', 'KeineAhnungWoDieWohnt 9 01979 London', 'KeineAhnungWoDieWohnt 9 01979 London')`);
+
+    db.run(`INSERT INTO Artikel VALUES 
+            ( 1, 'Haare blond', '50 cm lang mittelblond Naturwelle 100g', '49.90'),
+            ( 2, 'Haare braun', '50 cm lang haselnussbraun Naturwelle 100g', '49.90'),
+            ( 3, 'Haare schwarz', '50 cm lang schwarz Naturwelle 100g', '49.90'),
+            ( 4, 'Haare rot', '50 cm karminrot Naturwelle 100g', '49.90')`);
+
+    db.run(`INSERT INTO Bestellungen VALUES
+            (11, 'eingegangen', '01.01.2001', NULL, NULL, 1, 2,),
+            (12, ),
+            (13, ),
+            (14, )`);
+
 }
