@@ -1,6 +1,6 @@
 import sqlite from 'sqlite3';
 
-export const db = new sqlite.Database('./databases/db.sqlite', (err) => {
+export const db = new sqlite.Database('../databases/db.sqlite', (err) => {
     if (err) {
         console.log(err);
     } else {
@@ -92,16 +92,16 @@ function init() {
             ( 4, 'Haare rot', '50 cm karminrot Naturwelle 100g', '49.90')`);
 
     db.run(`INSERT INTO Bestellpositionen VALUES
-            (1, 11, 1, 'Haare blond', '49.90', 2),
-            (2, 11, 3, 'Haare schwarz', '49.90', 1),
-            (3, 12, 4, 'Haare rot', '49.90', 10),
-            (4, 13, 2, 'Haare braun', '49.90', 4),
-            (5, 13, 3, 'Haare schwarz', '49.90', 5),
-            (6, 13, 4, 'Haare rot', '49.90', 1),
-            (7, 13, 1, 'Haare blond', '49.90', 3),
-            (8, 14, 1, 'Haare blond', '49.90', 1),
-            (9, 14, 3, 'Haare schwarz', '49.90', 2),
-            (10, 14, 4, 'Haare rot', '49.90', 1)`);
+            (1, 1, 11, 1, 'Haare blond', '49.90', 2),
+            (2, 2, 11, 3, 'Haare schwarz', '49.90', 1),
+            (3, 1, 12, 4, 'Haare rot', '49.90', 10),
+            (4, 1, 13, 2, 'Haare braun', '49.90', 4),
+            (5, 2, 13, 3, 'Haare schwarz', '49.90', 5),
+            (6, 3, 13, 4, 'Haare rot', '49.90', 1),
+            (7, 4, 13, 1, 'Haare blond', '49.90', 3),
+            (8, 1, 14, 1, 'Haare blond', '49.90', 1),
+            (9, 2, 14, 3, 'Haare schwarz', '49.90', 2),
+            (10, 3, 14, 4, 'Haare rot', '49.90', 1)`);
 
     db.run(`INSERT INTO Bestellungen VALUES
             (11, 'eingegangen', '01.01.2001', NULL, NULL, 1, 1, 1),
