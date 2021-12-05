@@ -22,6 +22,18 @@ function run (sqlString, params) {
     });
 }
 
+function get(sqlstring, parameters){
+    return new Promise((resolve, reject) => {
+        db.get(sqlstring, parameters, (err, row) => {
+            if (err) {
+                rejec(err)
+            } else {
+                resolve(row)
+            }
+        });
+    });
+}
+
 async function init() {
     await run (`PRAGMA foreign_keys = ON;`, []);
 
@@ -100,48 +112,58 @@ async function init() {
                     FOREIGN KEY (ReAdressNr) REFERENCES RechnungsAdressen (ReAdressNr)
                 );`, []);
 
-    await run (`INSERT INTO Artikel
-                VALUES (1, 'Haare blond', '50 cm lang mittelblond Naturwelle 100g', '49.90'),
-                       (2, 'Haare braun', '50 cm lang haselnussbraun Naturwelle 100g', '49.90'),
-                       (3, 'Haare schwarz', '50 cm lang schwarz Naturwelle 100g', '49.90'),
-                       (4, 'Haare rot', '50 cm karminrot Naturwelle 100g', '49.90');`, []);
+    await run (`CREATE TABLE IF NOT EXISTS DummyZurPruefung 
+                (
+                    ID INTEGER PRIMARY KEY NOT NULL
+                );`, []);
 
-    await run (`INSERT INTO Kunden
-                VALUES (1, 'Frau', 'Lavinia', 'Berger', 1, 1),
-                       (2, 'Herr', 'Max', 'Mustermann', 2, 2),
-                       (3, 'Herr', 'Harry', 'Potter', 3, 3),
-                       (4, 'Frau', 'Hermoine', 'Granger', 4, 4);`, []);
+    const row = await get(`SELECT * FROM DummyZurPruefung WHERE id = ?;`, [1])
+    if(row) {
+        console.log("Datenbank wird wiederverwendet")
+    } else {
+        await run(`INSERT INTO DummyZurPruefung (id) VALUES (?);`, [1]) //Item zum merken ob Elemente schon vorhanden sind
 
-    await run (`INSERT INTO RechnungsAdressen
-                VALUES (1, 1, 'Alexanderstraße 146 70180 Stuttgart'),
-                       (2, 2, 'Musterstraße 1 12345 Musterort'),
-                       (3, 3, 'Ligusterweg 4 01980 Little Whining'),
-                       (4, 4, 'KeineAhnungWoDieWohnt 9 01979 London');`, []);
+        await run(`INSERT INTO Artikel
+                   VALUES (1, 'Haare blond', '50 cm lang mittelblond Naturwelle 100g', '49.90'),
+                          (2, 'Haare braun', '50 cm lang haselnussbraun Naturwelle 100g', '49.90'),
+                          (3, 'Haare schwarz', '50 cm lang schwarz Naturwelle 100g', '49.90'),
+                          (4, 'Haare rot', '50 cm karminrot Naturwelle 100g', '49.90');`, []);
 
-    await run (`INSERT INTO LieferAdressen
-                VALUES (1, 1, 'Alexanderstraße 146 70180 Stuttgart'),
-                       (2, 2, 'Musterstraße 1 12345 Musterort'),
-                       (3, 3, 'Ligusterweg 4 01980 Little Whining'),
-                       (4, 4, 'KeineAhnungWoDieWohnt 9 01979 London');`, []);
+        await run(`INSERT INTO Kunden
+                   VALUES (1, 'Frau', 'Lavinia', 'Berger', 1, 1),
+                          (2, 'Herr', 'Max', 'Mustermann', 2, 2),
+                          (3, 'Herr', 'Harry', 'Potter', 3, 3),
+                          (4, 'Frau', 'Hermoine', 'Granger', 4, 4);`, []);
 
-    await run (`INSERT INTO Bestellungen
-                VALUES (11, 'eingegangen', '01.01.2001', NULL, NULL, 1, 1, 1),
-                       (12, 'in Bearbeitung', '05.05.2009', '06.05.2009', NULL, 1, 1, 1),
-                       (13, 'eingegangen', '27.04.2012', NULL, NULL, 4, 4, 4),
-                       (14, 'abgeschlossen', '13.02.2010', '16.02.2010', '14.02.2010', 3, 3, 3);`, []);
+        await run(`INSERT INTO RechnungsAdressen
+                   VALUES (1, 1, 'Alexanderstraße 146 70180 Stuttgart'),
+                          (2, 2, 'Musterstraße 1 12345 Musterort'),
+                          (3, 3, 'Ligusterweg 4 01980 Little Whining'),
+                          (4, 4, 'KeineAhnungWoDieWohnt 9 01979 London');`, []);
 
-    await run (`INSERT INTO Bestellpositionen
-                VALUES (1, 1, 11, 1, 'Haare blond', '49.90', 2),
-                       (2, 2, 11, 3, 'Haare schwarz', '49.90', 1),
-                       (3, 1, 12, 4, 'Haare rot', '49.90', 10),
-                       (4, 1, 13, 2, 'Haare braun', '49.90', 4),
-                       (5, 2, 13, 3, 'Haare schwarz', '49.90', 5),
-                       (6, 3, 13, 4, 'Haare rot', '49.90', 1),
-                       (7, 4, 13, 1, 'Haare blond', '49.90', 3),
-                       (8, 1, 14, 1, 'Haare blond', '49.90', 1),
-                       (9, 2, 14, 3, 'Haare schwarz', '49.90', 2),
-                       (10, 3, 14, 4, 'Haare rot', '49.90', 1);`, []);
+        await run(`INSERT INTO LieferAdressen
+                   VALUES (1, 1, 'Alexanderstraße 146 70180 Stuttgart'),
+                          (2, 2, 'Musterstraße 1 12345 Musterort'),
+                          (3, 3, 'Ligusterweg 4 01980 Little Whining'),
+                          (4, 4, 'KeineAhnungWoDieWohnt 9 01979 London');`, []);
 
+        await run(`INSERT INTO Bestellungen
+                   VALUES (11, 'eingegangen', '01.01.2001', NULL, NULL, 1, 1, 1),
+                          (12, 'in Bearbeitung', '05.05.2009', '06.05.2009', NULL, 1, 1, 1),
+                          (13, 'eingegangen', '27.04.2012', NULL, NULL, 4, 4, 4),
+                          (14, 'abgeschlossen', '13.02.2010', '16.02.2010', '14.02.2010', 3, 3, 3);`, []);
 
+        await run(`INSERT INTO Bestellpositionen
+                   VALUES (1, 1, 11, 1, 'Haare blond', '49.90', 2),
+                          (2, 2, 11, 3, 'Haare schwarz', '49.90', 1),
+                          (3, 1, 12, 4, 'Haare rot', '49.90', 10),
+                          (4, 1, 13, 2, 'Haare braun', '49.90', 4),
+                          (5, 2, 13, 3, 'Haare schwarz', '49.90', 5),
+                          (6, 3, 13, 4, 'Haare rot', '49.90', 1),
+                          (7, 4, 13, 1, 'Haare blond', '49.90', 3),
+                          (8, 1, 14, 1, 'Haare blond', '49.90', 1),
+                          (9, 2, 14, 3, 'Haare schwarz', '49.90', 2),
+                          (10, 3, 14, 4, 'Haare rot', '49.90', 1);`, []);
+    }
 }
 
