@@ -1,4 +1,6 @@
-import sqlite from 'sqlite3';
+import sqlite3 from 'sqlite3';
+
+const sqlite = sqlite3.verbose();
 
 export const db = new sqlite.Database('./databases/db.sqlite', (err) => {
     if (err) {
@@ -21,7 +23,7 @@ function run (sqlString, params) {
 }
 
 async function init() {
-    await run( `PRAGMA foreign_keys = ON;`, []);
+    await run (`PRAGMA foreign_keys = ON;`, []);
 
     await run (`CREATE TABLE IF NOT EXISTS Artikel
                 (
@@ -31,7 +33,7 @@ async function init() {
                     ArtikelPreis        DECIMAL(6, 2)
                 );`, []);
 
-    await run(`CREATE TABLE IF NOT EXISTS Kunden
+    await run (`CREATE TABLE IF NOT EXISTS Kunden
                 (
                     KundenNr       INTEGER PRIMARY KEY NOT NULL,
                     KundenAnrede   VARCHAR(10),
@@ -92,23 +94,23 @@ async function init() {
                     BestellNr      INTEGER,
                     KundenNr       INTEGER,
                     ReAdressNr     INTEGER,
-                    BestellPosNr   INTEGER,
                     FOREIGN KEY (BestellNr)
                     REFERENCES Bestellungen (BestellNr),
                     FOREIGN KEY (KundenNr) REFERENCES Kunden (KundenNr),
-                    FOREIGN KEY (ReAdressNr) REFERENCES RechnungsAdressen (ReAdressNr),
-                    FOREIGN KEY (BestellPosNr) REFERENCES Bestellpositionen (BestellPosNr)
+                    FOREIGN KEY (ReAdressNr) REFERENCES RechnungsAdressen (ReAdressNr)
                 );`, []);
 
+    await run (`INSERT INTO Artikel
+                VALUES (1, 'Haare blond', '50 cm lang mittelblond Naturwelle 100g', '49.90'),
+                       (2, 'Haare braun', '50 cm lang haselnussbraun Naturwelle 100g', '49.90'),
+                       (3, 'Haare schwarz', '50 cm lang schwarz Naturwelle 100g', '49.90'),
+                       (4, 'Haare rot', '50 cm karminrot Naturwelle 100g', '49.90');`, []);
+
     await run (`INSERT INTO Kunden
-                VALUES (1, 'Frau', 'Lavinia', 'Berger', 'Alexanderstraße 146 70180 Stuttgart',
-                        'Alexanderstraße 146 70180 Stuttgart'),
-                       (2, 'Herr', 'Max', 'Mustermann', 'Musterstraße 1 12345 Musterort',
-                        'Musterstraße 1 12345 Musterort'),
-                       (3, 'Herr', 'Harry', 'Potter', 'Ligusterweg 4 01980 Little Whining',
-                        'Ligusterweg 4 01980 Little Whining'),
-                       (4, 'Frau', 'Hermoine', 'Granger', 'KeineAhnungWoDieWohnt 9 01979 London',
-                        'KeineAhnungWoDieWohnt 9 01979 London');`, []);
+                VALUES (1, 'Frau', 'Lavinia', 'Berger', 1, 1),
+                       (2, 'Herr', 'Max', 'Mustermann', 2, 2),
+                       (3, 'Herr', 'Harry', 'Potter', 3, 3),
+                       (4, 'Frau', 'Hermoine', 'Granger', 4, 4);`, []);
 
     await run (`INSERT INTO RechnungsAdressen
                 VALUES (1, 1, 'Alexanderstraße 146 70180 Stuttgart'),
@@ -122,11 +124,11 @@ async function init() {
                        (3, 3, 'Ligusterweg 4 01980 Little Whining'),
                        (4, 4, 'KeineAhnungWoDieWohnt 9 01979 London');`, []);
 
-    await run (`INSERT INTO Artikel
-                VALUES (1, 'Haare blond', '50 cm lang mittelblond Naturwelle 100g', '49.90'),
-                       (2, 'Haare braun', '50 cm lang haselnussbraun Naturwelle 100g', '49.90'),
-                       (3, 'Haare schwarz', '50 cm lang schwarz Naturwelle 100g', '49.90'),
-                       (4, 'Haare rot', '50 cm karminrot Naturwelle 100g', '49.90');`, []);
+    await run (`INSERT INTO Bestellungen
+                VALUES (11, 'eingegangen', '01.01.2001', NULL, NULL, 1, 1, 1),
+                       (12, 'in Bearbeitung', '05.05.2009', '06.05.2009', NULL, 1, 1, 1),
+                       (13, 'eingegangen', '27.04.2012', NULL, NULL, 4, 4, 4),
+                       (14, 'abgeschlossen', '13.02.2010', '16.02.2010', '14.02.2010', 3, 3, 3);`, []);
 
     await run (`INSERT INTO Bestellpositionen
                 VALUES (1, 1, 11, 1, 'Haare blond', '49.90', 2),
@@ -140,10 +142,6 @@ async function init() {
                        (9, 2, 14, 3, 'Haare schwarz', '49.90', 2),
                        (10, 3, 14, 4, 'Haare rot', '49.90', 1);`, []);
 
-    await run (`INSERT INTO Bestellungen
-                VALUES (11, 'eingegangen', '01.01.2001', NULL, NULL, 1, 1, 1),
-                       (12, 'in Bearbeitung', '05.05.2009', '06.05.2009', NULL, 1, 1, 1),
-                       (13, 'eingegangen', '27.04.2012', NULL, NULL, 4, 4, 4),
-                       (14, 'abgeschlossen', '13.02.2010', '16.02.2010', '14.02.2010', 3, 3, 3);`, []);
+
 }
 
