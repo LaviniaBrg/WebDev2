@@ -6,29 +6,32 @@
             [(nzCollapsed)]="isCollapsed"
             [nzTrigger]="null">
     <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
+      <a href="/welcome">
         <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-        <h1>Ant Design Of Angular</h1>
+        <h1>Verwaltung</h1>
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Welcome</a>
+            <a routerLink="/welcome">Startseite</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a>Monitor</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Workplace</a>
+            <a routerLink="/artikel">Artikel</a>
           </li>
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+      <li nz-submenu nzOpen nzTitle="Versand" nzIcon="form">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a>Basic Form</a>
+            <a routerLink="/bestellungen">Bestellungen</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/bestellungen/lieferscheine">Lieferscheine</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/bestellungen/rechnungen">Rechnungen</a>
           </li>
         </ul>
       </li>
