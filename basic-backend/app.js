@@ -1,9 +1,14 @@
-const express = require('express');
-const path = require('path');
-const api = require('./api');
+import { config } from 'dotenv';
+import path from 'path';
+import express from 'express';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { router as api } from './api.js';
 
-const dotenv = require('dotenv');
-dotenv.config({ path: './config/app.env'});
+const __filename = fileURLToPath(
+    import.meta.url);
+const __dirname = dirname(__filename);
+config({ path: './config/app.env' });
 
 const app = express();
 
@@ -11,6 +16,8 @@ app.use('/api', api);
 
 app.use(express.static(process.env.FRONTEND_DIST_PATH));
 app.use((req, res) => {
+    //res.sendFile(path.join(__dirname, '../basic-frontend/src', 'index.html'));
+    console.log(`Hier bin ich`)
     res.sendFile(path.join(__dirname, process.env.FRONTEND_DIST_PATH, 'index.html'))
 });
 
