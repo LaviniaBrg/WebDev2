@@ -12,7 +12,6 @@ import cors from "cors";
 router.use(cors());
 router.use(express.json());
 router.use(logToConsole);
-
 //router.use('/echo', echoController);
 router.use('/artikel', artikelRouter);
 router.use('/kunden', kundenRouter);
