@@ -52,7 +52,7 @@ async function init() {
                     KundenVorname  VARCHAR(20),
                     KundenNachname VARCHAR(15),
                     ReAdressNr     INTEGER,
-                    LiAdressNR     INTEGER
+                    LiAdressNr     INTEGER
                 );`, [])
 
     await run (`CREATE TABLE IF NOT EXISTS RechnungsAdressen
