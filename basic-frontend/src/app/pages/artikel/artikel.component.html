@@ -1,19 +1,21 @@
-<p>artikel works!</p>
-<nz-table class="Artikeltabelle">
+<nz-table #basicTable>
+  <thead>
     <tr>
-        <th>Nummer</th>
-        <th>Name</th>
-        <th>Beschreibung</th>
-        <th>Preis</th>
-        <th></th>
-        <th><button>neu</button></th>
+      <th>Artikelnummer</th>
+      <th>Name</th>
+      <th>Beschreibung</th>
+      <th>Preis</th>
+      <th colspan="2">Bearbeiten</th>
     </tr>
+  </thead>
+  <tbody>
     <tr *ngFor="let artikel of eintraege">
-        <td>{{artikel.ArtikelNr}}</td>
-        <td>{{artikel.ArtikelName}}</td>
-        <td>{{artikel.ArtikelBeschreibung}}</td>
-        <td>{{artikel.ArtikelPreis}}</td>
-        <td><a href="">löschen</a></td>
-        <td><a href="">editieren</a></td>
+      <td>{{artikel.ArtikelNr}}</td>
+      <td>{{artikel.ArtikelName}}</td>
+      <td>{{artikel.ArtikelBeschreibung}}</td>
+      <td>{{artikel.ArtikelPreis}}</td>
+      <td><a href="">löschen</a></td>
+      <td><a href="">editieren</a></td>
     </tr>
+  </tbody>
 </nz-table>

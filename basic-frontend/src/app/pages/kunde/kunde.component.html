@@ -1,25 +1,25 @@
 <nz-table #basicTable>
   <thead>
-  <tr>
-    <th>Kundennummer</th>
-    <th>Anrede</th>
-    <th>Vorname</th>
-    <th>Nachname</th>
-    <th>Rechnungsadresse</th>
-    <th>Lieferadresse</th>
-    <th colspan="2">Bearbeiten</th>
-  </tr>
+    <tr>
+      <th>Kundennummer</th>
+      <th>Anrede</th>
+      <th>Vorname</th>
+      <th>Nachname</th>
+      <th>Rechnungsadresse</th>
+      <th>Lieferadresse</th>
+      <th colspan="2">Bearbeiten</th>
+    </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let kunde of eintraege">
-    <td>{{ kunde.KundenNr }}</td>
-    <td>{{ kunde.KundenAnrede }}</td>
-    <td>{{ kunde.KundenVorname }}</td>
-    <td>{{ kunde.KundenNachname }}</td>
-    <td>{{ kunde.ReAdressNr }}</td>
-    <td>{{ kunde.LiAdressNr }}</td>
-    <td><a href="">löschen</a></td>
-    <td><a href="">editieren</a></td>
-  </tr>
+    <tr *ngFor="let kunde of eintraege">
+      <td>{{ kunde.KundenNr }}</td>
+      <td>{{ kunde.KundenAnrede }}</td>
+      <td>{{ kunde.KundenVorname }}</td>
+      <td>{{ kunde.KundenNachname }}</td>
+      <td>{{ kunde.ReAdressNr }}</td>
+      <td>{{ kunde.LiAdressNr }}</td>
+      <td><a href="">löschen</a></td>
+      <td><a href="">editieren</a></td>
+    </tr>
   </tbody>
 </nz-table>

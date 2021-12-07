@@ -1,14 +1,8 @@
-import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
-import {CreateEchoInput, Echo} from '../../models/echo.model';
-import {catchError} from 'rxjs/operators';
 import {Artikel} from "../../models/artikel.model";
 import {Kunde} from "../../models/kunde.model";
 
-@Injectable({
-  providedIn: 'root'
-})
+
 export class ApiService {
 
   private readonly baseUrl = 'http://localhost:3000/api';
@@ -24,4 +18,3 @@ export class ApiService {
     return this.http.get<Kunde[]>(`${this.baseUrl}/kunden`)
   }
 }
-
