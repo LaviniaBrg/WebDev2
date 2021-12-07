@@ -1,15 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.css']
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent  {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+
 
 }
+
+@Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'nz-demo-button-basic',
+  template: `
+    <button nz-button nzType="primary">Primary Button</button>
+    <button nz-button nzType="default">Default Button</button>
+    <button nz-button nzType="dashed">Dashed Button</button>
+    <button nz-button nzType="text">Text Button</button>
+    <a nz-button nzType="link">Link Button</a>
+  `,
+  styles: [
+    `
+      [nz-button] {
+        margin-right: 8px;
+        margin-bottom: 12px;
+      }
+    `
+  ]
+})
+export class NzDemoButtonBasicComponent {}
