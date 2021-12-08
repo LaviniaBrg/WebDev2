@@ -16,12 +16,14 @@ const routes: Routes = [
   { path: 'impressum', loadChildren: () => import('./core/impressum/impressum.module').then(m => m.Impressum2Module) },
   { path: 'bestellungen/rechnungen', loadChildren: () => import('./pages/bestellung/rechnungen/rechnungen.module').then(m => m.RechnungenModule) },
   { path: 'bestellungen/lieferscheine', loadChildren: () => import('./pages/bestellung/lieferscheine/lieferscheine.module').then(m => m.LieferscheineModule) },
-  { path: 'kunden/kundeBearbeitung', loadChildren: () => import('./pages/kunde/kunde-bearbeitung/kunde-bearbeitung.module').then(m => m.KundeBearbeitungModule) },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'user', component: BoardUserComponent },
+  { path: 'kunden/kundeBearbeiten', loadChildren: () => import('./pages/kunde/kunde-bearbeiten/kunde-bearbeiten.module').then(m => m.KundeBearbeitenModule) },
+  { path: 'artikel/artikelBearbeiten', loadChildren: () => import('./pages/artikel/artikel-bearbeiten/artikel-bearbeiten.module').then(m => m.ArtikelBearbeitenModule) },
+  { path: 'bestellungen/bestellungBearbeiten', loadChildren: () => import('./pages/bestellung/bestellung-bearbeiten/bestellung-bearbeiten.module').then(m => m.BestellungBearbeitenModule) }
 ];
 
 @NgModule({

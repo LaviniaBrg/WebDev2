@@ -1,1 +1,28 @@
-<p>bestellung works!</p>
+<nz-table #basicTable>
+  <thead>
+    <tr>
+      <th>Bestellnummer</th>
+      <th>Bestellstatus</th>
+      <th>Bestelldatum</th>
+      <th>Lieferdatum geplant</th>
+      <th>Versanddatum</th>
+      <th>Kundennummer</th>
+      <th>RechnungsadressNr.</th>
+      <th>LieferadressNr.</th>
+      <th colspan="2">Bearbeiten</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let bestellung of eintraege">
+      <td>{{ bestellung.BestellNr }}</td>
+      <td>{{ bestellung.BestellStatus }}</td>
+      <td>{{ bestellung.BestellDatum }}</td>
+      <td>{{ bestellung.LieferDatumGeplant }}</td>
+      <td>{{ bestellung.VersandDatum }}</td>
+      <td>{{ bestellung.KundenNr }}</td>
+      <td>{{ bestellung.ReAdressNr }}</td>
+      <td>{{ bestellung.LiAdressNr }}</td>
+      <td><i nz-icon nzType="edit" nzTheme="outline" routerLink='bestellungBearbeiten'></i></td>
+    </tr>
+  </tbody>
+</nz-table>

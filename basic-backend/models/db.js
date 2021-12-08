@@ -143,7 +143,7 @@ async function init() {
                    VALUES (1, 'Frau', 'Lavinia', 'Berger', 1, 1),
                           (2, 'Herr', 'Max', 'Mustermann', 2, 2),
                           (3, 'Herr', 'Harry', 'Potter', 3, 3),
-                          (4, 'Frau', 'Hermoine', 'Granger', 4, 4);`, []);
+                          (4, 'Frau', 'Hermione', 'Granger', 4, 4);`, []);
 
         await run(`INSERT INTO RechnungsAdressen
                    VALUES (1, 1, 'Alexanderstraße 146 70180 Stuttgart'),

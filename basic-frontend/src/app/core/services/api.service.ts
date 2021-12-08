@@ -4,6 +4,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Artikel} from "../../models/artikel.model";
 import {Kunde} from "../../models/kunde.model";
+import {Bestellung} from "../../models/bestellung.model";
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,6 @@ export class ApiService {
     return this.http.get<Kunde[]>(`${this.baseUrl}/kunden`)
   }
 
-
   deleteKunde(kundenNr: number) {
     return this.http.delete<any>(`${this.baseUrl}/kunden`, {body: {KundenNr: kundenNr}})
   }
@@ -47,5 +47,21 @@ export class ApiService {
   updateKunde(kundenNr: number) {
     return this.http.post<any>(`${this.baseUrl}/kunden`, {body: {KundenNr: kundenNr}})
 
+  }
+
+  getBestellungen() {
+    return this.http.get<Bestellung[]>(`${this.baseUrl}/bestellungen`)
+  }
+
+  deleteBestellung(bestellNr: number) {
+    return this.http.delete<any>(`${this.baseUrl}/bestellungen`, {body: {BestellNr: bestellNr}})
+  }
+
+  addBestellung(bestellNr: number) {
+    return this.http.put<any>(`${this.baseUrl}/bestellungen`, {body: {BestellNr: bestellNr}})
+  }
+
+  updateBestellung(bestellNr: number) {
+    return this.http.post<any>(`${this.baseUrl}/bestellungen`, {body: {BestellNr: bestellNr}})
   }
 }

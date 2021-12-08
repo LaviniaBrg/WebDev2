@@ -5,7 +5,7 @@
       <th>Name</th>
       <th>Beschreibung</th>
       <th>Preis</th>
-      <th colspan="2">Bearbeiten</th>
+      <th>Bearbeiten</th>
     </tr>
   </thead>
   <tbody>
@@ -14,8 +14,7 @@
       <td>{{artikel.ArtikelName}}</td>
       <td>{{artikel.ArtikelBeschreibung}}</td>
       <td>{{artikel.ArtikelPreis}}</td>
-      <td><a href="">löschen</a></td>
-      <td><a href="">editieren</a></td>
+      <td><i nz-icon nzType="edit" nzTheme="outline" routerLink='artikelBearbeiten'></i></td>
     </tr>
   </tbody>
 </nz-table>

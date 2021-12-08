@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { BestellungRoutingModule } from './bestellung-routing.module';
 import { BestellungComponent } from './bestellung.component';
+import {NzTableModule} from "ng-zorro-antd/table";
+import {NzIconModule} from "ng-zorro-antd/icon";
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { BestellungComponent } from './bestellung.component';
   ],
   imports: [
     CommonModule,
-    BestellungRoutingModule
+    BestellungRoutingModule,
+    NzTableModule,
+    NzIconModule
   ]
 })
 export class BestellungModule { }
