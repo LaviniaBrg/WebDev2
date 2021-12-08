@@ -15,6 +15,7 @@ router.use(logToConsole);
 //router.use('/echo', echoController);
 router.use('/artikel', artikelRouter);
 router.use('/kunden', kundenRouter);
+router.use('/kunden/:KundenNr', kundenRouter);
 router.use('/bestellungen', bestellungenRouter);
 
 router.use((req, res) => {

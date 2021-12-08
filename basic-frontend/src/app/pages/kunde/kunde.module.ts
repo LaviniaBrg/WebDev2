@@ -4,16 +4,20 @@ import { CommonModule } from '@angular/common';
 import { KundeRoutingModule } from './kunde-routing.module';
 import { KundeComponent } from './kunde.component';
 import {NzTableModule} from "ng-zorro-antd/table";
+import {NzButtonModule} from "ng-zorro-antd/button";
+import {NzIconModule} from "ng-zorro-antd/icon";
 
 
 @NgModule({
   declarations: [
     KundeComponent
   ],
-  imports: [
-    CommonModule,
-    KundeRoutingModule,
-    NzTableModule
-  ]
+    imports: [
+        CommonModule,
+        KundeRoutingModule,
+        NzTableModule,
+        NzButtonModule,
+        NzIconModule
+    ]
 })
 export class KundeModule { }
