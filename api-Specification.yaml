@@ -1,0 +1,455 @@
+openapi: 3.0.0
+info:
+  description: API für die Verwaltung von Kunden, Bestellungen und Artikeln.
+  version: "1.0.0"
+  title: Verwaltungs-API
+tags:
+  - name: Kunden
+    description: course based requests
+  - name: students
+    description: student based requests
+  - name: dates
+    description: date based requests
+  - name: notes
+    description: note based requests
+paths:
+  /kurse/:
+    post:
+      tags:
+        - course
+      summary: Creates a new course
+      description:
+        Creates new course
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kurs'
+        description: course to add
+      responses:
+        '201':
+          description: course added
+        '400':
+          description: 'invalid input, object invalid'
+        '500':
+          description: 'internal server error'
+
+
+  /kurse/{kursid}:
+    put:
+      tags:
+        - course
+      summary: Overwrites a course
+      description:
+        Deletes a certain course
+      parameters:
+        - in: path
+          name: kursid
+          required: true
+          description: Id of one specific course
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kurs'
+        description: course that will overwrite
+      responses:
+        '200':
+          description: course overwritten
+        '400':
+          description: Bad input parameter
+        '500':
+          description: internal server error
+
+    delete:
+      tags:
+        - course
+      summary: Deletes a course
+      description:
+        Overwrites a certain course
+      parameters:
+        - in: path
+          name: kursid
+          required: true
+          description: Id of one specific course
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Delete successful
+        '500':
+          description: internal server error
+
+  /kurse/termine/{lehrerid}:
+    get:
+      tags:
+        - course
+        - dates
+      summary: Gets list of all courses including all dates
+      description:
+        Simply returns every single existing course by a teacher
+      parameters:
+        - in: path
+          name: lehrerid
+          required: true
+          description: Id of one specific teacher
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of all list of all courses including all dates, may be empty
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Kurs'
+        '404':
+          description: Bad input parameter
+
+  /kurse/schueler/{lehrerid}:
+    get:
+      tags:
+        - course
+        - students
+      summary: Gets list of all courses including all students including all notes
+      description:
+        Simply returns every single existing course by a teacher with all studends and notes in that course
+      parameters:
+        - in: path
+          name: lehrerid
+          required: true
+          description: Id of one specific teacher
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of all list of all courses including all students, may be empty
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Kursschueler'
+        '404':
+          description: Bad input parameter
+
+  /termine:
+    post:
+      tags:
+        - dates
+      summary: Creates a new date
+      description:
+        Creates new date
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Termin'
+        description: date to add
+      responses:
+        '201':
+          description: date added
+        '400':
+          description: 'invalid input, object invalid'
+        '500':
+          description: 'internal server error'
+
+
+  /termine/{terminid}:
+    put:
+      tags:
+        - date
+      summary: Overwrites a date
+      description:
+        Overwrites a certain date
+      parameters:
+        - in: path
+          name: terminid
+          required: true
+          description: Id of one specific date
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Termin'
+        description: date that will overwrite
+      responses:
+        '200':
+          description: date overwritten
+        '400':
+          description: Bad input parameter
+        '500':
+          description: internal server error
+
+    delete:
+      tags:
+        - date
+      summary: Deletes a date
+      description:
+        Deletes a certain date
+      parameters:
+        - in: path
+          name: terminid
+          required: true
+          description: Id of one specific date
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Delete successful
+        '500':
+          description: internal server error
+
+  /schueler:
+    post:
+      tags:
+        - students
+      summary: Creates a new student
+      description:
+        Creates new student
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schueler'
+        description: student to add
+      responses:
+        '201':
+          description: student added
+        '400':
+          description: 'invalid input, object invalid'
+        '500':
+          description: 'internal server error'
+
+
+  /schueler/{schuelerid}:
+    put:
+      tags:
+        - students
+      summary: Overwrites a student
+      description:
+        Overwrites a certain student
+      parameters:
+        - in: path
+          name: schuelerid
+          required: true
+          description: Id of one specific student
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schueler'
+        description: student that will overwrite
+      responses:
+        '200':
+          description: student overwritten
+        '400':
+          description: Bad input parameter
+        '500':
+          description: internal server error
+
+    delete:
+      tags:
+        - students
+      summary: Deletes a student
+      description:
+        Deletes a certain student
+      parameters:
+        - in: path
+          name: schuelerid
+          required: true
+          description: Id of one specific student
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Delete successful
+        '500':
+          description: internal server error
+
+  /noten:
+    post:
+      tags:
+        - notes
+      summary: Creates a new note
+      description:
+        Creates new note
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Note'
+        description: note to add
+      responses:
+        '201':
+          description: note added
+        '400':
+          description: 'invalid input, object invalid'
+        '500':
+          description: 'internal server error'
+
+  /noten/{notenid}:
+    put:
+      tags:
+        - notes
+      summary: Overwrites a note
+      description:
+        Overwrites a certain note
+      parameters:
+        - in: path
+          name: notenid
+          required: true
+          description: Id of one specific note
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Note'
+        description: note that will overwrite
+      responses:
+        '200':
+          description: note overwritten
+        '400':
+          description: Bad input parameter
+        '500':
+          description: internal server error
+
+    delete:
+      tags:
+        - notes
+      summary: Deletes a note
+      description:
+        Deletes a certain note
+      parameters:
+        - in: path
+          name: notenid
+          required: true
+          description: Id of one specific note
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Delete successful
+        '500':
+          description: internal server error
+
+
+
+components:
+  schemas:
+    Termin:
+      type: object
+      properties:
+        tid:
+          type: integer
+          example: 1
+        kid:
+          type: integer
+          example: 1
+        bezeichnung:
+          type: string
+        start:
+          type: object
+        end:
+          type: object
+
+    Kurs:
+      type: object
+      properties:
+        kid:
+          type: integer
+          example: 1
+        lid:
+            type: string
+            example: 'mwer'
+        fach:
+          type: string
+          example: "Mathe"
+        name:
+          type: string
+          example: "TINF20D"
+        termine:
+          type: array
+          items:
+            $ref: '#/components/schemas/Termin'
+
+    Note:
+      type: object
+      properties:
+        note:
+          type: number
+          example: 4.0
+        zuordnung:
+          type: string
+          enum: ['mdl', 'schrftl']
+        kid:
+          type: integer
+          example: 1
+        sid:
+          type: integer
+          example: 1
+        nid:
+          type: integer
+          example: 1
+
+    Schueler:
+      type: object
+      properties:
+        sid:
+          type: integer
+          example: 42
+        vName:
+          type: string
+          example: 'Max'
+        nName:
+          type: string
+          example: 'Mustermann'
+        kid:
+          type: integer
+          example: 1
+        noten:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+
+    Kursschueler:
+      type: object
+      properties:
+        kid:
+          type: integer
+          example: 1
+        lid:
+          type: string
+          example: 'mwer'
+        fach:
+          type: string
+          example: "Mathe"
+        name:
+          type: string
+          example: "TINF20D"
+        schueler:
+          type: array
+          items:
+            $ref: '#/components/schemas/Schueler'
+
+    Lehrer:
+      type: object
+      properties:
+        username:
+          type: string
+          example: 'mwer'
+        password:
+          type: string
+          example: 'Password1'
+        anzeigename:
+          type: string
+          example: 'Werdon'

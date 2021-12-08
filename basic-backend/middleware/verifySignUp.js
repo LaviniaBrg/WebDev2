@@ -1,8 +1,9 @@
-import { ROLES as _ROLES, user as _user } from "../models";
+import { roles as _ROLES} from "../models/role.model";
+import { user as _user } from "../models/user.model";
 const ROLES = _ROLES;
 const User = _user;
 
-checkDuplicateUsernameOrEmail = (req, res, next) => {
+function checkDuplicateUsernameOrEmail (req, res, next) {
     // Username
     User.findOne({
         where: {
@@ -11,7 +12,7 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
     }).then(user => {
         if (user) {
             res.status(400).send({
-                message: "Failed! Username is already in use!"
+                message: "Fehler! Benutzername bereits vergeben!"
             });
             return;
         }
@@ -24,30 +25,28 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
         }).then(user => {
             if (user) {
                 res.status(400).send({
-                    message: "Failed! Email is already in use!"
+                    message: "Fehler! Email wird bereits verwendet!"
                 });
                 return;
             }
-
             next();
         });
     });
-};
+}
 
-checkRolesExisted = (req, res, next) => {
+function checkRolesExisted (req, res, next) {
     if (req.body.roles) {
         for (let i = 0; i < req.body.roles.length; i++) {
             if (!ROLES.includes(req.body.roles[i])) {
                 res.status(400).send({
-                    message: "Failed! Role does not exist = " + req.body.roles[i]
+                    message: "Fehler! Rolle existiert nicht = " + req.body.roles[i]
                 });
                 return;
             }
         }
     }
-
     next();
-};
+}
 
 const verifySignUp = {
     checkDuplicateUsernameOrEmail: checkDuplicateUsernameOrEmail,

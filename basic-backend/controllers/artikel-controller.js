@@ -8,6 +8,6 @@ router.get('/', (req, res) => {
         res.json(ArtikelUebersicht);
     }).catch((err) => {
         res.status(500);
-        res.send();
+        res.send(err);
     })
 });

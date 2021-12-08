@@ -1,4 +1,4 @@
-import { user as _user, role, Sequelize } from "../models";
+import { user as _user } from "../models/user.model";
 import { secret } from "../config/auth.config";
 const User = _user;
 const Role = role;
@@ -7,6 +7,7 @@ const Op = Sequelize.Op;
 
 import { sign } from "jsonwebtoken";
 import { hashSync, compareSync } from "bcryptjs";
+import Sequelize from "sequelize";
 
 export function signup(req, res) {
     // Save User to Database
@@ -25,13 +26,13 @@ export function signup(req, res) {
                     }
                 }).then(roles => {
                     user.setRoles(roles).then(() => {
-                        res.send({ message: "User was registered successfully!" });
+                        res.send({ message: "Benutzer wurde erfolgreich registriert!" });
                     });
                 });
             } else {
                 // user role = 1
                 user.setRoles([1]).then(() => {
-                    res.send({ message: "User was registered successfully!" });
+                    res.send({ message: "Benutzer wurde erfolgreich registriert!" });
                 });
             }
         })
@@ -48,10 +49,10 @@ export function signin(req, res) {
         })
         .then(user => {
             if (!user) {
-                return res.status(404).send({ message: "User Not found." });
+                return res.status(404).send({ message: "Benutzer nicht gefunden." });
             }
 
-            var passwordIsValid = compareSync(
+            const passwordIsValid = compareSync(
                 req.body.password,
                 user.password
             );
@@ -59,15 +60,15 @@ export function signin(req, res) {
             if (!passwordIsValid) {
                 return res.status(401).send({
                     accessToken: null,
-                    message: "Invalid Password!"
+                    message: "Ungültiges Passwort!"
                 });
             }
 
-            var token = sign({ id: user.id }, secret, {
+            const token = sign({id: user.id}, secret, {
                 expiresIn: 86400 // 24 hours
             });
 
-            var authorities = [];
+            const authorities = [];
             user.getRoles().then(roles => {
                 for (let i = 0; i < roles.length; i++) {
                     authorities.push("ROLE_" + roles[i].name.toUpperCase());

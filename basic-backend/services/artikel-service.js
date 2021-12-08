@@ -1,6 +1,5 @@
-import { getAlleArtikel } from '../models/artikel-model.js';
+import {getAlleArtikel} from '../models/artikel-model.js';
 
 export async function fetchAlleArtikel() {
-    const ArtikelUebersicht = await getAlleArtikel();
-    return ArtikelUebersicht;
+    return await getAlleArtikel();
 }

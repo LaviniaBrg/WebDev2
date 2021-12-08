@@ -12,7 +12,7 @@ verifyToken = (req, res, next) => {
         });
     }
 
-    jwt.verify(token, config.secret, (err, decoded) => {
+    jwt.verify(token, config.secret, [], (err, decoded) => {
         if (err) {
             return res.status(401).send({
                 message: "Unauthorized!"
@@ -36,7 +36,6 @@ isAdmin = (req, res, next) => {
             res.status(403).send({
                 message: "Require Admin Role!"
             });
-            return;
         });
     });
 };
@@ -46,13 +45,3 @@ const authJwt = {
     isAdmin: isAdmin
 };
 module.exports = authJwt;
-
-middleware / index.js
-
-const authJwt = require("./authJwt");
-const verifySignUp = require("./verifySignUp").default.default;
-
-module.exports = {
-    authJwt,
-    verifySignUp
-};

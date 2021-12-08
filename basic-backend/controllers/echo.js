@@ -35,5 +35,3 @@ function validateEcho(req, res, next) {
         res.send('Body validation failed');
     }
 }
-
-export default router;

@@ -10,7 +10,7 @@ export const db = new sqlite.Database('./databases/db.sqlite', (err) => {
     }
 });
 
-function run (sqlString, params) {
+function run(sqlString, params) {
     return new Promise((resolve, reject) => {
         db.run(sqlString, params, function (err) {
             if (err) {
@@ -22,7 +22,7 @@ function run (sqlString, params) {
     });
 }
 
-function get(sqlstring, parameters){
+function get(sqlstring, parameters) {
     return new Promise((resolve, reject) => {
         db.get(sqlstring, parameters, (err, row) => {
             if (err) {
@@ -35,93 +35,103 @@ function get(sqlstring, parameters){
 }
 
 async function init() {
-    await run (`PRAGMA foreign_keys = ON;`, []);
+    await run(`PRAGMA foreign_keys = ON;`, []);
 
-    await run (`CREATE TABLE IF NOT EXISTS Artikel
-                (
-                    ArtikelNr           INTEGER PRIMARY KEY NOT NULL,
-                    ArtikelName         VARCHAR(50),
-                    ArtikelBeschreibung VARCHAR(250),
-                    ArtikelPreis        DECIMAL(6, 2)
-                );`, []);
+    await run(`CREATE TABLE IF NOT EXISTS Artikel
+               (
+                   ArtikelNr           INTEGER PRIMARY KEY NOT NULL,
+                   ArtikelName         VARCHAR(50),
+                   ArtikelBeschreibung VARCHAR(250),
+                   ArtikelPreis        DECIMAL(6, 2)
+               );`, []);
 
-    await run (`CREATE TABLE IF NOT EXISTS Kunden
-                (
-                    KundenNr       INTEGER PRIMARY KEY NOT NULL,
-                    KundenAnrede   VARCHAR(10),
-                    KundenVorname  VARCHAR(20),
-                    KundenNachname VARCHAR(15),
-                    ReAdressNr     INTEGER,
-                    LiAdressNr     INTEGER
-                );`, [])
+    await run(`CREATE TABLE IF NOT EXISTS Kunden
+               (
+                   KundenNr       INTEGER PRIMARY KEY NOT NULL,
+                   KundenAnrede   VARCHAR(10),
+                   KundenVorname  VARCHAR(20),
+                   KundenNachname VARCHAR(15),
+                   ReAdressNr     INTEGER,
+                   LiAdressNr     INTEGER
+               );`, [])
 
-    await run (`CREATE TABLE IF NOT EXISTS RechnungsAdressen
-                (
-                    ReAdressNr       INTEGER PRIMARY KEY NOT NULL,
-                    KundenNr         INTEGER,
-                    Rechnungsadresse VARCHAR(50),
-                    FOREIGN KEY (KundenNr) REFERENCES Kunden (KundenNr)
-                );`, []);
+    await run(`CREATE TABLE IF NOT EXISTS RechnungsAdressen
+               (
+                   ReAdressNr       INTEGER PRIMARY KEY NOT NULL,
+                   KundenNr         INTEGER,
+                   Rechnungsadresse VARCHAR(50),
+                   FOREIGN KEY (KundenNr) REFERENCES Kunden (KundenNr)
+               );`, []);
 
-    await run (`CREATE TABLE IF NOT EXISTS LieferAdressen
-                (
-                    LiAdressNr    INTEGER PRIMARY KEY NOT NULL,
-                    KundenNr      INTEGER,
-                    Lieferadresse VARCHAR(50),
-                    FOREIGN KEY (KundenNr) REFERENCES Kunden (KundenNr)
-                );`, []);
+    await run(`CREATE TABLE IF NOT EXISTS LieferAdressen
+               (
+                   LiAdressNr    INTEGER PRIMARY KEY NOT NULL,
+                   KundenNr      INTEGER,
+                   Lieferadresse VARCHAR(50),
+                   FOREIGN KEY (KundenNr) REFERENCES Kunden (KundenNr)
+               );`, []);
 
-    await run (`CREATE TABLE IF NOT EXISTS Bestellungen
-                (
-                    BestellNr          INTEGER PRIMARY KEY NOT NULL,
-                    BestellStatus      VARCHAR(20),
-                    BestellDatum       DATE,
-                    LieferDatumGeplant DATE,
-                    VersandDatum       DATE,
-                    KundenNr           INTEGER,
-                    ReAdressNr         INTEGER,
-                    LiAdressNr         INTEGER,
-                    FOREIGN KEY (KundenNr) REFERENCES Kunden (KundenNr),
-                    FOREIGN KEY (ReAdressNr) REFERENCES RechnungsAdressen (ReAdressNr),
-                    FOREIGN KEY (LiAdressNr) REFERENCES LieferAdressen (LiAdressNr)
-                );`, []);
+    await run(`CREATE TABLE IF NOT EXISTS Bestellungen
+               (
+                   BestellNr          INTEGER PRIMARY KEY NOT NULL,
+                   BestellStatus      VARCHAR(20),
+                   BestellDatum       DATE,
+                   LieferDatumGeplant DATE,
+                   VersandDatum       DATE,
+                   KundenNr           INTEGER,
+                   ReAdressNr         INTEGER,
+                   LiAdressNr         INTEGER,
+                   FOREIGN KEY (KundenNr) REFERENCES Kunden (KundenNr),
+                   FOREIGN KEY (ReAdressNr) REFERENCES RechnungsAdressen (ReAdressNr),
+                   FOREIGN KEY (LiAdressNr) REFERENCES LieferAdressen (LiAdressNr)
+               );`, []);
 
-    await run (`CREATE TABLE IF NOT EXISTS Bestellpositionen
-                (
-                    BestellPosID     INTEGER PRIMARY KEY NOT NULL,
-                    BestellPosNr     INTEGER             NOT NULL,
-                    BestellNr        INTEGER,
-                    ArtikelNr        INTEGER,
-                    ArtikelName      VARCHAR(50),
-                    ArtikelPreis     DECIMAL(6, 2),
-                    BestellStückzahl INTEGER,
-                    FOREIGN KEY (BestellNr) REFERENCES Bestellungen (BestellNr),
-                    FOREIGN KEY (ArtikelNr) REFERENCES Artikel (ArtikelNr)
-                );`, []);
+    await run(`CREATE TABLE IF NOT EXISTS Bestellpositionen
+               (
+                   BestellPosID     INTEGER PRIMARY KEY NOT NULL,
+                   BestellPosNr     INTEGER             NOT NULL,
+                   BestellNr        INTEGER,
+                   ArtikelNr        INTEGER,
+                   ArtikelName      VARCHAR(50),
+                   ArtikelPreis     DECIMAL(6, 2),
+                   BestellStückzahl INTEGER,
+                   FOREIGN KEY (BestellNr) REFERENCES Bestellungen (BestellNr),
+                   FOREIGN KEY (ArtikelNr) REFERENCES Artikel (ArtikelNr)
+               );`, []);
 
-    await run (`CREATE TABLE IF NOT EXISTS Rechnungen
-                (
-                    RechnungsNr    INTEGER PRIMARY KEY NOT NULL,
-                    RechnungsDatum Date,
-                    BestellNr      INTEGER,
-                    KundenNr       INTEGER,
-                    ReAdressNr     INTEGER,
-                    FOREIGN KEY (BestellNr)
-                    REFERENCES Bestellungen (BestellNr),
-                    FOREIGN KEY (KundenNr) REFERENCES Kunden (KundenNr),
-                    FOREIGN KEY (ReAdressNr) REFERENCES RechnungsAdressen (ReAdressNr)
-                );`, []);
+    await run(`CREATE TABLE IF NOT EXISTS Rechnungen
+               (
+                   RechnungsNr    INTEGER PRIMARY KEY NOT NULL,
+                   RechnungsDatum Date,
+                   BestellNr      INTEGER,
+                   KundenNr       INTEGER,
+                   ReAdressNr     INTEGER,
+                   FOREIGN KEY (BestellNr)
+                       REFERENCES Bestellungen (BestellNr),
+                   FOREIGN KEY (KundenNr) REFERENCES Kunden (KundenNr),
+                   FOREIGN KEY (ReAdressNr) REFERENCES RechnungsAdressen (ReAdressNr)
+               );`, []);
 
-    await run (`CREATE TABLE IF NOT EXISTS DummyZurPruefung 
-                (
-                    ID INTEGER PRIMARY KEY NOT NULL
-                );`, []);
+    await run(`CREATE TABLE IF NOT EXISTS DummyZurPruefung
+               (
+                   ID INTEGER PRIMARY KEY NOT NULL
+               );`, []);
+
+    await run(`CREATE TABLE IF NOT EXISTS Authentifikation
+               (
+                   Username VARCHAR PRIMARY KEY NOT NULL ,
+                   Email    VARCHAR NOT NULL,
+                   Password VARCHAR(20) NOT NULL
+               );`, [])
 
     const row = await get(`SELECT * FROM DummyZurPruefung WHERE id = ?;`, [1])
-    if(row) {
+    if (row) {
         console.log("Datenbank wird wiederverwendet")
     } else {
-        await run(`INSERT INTO DummyZurPruefung (id) VALUES (?);`, [1]) //Item zum merken ob Elemente schon vorhanden sind
+        await run(`INSERT INTO DummyZurPruefung (id)
+                   VALUES (?);`, [1]) //Item zum merken ob Elemente schon vorhanden sind
+
+        await run(`INSERT INTO Authentifikation VALUES('test', 'test@test.test', '123456');`, []);
 
         await run(`INSERT INTO Artikel
                    VALUES (1, 'Haare blond', '50 cm lang mittelblond Naturwelle 100g', '49.90'),
