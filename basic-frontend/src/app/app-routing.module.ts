@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'kunden', loadChildren: () => import('./pages/kunde/kunde.module').then(m => m.KundeModule) },
   { path: 'impressum', loadChildren: () => import('./core/impressum/impressum.module').then(m => m.Impressum2Module) },
   { path: 'bestellungen/rechnungen', loadChildren: () => import('./pages/bestellung/rechnungen/rechnungen.module').then(m => m.RechnungenModule) },
-  { path: 'bestellungen/lieferscheine', loadChildren: () => import('./pages/bestellung/lieferscheine/lieferscheine.module').then(m => m.LieferscheineModule) }
+  { path: 'bestellungen/lieferscheine', loadChildren: () => import('./pages/bestellung/lieferscheine/lieferscheine.module').then(m => m.LieferscheineModule) },
+  { path: 'kunden/kundeBearbeitung', loadChildren: () => import('./pages/kunde/kunde-bearbeitung/kunde-bearbeitung.module').then(m => m.KundeBearbeitungModule) }
 ];
 
 @NgModule({
