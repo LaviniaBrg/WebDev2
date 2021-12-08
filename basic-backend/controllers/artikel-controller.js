@@ -9,9 +9,10 @@ router.get('/', (req, res) => {
         res.json(ArtikelUebersicht);
     }).catch((err) => {
         res.status(500);
-        res.send();
+        res.send(err);
     })
 });
+
 router.delete('/:ArtikelNr', (req, res) => {
     const ArtikelNr = parseInt(req.params.KundenNr);
     console.log(ArtikelNr);

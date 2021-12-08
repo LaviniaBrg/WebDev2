@@ -1,3 +1,4 @@
+
 import * as KundenModel from '../models/kunden-model.js';
 
 export async function fetchAlleKunden() {
