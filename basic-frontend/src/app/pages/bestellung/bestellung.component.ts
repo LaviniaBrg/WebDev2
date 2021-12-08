@@ -9,7 +9,6 @@ export class BestellungComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
+  // @ts-ignore
+  ngOnInit(): void;
 }

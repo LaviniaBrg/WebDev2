@@ -10,7 +10,7 @@ export const db = new sqlite.Database('./databases/db.sqlite', (err) => {
     }
 });
 
-function run(sqlString, params) {
+function run (sqlString, params) {
     return new Promise((resolve, reject) => {
         db.run(sqlString, params, function (err) {
             if (err) {
@@ -22,7 +22,7 @@ function run(sqlString, params) {
     });
 }
 
-function get(sqlstring, parameters) {
+function get(sqlstring, parameters){
     return new Promise((resolve, reject) => {
         db.get(sqlstring, parameters, (err, row) => {
             if (err) {

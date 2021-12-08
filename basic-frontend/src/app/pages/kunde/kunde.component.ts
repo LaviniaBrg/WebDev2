@@ -22,7 +22,7 @@ export class KundeComponent implements OnInit {
   }
 
   deleteKunden(KundenNr: number){
-    this.apiService.deleteKunden(KundenNr).subscribe(kunde => {
+    this.apiService.deleteKunde(KundenNr).subscribe(kunde => {
       this.geloeschtereintrag = kunde;
       console.log("gelöschter", kunde);
     } )

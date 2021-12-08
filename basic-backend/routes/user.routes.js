@@ -1,5 +1,5 @@
 import { authJwt } from "../middleware";
-import { allAccess, userBoard, adminBoard } from "../controllers/user.controller";
+import { allAccess, userBoard } from "../controllers/user.controller";
 
 export default function(app) {
     app.use(function(req, res, next) {
@@ -17,8 +17,4 @@ export default function(app) {
         userBoard
     );
 
-    app.get(
-        "/api/test/admin", [authJwt.verifyToken, authJwt.isAdmin],
-        adminBoard
-    );
 };

@@ -43,9 +43,33 @@
 
       <li nz-submenu nzOpen nzTitle="Zugang" nzIcon="user">
         <ul>
-          <li nz-menu-item nzMatchRouter *ngIf="showAdminBoard">
-            <a routerLink="admin">Admin Board</a>
+          <li nz-menu-item nzMatchRouter *ngIf="isLoggedIn" >
+            <a routerLink="user">Benutzer</a>
           </li>
+          <ul>
+            <li nz-menu-item nzMatchRouter *ngIf="!isLoggedIn">
+              <a routerLink="register">Registrieren</a>
+            </li>
+            <li nz-menu-item nzMatchRouter>
+              <a routerLink="login">Einloggen</a>
+            </li>
+          </ul>
+        </ul>
+      </li>
+
+      <li nz-submenu nzOpen nzTitle="{{ username }}" *ngIf="isLoggedIn" nzIcon="user">
+        <ul>
+          <li nz-menu-item nzMatchRouter *ngIf="isLoggedIn">
+            <a routerLink="profile">{{ username }}</a>
+          </li>
+          <li nz-menu-item nzMatchRouter *ngIf="isLoggedIn">
+            <a href class="nav-link" (click)="logout()">LogOut</a>
+          </li>
+        </ul>
+      </li>
+
+      <li nz-submenu nzOpen nzTitle="Zugang" nzIcon="user">
+        <ul>
           <li nz-menu-item nzMatchRouter *ngIf="isLoggedIn" >
             <a routerLink="user">Benutzer</a>
           </li>

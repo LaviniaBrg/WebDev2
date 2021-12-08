@@ -9,7 +9,7 @@ export class RechnungenComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  // @ts-ignore
+  ngOnInit(): void;
 
 }

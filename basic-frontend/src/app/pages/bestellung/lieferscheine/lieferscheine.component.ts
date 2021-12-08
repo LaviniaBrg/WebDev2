@@ -9,7 +9,7 @@ export class LieferscheineComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  // @ts-ignore
+  ngOnInit(): void;
 
 }
