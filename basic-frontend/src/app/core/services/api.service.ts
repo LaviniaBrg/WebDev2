@@ -23,6 +23,7 @@ export class ApiService {
   getKunden() {
     return this.http.get<Kunde[]>(`${this.baseUrl}/kunden`)
   }
+
   createEcho(echo: CreateEchoInput): Observable<Echo> {
     return this.http.post<Echo>(
       `${this.baseUrl}/echo`,
