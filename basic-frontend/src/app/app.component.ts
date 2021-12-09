@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TokenStorageService } from './_services/token-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -9,26 +8,11 @@ import { TokenStorageService } from './_services/token-storage.service';
 
 export class AppComponent implements OnInit {
   isCollapsed = false;
-  private roles: string[] = [];
-  isLoggedIn = false;
-  username?: string;
 
-  constructor(private tokenStorageService: TokenStorageService) { }
-
-  ngOnInit(): void {
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
-
-      this.username = user.username;
-    }
+  constructor() {
   }
 
-  logout(): void {
-    this.tokenStorageService.signOut();
-    window.location.reload();
-  }
+  // @ts-ignore
+  ngOnInit(): void;
 }
 

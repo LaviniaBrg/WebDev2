@@ -26,7 +26,7 @@ function get(sqlstring, parameters){
     return new Promise((resolve, reject) => {
         db.get(sqlstring, parameters, (err, row) => {
             if (err) {
-                rejec(err)
+                reject(err)
             } else {
                 resolve(row)
             }
@@ -117,21 +117,13 @@ async function init() {
                    ID INTEGER PRIMARY KEY NOT NULL
                );`, []);
 
-    await run(`CREATE TABLE IF NOT EXISTS Authentifikation
-               (
-                   Username VARCHAR PRIMARY KEY NOT NULL ,
-                   Email    VARCHAR NOT NULL,
-                   Password VARCHAR(20) NOT NULL
-               );`, [])
-
     const row = await get(`SELECT * FROM DummyZurPruefung WHERE id = ?;`, [1])
     if (row) {
         console.log("Datenbank wird wiederverwendet")
     } else {
         await run(`INSERT INTO DummyZurPruefung (id)
-                   VALUES (?);`, [1]) //Item zum merken ob Elemente schon vorhanden sind
+                   VALUES (?);`, [1]) //Item zum Merken ob Elemente schon vorhanden sind
 
-        await run(`INSERT INTO Authentifikation VALUES('test', 'test@test.test', '123456');`, []);
 
         await run(`INSERT INTO Artikel
                    VALUES (1, 'Haare blond', '50 cm lang mittelblond Naturwelle 100g', '49.90'),

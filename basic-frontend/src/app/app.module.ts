@@ -17,18 +17,6 @@ import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { HomeComponent } from './pages/home/home.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { BoardUserComponent } from './board-user/board-user.component';
-
-import { authInterceptorProviders } from './_helpers/auth.interceptor';
-
-//import { KundeComponent } from './pages/kunde/kunde.component';
-//import { ArtikelComponent } from './pages/artikel/artikel.component';
-//import { BestellungComponent } from './pages/bestellung/bestellung.component';
-
 registerLocaleData(de);
 
 @NgModule({
@@ -37,11 +25,6 @@ registerLocaleData(de);
     HeaderComponent,
     FooterComponent,
     PageNotFoundComponent,
-    LoginComponent,
-    RegisterComponent,
-    HomeComponent,
-    ProfileComponent,
-    BoardUserComponent
   ],
   imports: [
     CommonModule,
@@ -54,7 +37,7 @@ registerLocaleData(de);
     NzLayoutModule,
     NzMenuModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: de_DE }, authInterceptorProviders],
+  providers: [{ provide: NZ_I18N, useValue: de_DE }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
