@@ -1,88 +1,85 @@
-import { user as _user } from "../models/user.model";
-import { secret } from "../config/auth.config";
-const User = _user;
-const Role = role;
+import { createUser, loginUser } from "../models/db.js";
+import { secret } from "../config/auth.config.js"
+import { Router } from 'express';
+import jwt from 'jsonwebtoken';
 
-const Op = Sequelize.Op;
+const router = Router();
 
-import { sign } from "jsonwebtoken";
-import { hashSync, compareSync } from "bcryptjs";
-import Sequelize from "sequelize";
+router.post('/', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    const email = req.body.email;
 
-export function signup(req, res) {
-    // Save User to Database
-    User.create({
-            username: req.body.username,
-            email: req.body.email,
-            password: hashSync(req.body.password, 8)
-        })
-        .then(user => {
-            if (req.body.roles) {
-                Role.findAll({
-                    where: {
-                        name: {
-                            [Op.or]: req.body.roles
-                        }
-                    }
-                }).then(roles => {
-                    user.setRoles(roles).then(() => {
-                        res.send({ message: "Benutzer wurde erfolgreich registriert!" });
-                    });
-                });
-            } else {
-                // user role = 1
-                user.setRoles([1]).then(() => {
-                    res.send({ message: "Benutzer wurde erfolgreich registriert!" });
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({ message: err.message });
-        });
-}
+    if (username && password && email) {
+        createUser(username, email, password)
+            .then(() => {
+                let user = {username: username, email: email};
+                let authToken = jwt.sign(user, secret, {expiresIn: '420d'});
 
-export function signin(req, res) {
-    User.findOne({
-            where: {
-                username: req.body.username
-            }
-        })
-        .then(user => {
-            if (!user) {
-                return res.status(404).send({ message: "Benutzer nicht gefunden." });
-            }
+                res.status(201);
+                res.send({username: username, email: email, token: authToken})
+            })
+            .catch(() => {
+                // user existiert bereits
+                res.status(409);
+                res.send();
+            })
+    }
 
-            const passwordIsValid = compareSync(
-                req.body.password,
-                user.password
-            );
+});
 
-            if (!passwordIsValid) {
-                return res.status(401).send({
-                    accessToken: null,
-                    message: "Ungültiges Passwort!"
-                });
-            }
+router.post('/login', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    const email = req.body.email;
 
-            const token = sign({id: user.id}, secret, {
-                expiresIn: 86400 // 24 hours
-            });
+    if (username && password && email) {
+        loginUser(username, email, password)
+            .then((isValid) => {
+                if (isValid) {
+                    let user = {username: username, email: email};
+                    let authToken = jwt.sign(user, secret, {expiresIn: '420d'});
 
-            const authorities = [];
-            user.getRoles().then(roles => {
-                for (let i = 0; i < roles.length; i++) {
-                    authorities.push("ROLE_" + roles[i].name.toUpperCase());
+                    res.status(200);
+                    res.send({username: username, email: email, token: authToken})
                 }
-                res.status(200).send({
-                    id: user.id,
-                    username: user.username,
-                    email: user.email,
-                    roles: authorities,
-                    accessToken: token
-                });
-            });
-        })
-        .catch(err => {
-            res.status(500).send({ message: err.message });
-        });
+                else {
+                    res.status(403);
+                    res.send(); 
+                }
+            })
+            .catch((err) => {
+                res.status(403);
+                res.send();
+            })
+    }
+
+})
+
+router.get('/test', authMiddleware, (req, res) => {
+    if (req.user) {
+        res.status(200);
+        res.send(req.user)
+    }
+    else {
+        res.status(403);
+        res.send(); 
+    }
+})
+
+function authMiddleware(req, res, next) {
+    const token = req.header('Authorization');
+    if (token){
+        try {
+            req.user = jwt.verify(token, secret);
+        } catch (error) {
+            req.user = undefined;
+            res.status(403);
+            res.send();
+        }
+    }
+    next();
 }
+
+
+export {router as authRouter};
