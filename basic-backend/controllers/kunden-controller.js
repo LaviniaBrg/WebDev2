@@ -25,14 +25,25 @@ router.delete('/:KundenNr',(req, res) =>{
 });
 
 router.post('/', (req, res)=>{
-    if(req.body.KundenNr !== undefined){
-        let KundenNr = req.body.KundenNr;
-        KundenService.updateKunde(KundenNr).then((KundenUebersicht) => {
-            res.status(200);
-            res.json(KundenUebersicht);
+    const KundenAnrede = req.body.KundenAnrede;
+    const KundenVorname = req.body.KundenVorname;
+    const KundenNachname = req.body.KundenNachname;
+    const ReAdressNr = parseInt(req.body.ReAdressNr);
+    const LiAdressNr = parseInt(req.body.LiAdressNr);
+    if(KundenAnrede
+        && KundenVorname
+        && KundenNachname
+        && ReAdressNr
+        && LiAdressNr){
+        KundenService.addKunde(KundenAnrede,
+            KundenVorname,
+            KundenNachname,
+            ReAdressNr,
+            LiAdressNr).then(function () {
+            res.status(201).send();
         }).catch((err) => {
             res.status(500);
-            res.send();
+            res.send(err);
         })
     } else {
         res.status(400);
@@ -42,12 +53,36 @@ router.post('/', (req, res)=>{
 
 router.put('/:KundenNr', (req, res) =>{
     const KundenNr = parseInt(req.params.KundenNr);
-    console.log(KundenNr);
-    KundenService.addKunde(KundenNr).then( () => {
-        res.status(204);
-        res.send();
-    }).catch((err) => {
-        res.status(500);
-        res.send(err);
-    })
+    const KundenAnrede = req.body.KundenAnrede
+    const KundenVorname = req.body.KundenVorname;
+    const KundenNachname = req.body.KundenNachname;
+    const ReAdressNr = parseInt(req.body.ReAdressNr);
+    const LiAdressNr = parseInt(req.body.LiAdressNr);
+    if(KundenNr
+        && KundenAnrede
+        && KundenVorname
+        && KundenNachname
+        && ReAdressNr
+        && LiAdressNr){
+        if(parseInt(req.params.KundenNr) === parseInt(req.body.KundenNr)){
+            KundenService.updateKunde(KundenNr,
+                KundenAnrede,
+                KundenVorname,
+                KundenNachname,
+                ReAdressNr,
+                LiAdressNr).then( () => {
+                res.status(201);
+                res.send();
+            }).catch((err) => {
+                res.status(500);
+                res.send(err);
+            })
+        } else {
+            res.status(400).send("inconsistent");
+        }
+    } else {
+        res.status(400).send("bad request");
+    }
+
+
 });

@@ -11,12 +11,13 @@ export async function deleteKunde(KundenNr){
     return KundenUebersicht;
 }
 
-export async function updateKunde(KundenNr){
-    const KundenUebersicht = await KundenModel.updateKunde(KundenNr);
-    return KundenUebersicht;
+export async function updateKunde(KundenNr, KundenAnrede, KundenVorname, KundenNachname, ReAdressNr, LiAdressNr){
+    await KundenModel.updateKunde(KundenNr, KundenAnrede, KundenVorname, KundenNachname, ReAdressNr, LiAdressNr);
+
 }
 
-export async function addKunde(KundenNr){
-    const KundenUebersicht = await KundenModel.addKunde(KundenNr);
-    return KundenUebersicht;
+export async function addKunde(KundenAnrede, KundenVorname, KundenNachname, ReAdressNr, LiAdressNr){
+    await KundenModel.addKunde(KundenAnrede, KundenVorname, KundenNachname, ReAdressNr, LiAdressNr);
+
+
 }

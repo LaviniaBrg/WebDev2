@@ -72,6 +72,10 @@ nz-content {
   margin: 15px;
 }
 
+nz-breadcrumb {
+  margin: 16px 0;
+}
+
 .inner-content {
   padding: 15px;
   background: #fff;

@@ -24,6 +24,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
 
 //import { KundeComponent } from './pages/kunde/kunde.component';
 //import { ArtikelComponent } from './pages/artikel/artikel.component';
@@ -43,17 +44,18 @@ registerLocaleData(de);
     ProfileComponent,
     BoardUserComponent
   ],
-  imports: [
-    CommonModule,
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    IconsProviderModule,
-    NzLayoutModule,
-    NzMenuModule
-  ],
+    imports: [
+        CommonModule,
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        IconsProviderModule,
+        NzLayoutModule,
+        NzMenuModule,
+        NzBreadCrumbModule
+    ],
   providers: [{ provide: NZ_I18N, useValue: de_DE }, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
