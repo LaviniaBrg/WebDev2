@@ -16,7 +16,7 @@ router.use('/artikel', artikelRouter);
 router.use('/kunden', kundenRouter);
 router.use('/kunden/:KundenNr', kundenRouter);
 router.use('/bestellungen', bestellungenRouter);
-router.use('/autenifizieren', authRouter);
+router.use('/authentifizieren', authRouter);
 
 router.use((req, res) => {
     res.status(404);
