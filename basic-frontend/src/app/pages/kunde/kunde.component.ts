@@ -10,9 +10,6 @@ import {Kunde} from "../../models/kunde.model";
 export class KundeComponent implements OnInit {
 
   public eintraege: Kunde[];
-  public geloeschterEintrag: Kunde[];
-  public neuerEintrag: Kunde[];
-  public aktualisierterEintrag: Kunde[];
 
   constructor(private apiService: ApiService) { }
 
@@ -25,12 +22,12 @@ export class KundeComponent implements OnInit {
 
   deleteKunde(KundenNr: number){
     this.apiService.deleteKunde(KundenNr).subscribe(kunde => {
-      this.geloeschterEintrag = kunde;
+      this.eintraege = kunde;
       console.log("gelöschter", kunde);
     } )
   }
 
-  neuerKunde(KundenNr: number, ){
+  neuerKunde(KundenNr: number, KundenAnrede: string, KundenVorname: string, KundenNachname: string, ReAdressNr: number, LiAdressNr: number){
     const kunde : Kunde = {
       KundenNr : 0,
       KundenAnrede : "Herr",
@@ -42,12 +39,15 @@ export class KundeComponent implements OnInit {
     this.apiService.addKunde(kunde);
   }
 
-  AktualisierterKunde(KundenNr: number){
-    this.apiService.updateKunde(KundenNr).subscribe(kunde => {
-      this.aktualisierterEintrag = kunde;
-      console.log("aktualisierter", kunde);
-    } )
+  AktualisierterKunde(KundenNr: number, KundenAnrede: string, KundenVorname: string, KundenNachname: string, ReAdressNr: number, LiAdressNr: number){
+    const kunde : Kunde = {
+      KundenNr : 0,
+      KundenAnrede : "Herr",
+      KundenVorname : "Theo",
+      KundenNachname : "Krinitz",
+      ReAdressNr : 69,
+      LiAdressNr : 69
+    };
+    this.apiService.updateKunde(kunde);
   }
-
 }
-
