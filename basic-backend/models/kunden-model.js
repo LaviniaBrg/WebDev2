@@ -42,10 +42,10 @@ export async function updateKunde(KundenNr, KundenAnrede, KundenVorname, KundenN
     });
 }
 
-export async function addKunde(KundenNr, KundenAnrede, KundenVorname, KundenNachname, ReAdressNr, LiAdressNr){
+export async function addKunde(KundenAnrede, KundenVorname, KundenNachname, ReAdressNr, LiAdressNr){
     return new Promise((resolve, reject)=>{
-        db.run("INSERT INTO Kunden VALUES (KundenNr=?, KundenAnrede =?, KundenVorname=?, KundenNachname=?, ReAdressNr=?, LiAdressNr=?);",
-            [KundenAnrede, KundenVorname, KundenNachname, ReAdressNr, LiAdressNr, KundenNr], (err, results) =>{
+        db.run("INSERT INTO Kunden (KundenAnrede, KundenVorname, KundenNachname, ReAdressNr, LiAdressNr) VALUES ( ?, ?, ?, ?, ?);",
+            [KundenAnrede, KundenVorname, KundenNachname, ReAdressNr, LiAdressNr], (err, results) =>{
                 if (err){
                     reject(err);
                 } else {

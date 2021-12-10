@@ -30,11 +30,16 @@ export class KundeComponent implements OnInit {
     } )
   }
 
-  neuerKunde(KundenNr: number){
-    this.apiService.addKunde(KundenNr).subscribe(kunde => {
-      this.neuerEintrag = kunde;
-      console.log("neuer", kunde);
-    } )
+  neuerKunde(KundenNr: number, ){
+    const kunde : Kunde = {
+      KundenNr : 0,
+      KundenAnrede : "Herr",
+      KundenVorname : "Theo",
+      KundenNachname : "Krinitz",
+      ReAdressNr : 69,
+      LiAdressNr : 69
+    };
+    this.apiService.addKunde(kunde);
   }
 
   AktualisierterKunde(KundenNr: number){

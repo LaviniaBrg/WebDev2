@@ -39,7 +39,7 @@ async function init() {
 
     await run(`CREATE TABLE IF NOT EXISTS Artikel
                (
-                   ArtikelNr           INTEGER PRIMARY KEY NOT NULL,
+                   ArtikelNr           INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                    ArtikelName         VARCHAR(50),
                    ArtikelBeschreibung VARCHAR(250),
                    ArtikelPreis        DECIMAL(6, 2)
@@ -47,7 +47,7 @@ async function init() {
 
     await run(`CREATE TABLE IF NOT EXISTS Kunden
                (
-                   KundenNr       INTEGER PRIMARY KEY NOT NULL,
+                   KundenNr       INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                    KundenAnrede   VARCHAR(10),
                    KundenVorname  VARCHAR(20),
                    KundenNachname VARCHAR(15),
@@ -57,7 +57,7 @@ async function init() {
 
     await run(`CREATE TABLE IF NOT EXISTS RechnungsAdressen
                (
-                   ReAdressNr       INTEGER PRIMARY KEY NOT NULL,
+                   ReAdressNr       INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                    KundenNr         INTEGER,
                    Rechnungsadresse VARCHAR(50),
                    FOREIGN KEY (KundenNr) REFERENCES Kunden (KundenNr)
@@ -65,7 +65,7 @@ async function init() {
 
     await run(`CREATE TABLE IF NOT EXISTS LieferAdressen
                (
-                   LiAdressNr    INTEGER PRIMARY KEY NOT NULL,
+                   LiAdressNr    INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                    KundenNr      INTEGER,
                    Lieferadresse VARCHAR(50),
                    FOREIGN KEY (KundenNr) REFERENCES Kunden (KundenNr)
@@ -73,7 +73,7 @@ async function init() {
 
     await run(`CREATE TABLE IF NOT EXISTS Bestellungen
                (
-                   BestellNr          INTEGER PRIMARY KEY NOT NULL,
+                   BestellNr          INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                    BestellStatus      VARCHAR(20),
                    BestellDatum       DATE,
                    LieferDatumGeplant DATE,
@@ -88,7 +88,7 @@ async function init() {
 
     await run(`CREATE TABLE IF NOT EXISTS Bestellpositionen
                (
-                   BestellPosID     INTEGER PRIMARY KEY NOT NULL,
+                   BestellPosID     INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                    BestellPosNr     INTEGER             NOT NULL,
                    BestellNr        INTEGER,
                    ArtikelNr        INTEGER,
@@ -101,7 +101,7 @@ async function init() {
 
     await run(`CREATE TABLE IF NOT EXISTS Rechnungen
                (
-                   RechnungsNr    INTEGER PRIMARY KEY NOT NULL,
+                   RechnungsNr    INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                    RechnungsDatum Date,
                    BestellNr      INTEGER,
                    KundenNr       INTEGER,

@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
-import {catchError} from 'rxjs/operators';
 import {Artikel} from "../../models/artikel.model";
 import {Kunde} from "../../models/kunde.model";
 import {Bestellung} from "../../models/bestellung.model";
@@ -40,12 +38,12 @@ export class ApiService {
     return this.http.delete<any>(`${this.baseUrl}/kunden`, {body: {KundenNr: kundenNr}})
   }
 
-  addKunde(kundenNr: number) {
-    return this.http.put<any>(`${this.baseUrl}/kunden`, {body: {KundenNr: kundenNr}})
+  addKunde(kunde: Kunde) {
+    return this.http.post<any>(`${this.baseUrl}/kunden`, {body: JSON.stringify(kunde)})
   }
 
-  updateKunde(kundenNr: number) {
-    return this.http.post<any>(`${this.baseUrl}/kunden`, {body: {KundenNr: kundenNr}})
+  updateKunde(kunde: Kunde) {
+    return this.http.put<any>(`${this.baseUrl}/kunden/${kunde.KundenNr}`, {body: JSON.stringify(kunde)})
 
   }
 
