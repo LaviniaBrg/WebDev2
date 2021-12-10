@@ -2,6 +2,7 @@ import { createUser, loginUser } from "../models/db.js";
 import { secret } from "../config/auth.config.js"
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';
+import {authMiddleware} from "../middleware/auth.js";
 
 const router = Router();
 
@@ -45,7 +46,7 @@ router.post('/login', (req, res) => {
                 }
                 else {
                     res.status(403);
-                    res.send(); 
+                    res.send();
                 }
             })
             .catch((err) => {
@@ -63,23 +64,8 @@ router.get('/test', authMiddleware, (req, res) => {
     }
     else {
         res.status(403);
-        res.send(); 
+        res.send();
     }
 })
-
-function authMiddleware(req, res, next) {
-    const token = req.header('Authorization');
-    if (token){
-        try {
-            req.user = jwt.verify(token, secret);
-        } catch (error) {
-            req.user = undefined;
-            res.status(403);
-            res.send();
-        }
-    }
-    next();
-}
-
 
 export {router as authRouter};
