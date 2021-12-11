@@ -1,6 +1,6 @@
-import { createUser, loginUser } from "../models/db.js";
-import { secret } from "../config/auth.config.js"
-import { Router } from 'express';
+import {createUser, loginUser} from "../models/db.js";
+import {secret} from "../config/auth.config.js"
+import {Router} from 'express';
 import jwt from 'jsonwebtoken';
 import {authMiddleware} from "../middleware/auth.js";
 
@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
         createUser(username, email, password)
             .then(() => {
                 let user = {username: username};
-                let authToken = jwt.sign(user, secret, {expiresIn: '420d'});
+                let authToken = jwt.sign(user, secret, {expiresIn: '420d'}, []);
 
                 res.status(201);
                 res.send({username: username, token: authToken})
@@ -42,8 +42,7 @@ router.post('/login', (req, res) => {
 
                     res.status(200);
                     res.send({username: username, token: authToken})
-                }
-                else {
+                } else {
                     res.status(403);
                     res.send();
                 }
@@ -60,8 +59,7 @@ router.get('/test', authMiddleware, (req, res) => {
     if (req.user) {
         res.status(200);
         res.send(req.user)
-    }
-    else {
+    } else {
         res.status(403);
         res.send();
     }

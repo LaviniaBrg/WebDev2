@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../_services/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../_services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -15,13 +15,14 @@ export class RegisterComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit(): void;
 
   // @ts-ignore
   onSubmit(): void {
-    const { username, email, password } = this.form;
+    const {username, email, password} = this.form;
 
     this.authService.register(username, email, password).subscribe(
       data => {
@@ -35,4 +36,3 @@ export class RegisterComponent implements OnInit {
     );
   }
 }
-

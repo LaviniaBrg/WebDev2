@@ -41,13 +41,10 @@
         </ul>
       </li>
 
-      <li nz-submenu nzOpen nzTitle="Zugang" nzIcon="user">
+      <li nz-submenu nzOpen nzTitle="Zugang" nzIcon="user" *ngIf="!isLoggedIn">
         <ul>
-          <li nz-menu-item nzMatchRouter *ngIf="isLoggedIn" >
-            <a routerLink="user">Benutzer</a>
-          </li>
           <ul>
-            <li nz-menu-item nzMatchRouter *ngIf="!isLoggedIn">
+            <li nz-menu-item nzMatchRouter>
               <a routerLink="register">Registrieren</a>
             </li>
             <li nz-menu-item nzMatchRouter>
@@ -57,11 +54,11 @@
         </ul>
       </li>
 
-      <li nz-submenu nzOpen nzTitle="{{ username }}" *ngIf="isLoggedIn" nzIcon="user">
+      <li nz-submenu nzOpen nzTitle="User: {{ username }}" *ngIf="isLoggedIn" nzIcon="user">
         <ul>
-          <li nz-menu-item nzMatchRouter *ngIf="isLoggedIn">
+          <!--<li nz-menu-item nzMatchRouter *ngIf="isLoggedIn">
             <a routerLink="profile">{{ username }}</a>
-          </li>
+          </li>-->
           <li nz-menu-item nzMatchRouter *ngIf="isLoggedIn">
             <a href class="nav-link" (click)="logout()">LogOut</a>
           </li>
