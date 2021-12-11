@@ -12,6 +12,18 @@ router.get('/', (req, res) => {
     })
 });
 
+router.get('/:KundenNr',(req, res) =>{
+    const KundenNr = parseInt(req.params.KundenNr);
+    console.log(KundenNr);
+    KundenService.fetchEinenKunden(KundenNr).then( () => {
+        res.status(204);
+        res.send();
+    }).catch((err) => {
+        res.status(500);
+        res.send(err);
+    })
+});
+
 router.delete('/:KundenNr',(req, res) =>{
     const KundenNr = parseInt(req.params.KundenNr);
     console.log(KundenNr);

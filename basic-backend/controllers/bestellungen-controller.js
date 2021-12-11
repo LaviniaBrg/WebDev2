@@ -12,6 +12,18 @@ router.get('/', (req, res) => {
     })
 });
 
+router.get('/:BestellNr',(req, res) =>{
+    const BestellNr = parseInt(req.params.BestellNr);
+    console.log(BestellNr);
+    BestellungenService.fetchEineBestellung(BestellNr).then( () => {
+        res.status(204);
+        res.send();
+    }).catch((err) => {
+        res.status(500);
+        res.send(err);
+    })
+});
+
 router.delete('/:BestellNr',(req, res) =>{
     const BestellNr = parseInt(req.params.BestellNr);
     console.log(BestellNr);

@@ -13,6 +13,18 @@ router.get('/', (req, res) => {
     })
 });
 
+router.get('/:ArtikelNr', (req, res) => {
+    const ArtikelNr = parseInt(req.params.KundenNr);
+    console.log(ArtikelNr);
+    ArtikelService.fetchEinenArtikel(ArtikelNr).then(() => {
+        res.status(204);
+        res.send();
+    }).catch((err) => {
+        res.status(500);
+        res.send(err);
+    })
+});
+
 router.delete('/:ArtikelNr', (req, res) => {
     const ArtikelNr = parseInt(req.params.KundenNr);
     console.log(ArtikelNr);

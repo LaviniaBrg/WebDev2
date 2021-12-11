@@ -12,6 +12,20 @@ export async function getAlleKunden() {
     });
 }
 
+export async function getEinenKunden() {
+    return new Promise((resolve, reject)=>{
+        console.log(KundenNr);
+        const sql = "SELECT * FROM Kunden WHERE KundenNr = ?;"
+        db.run(sql, [KundenNr], function(err, results) {
+            if (err){
+                reject(err);
+            } else {
+                resolve(results);
+            }
+        })
+    });
+}
+
 export async function deleteKunde(KundenNr){
     return new Promise((resolve, reject)=>{
         console.log(KundenNr);

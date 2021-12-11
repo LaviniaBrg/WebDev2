@@ -12,6 +12,20 @@ export async function getAlleBestellungen() {
     });
 }
 
+export async function getEineBestellung() {
+    return new Promise((resolve, reject)=>{
+        console.log(BestellNr);
+        const sql = "SELECT * FROM Bestellungen WHERE BestellNr = ?;"
+        db.run(sql, [BestellNr], function(err, results) {
+            if (err){
+                reject(err);
+            } else {
+                resolve(results);
+            }
+        })
+    });
+}
+
 export async function deleteBestellung(BestellNr){
     return new Promise((resolve, reject)=>{
         console.log(BestellNr);

@@ -5,6 +5,11 @@ export async function fetchAlleArtikel() {
     return ArtikelUebersicht;
 }
 
+export async function fetchEinenArtikel(ArtikelNr) {
+    const ArtikelUebersicht = await ArtikelModel.getEinenArtikel(ArtikelNr);
+    return ArtikelUebersicht;
+}
+
 export async function deleteArtikel(ArtikelNr) {
     const ArtikelUebersicht = await ArtikelModel.deleteArtikel(ArtikelNr);
     return ArtikelUebersicht;

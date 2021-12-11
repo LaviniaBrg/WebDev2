@@ -12,6 +12,20 @@ export async function getAlleArtikel() {
     });
 }
 
+export async function getEinenArtikel() {
+    return new Promise((resolve, reject)=>{
+        console.log(ArtikelNr);
+        const sql = "SELECT * FROM Artikel WHERE ArtikelNr = ?;"
+        db.run(sql, [ArtikelNr], function(err, results) {
+            if (err){
+                reject(err);
+            } else {
+                resolve(results);
+            }
+        })
+    });
+}
+
 export async function deleteArtikel(ArtikelNr){
     return new Promise((resolve, reject)=>{
         console.log(ArtikelNr);
