@@ -3,6 +3,7 @@
     "@angular/cli": "^13.0.3",
     "@angular/core": "^13.0.2",
     "angular": "^1.8.2",
+    "json-web-token": "^3.2.0",
     "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.15",
     "sqlite": "^4.0.23",

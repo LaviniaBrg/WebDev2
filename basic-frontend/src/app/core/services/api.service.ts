@@ -34,6 +34,10 @@ export class ApiService {
     return this.http.get<Kunde[]>(`${this.baseUrl}/kunden`)
   }
 
+  getKunde(KundenId: string){
+    return this.http.get<Kunde>(`${this.baseUrl}/kunden/${KundenId}`)
+  }
+
   deleteKunde(kundenNr: number) {
     return this.http.delete<any>(`${this.baseUrl}/kunden`, {body: {KundenNr: kundenNr}})
   }

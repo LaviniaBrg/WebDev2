@@ -7,6 +7,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {NzGridModule} from "ng-zorro-antd/grid";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzButtonModule} from "ng-zorro-antd/button";
+import {NzInputModule} from "ng-zorro-antd/input";
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {NzButtonModule} from "ng-zorro-antd/button";
     ReactiveFormsModule,
     NzGridModule,
     NzFormModule,
-    NzButtonModule
+    NzButtonModule,
+    NzInputModule
   ]
 })
 export class BestellungBearbeitenModule { }

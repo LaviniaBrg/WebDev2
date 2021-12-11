@@ -18,7 +18,7 @@
       <td>{{ kunde.KundenNachname }}</td>
       <td>{{ kunde.ReAdressNr }}</td>
       <td>{{ kunde.LiAdressNr }}</td>
-      <td><i nz-icon nzType="edit" nzTheme="outline" routerLink='kundeBearbeiten'></i></td>
+      <td><i nz-icon nzType="edit" nzTheme="outline" [routerLink] = "['kundeBearbeiten', kunde.KundenNr]"></i></td>
     </tr>
   </tbody>
 </nz-table>
