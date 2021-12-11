@@ -1,1 +1,86 @@
-<p>bestellung-bearbeitung works!</p>
+<!--(click)="deleteBestellung(bestellung.BestellNr)"
+    (click)="updateBestellung(bestellung.BestellNr)"
+    (click)="addBestellung(bestellung.BestellNr)"
+-->
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-control [nzSpan]="8" [nzOffset]="4">
+      <button nz-button nzType="primary" >löschen</button>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="8" [nzOffset]="4">
+      <button nz-button nzType="primary" >neue Bestellung anlegen</button>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="8" [nzOffset]="4">
+      <button nz-button nzType="primary" >speichern</button>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired nzFor="BestellNr">
+      Bestellnummer
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Bestellnummer ein" >
+      <input type="number" nz-input formControlName="BestellNr" placeholder= BestellNr/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired nzFor="BestellStatus">
+      BestellStatus
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie einen Bestellstatus ein" >
+      <input type="text" nz-input formControlName="BestellStatus" placeholder= BestellStatus/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired nzFor="BestellDatum">
+      Bestelldatum
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Bestelldatum ein" >
+      <input type="datetime" nz-input formControlName="BestellDatum" placeholder= BestellDatum/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired nzFor="LieferDatumGeplant">
+      Lieferdatum geplant
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine geplantes Lieferdatum ein" >
+      <input type="datetime" nz-input formControlName="LieferDatumGeplant" placeholder= LieferDatumGeplant/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired nzFor="VersandDatum">
+      Versanddatum
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie ein Versanddatum ein" >
+      <input type="datetime" nz-input formControlName="VersandDatum" placeholder= VersandDatum/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired nzFor="KundenNr">
+      Kundennummer
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Kundennummer ein" >
+      <input type="number" nz-input formControlName="KundenNr" placeholder= Kundennummer/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired nzFor="ReAdressNr">
+      Rechnungsadressnummer
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Rechnungsadressenummer ein" >
+      <input type="number" nz-input formControlName="ReAdressNr" placeholder= ReAdressNr/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired nzFor="LiAdressNr">
+      Lieferdadressnummer
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Lieferungsadressnummer ein" >
+      <input type="number" nz-input formControlName="LiAdressNr" placeholder= LiAdressNr/>
+    </nz-form-control>
+  </nz-form-item>
+</form>

@@ -28,13 +28,13 @@ export class KundeComponent implements OnInit {
   }
 
   neuerKunde(KundenNr: number, KundenAnrede: string, KundenVorname: string, KundenNachname: string, ReAdressNr: number, LiAdressNr: number){
-    const kunde : Kunde = {
-      KundenNr : 0,
-      KundenAnrede : "Herr",
-      KundenVorname : "Theo",
-      KundenNachname : "Krinitz",
-      ReAdressNr : 69,
-      LiAdressNr : 69
+    const kunde: Kunde = {
+      KundenNr: 0,
+      KundenAnrede: "Herr",
+      KundenVorname: "Theo",
+      KundenNachname: "Krinitz",
+      ReAdressNr: 69,
+      LiAdressNr: 69
     };
     this.apiService.addKunde(kunde);
   }

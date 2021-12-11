@@ -55,11 +55,11 @@ export class ApiService {
     return this.http.delete<any>(`${this.baseUrl}/bestellungen`, {body: {BestellNr: bestellNr}})
   }
 
-  addBestellung(bestellNr: number) {
-    return this.http.put<any>(`${this.baseUrl}/bestellungen`, {body: {BestellNr: bestellNr}})
+  addBestellung(bestellung: Bestellung) {
+    return this.http.post<any>(`${this.baseUrl}/bestellungen`, {body: JSON.stringify(bestellung)})
   }
 
-  updateBestellung(bestellNr: number) {
-    return this.http.post<any>(`${this.baseUrl}/bestellungen`, {body: {BestellNr: bestellNr}})
+  updateBestellung(bestellung: Bestellung) {
+    return this.http.put<any>(`${this.baseUrl}/bestellungen`, {body: JSON.stringify(bestellung)})
   }
 }
