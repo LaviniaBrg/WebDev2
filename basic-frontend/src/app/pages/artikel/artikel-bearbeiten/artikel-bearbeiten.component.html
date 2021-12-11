@@ -4,21 +4,20 @@
 -->
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
   <nz-form-item>
-    <nz-form-control [nzSpan]="8" [nzOffset]="4">
+    <nz-form-control>
+      <table>
+        <td>
       <button nz-button nzType="primary" >löschen</button>
+        </td>
+        <td>
+        <button nz-button nzType="primary" >neuen Artikel anlegen</button>
+        </td>
+        <td>
+        <button nz-button nzType="primary" >speichern</button>
+        </td>
+      </table>
     </nz-form-control>
   </nz-form-item>
-  <nz-form-item>
-    <nz-form-control [nzSpan]="8" [nzOffset]="4">
-      <button nz-button nzType="primary" >neuen Artikel anlegen</button>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-control [nzSpan]="8" [nzOffset]="4">
-      <button nz-button nzType="primary" >speichern</button>
-    </nz-form-control>
-  </nz-form-item>
-
   <nz-form-item>
     <nz-form-label [nzSpan]="4" nzRequired nzFor="ArtikelNr">
       Artikelummer
