@@ -6,7 +6,6 @@ import { BestellungBearbeitenComponent } from './bestellung-bearbeiten.component
 import {ReactiveFormsModule} from "@angular/forms";
 import {NzGridModule} from "ng-zorro-antd/grid";
 import {NzFormModule} from "ng-zorro-antd/form";
-import {NzTransitionPatchModule} from "ng-zorro-antd/core/transition-patch/transition-patch.module";
 import {NzButtonModule} from "ng-zorro-antd/button";
 
 
@@ -20,7 +19,6 @@ import {NzButtonModule} from "ng-zorro-antd/button";
     ReactiveFormsModule,
     NzGridModule,
     NzFormModule,
-    NzTransitionPatchModule,
     NzButtonModule
   ]
 })
