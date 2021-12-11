@@ -8,7 +8,6 @@ import {SharedModule} from "../../../shared/shared.module";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
-//import {NzTransitionPatchModule} from "ng-zorro-antd/core/transition-patch/transition-patch.module";
 import {NzButtonModule} from "ng-zorro-antd/button";
 
 

@@ -22,12 +22,12 @@ export class ApiService {
     return this.http.delete<any>(`${this.baseUrl}/artikel`, {body: {ArtikelNr: artikelNr}})
   }
 
-  addArtikel(artikelNr: number) {
-    return this.http.put<any>(`${this.baseUrl}/artikel`, {body: {ArtikelNr: artikelNr}})
+  addArtikel(artikel: Artikel) {
+    return this.http.post<any>(`${this.baseUrl}/artikel`, {body: JSON.stringify(artikel)})
   }
 
-  updateArtikel(artikelNr: number) {
-    return this.http.post<any>(`${this.baseUrl}/artikel`, {body: {ArtikelNr: artikelNr}})
+  updateArtikel(artikel: Artikel) {
+    return this.http.put<any>(`${this.baseUrl}/artikel`, {body: JSON.stringify(artikel)})
   }
 
   getKunden() {

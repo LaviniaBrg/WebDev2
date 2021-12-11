@@ -16,8 +16,6 @@ app.use('/api', api);
 
 app.use(express.static(process.env.FRONTEND_DIST_PATH));
 app.use((req, res) => {
-    //res.sendFile(path.join(__dirname, '../basic-frontend/src', 'index.html'));
-    console.log(`Hier bin ich`)
     res.sendFile(path.join(__dirname, process.env.FRONTEND_DIST_PATH, 'index.html'))
 });
 

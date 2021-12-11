@@ -26,10 +26,16 @@ router.delete('/:ArtikelNr', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    if (req.body.ArtikelNr !== undefined) {
-        let ArtikelNr = req.body.KundenNr;
-        ArtikelService.updateArtikel(ArtikelNr).then((ArtikelUebersicht) => {
-            res.status(200);
+    const ArtikelName = req.body.ArtikelName;
+    const ArtikelBeschreibung = req.body.ArtikelBeschreibung;
+    const ArtikelPreis = parseInt(req.body.ArtikelPreis);
+    if (ArtikelName
+        && ArtikelBeschreibung
+        && ArtikelPreis) {
+        ArtikelService.addArtikel(ArtikelName,
+            ArtikelBeschreibung,
+            ArtikelPreis).then(function () {
+            res.status(201).send();
             res.json(ArtikelUebersicht);
         }).catch((err) => {
             res.status(500);
@@ -43,12 +49,30 @@ router.post('/', (req, res) => {
 
 router.put('/:ArtikelNr', (req, res) => {
     const ArtikelNr = parseInt(req.params.ArtikelNr);
-    console.log(ArtikelNr);
-    ArtikelService.addArtikel(ArtikelNr).then(() => {
-        res.status(204);
-        res.send();
-    }).catch((err) => {
-        res.status(500);
-        res.send(err);
-    })
+    const ArtikelName = req.body.ArtikelName;
+    const ArtikelBeschreibung = req.body.ArtikelBeschreibung;
+    const ArtikelPreis = parseInt(req.body.ArtikelPreis);
+    if (ArtikelNr
+        && ArtikelName
+        && ArtikelBeschreibung
+        && ArtikelPreis) {
+        if (parseInt(req.params.ArtikelNr) === parseInt(req.body.ArtikelNr)) {
+            ArtikelService.updateArtikel(ArtikelNr,
+                ArtikelName,
+                ArtikelBeschreibung,
+                ArtikelPreis).then(() => {
+                res.status(201);
+                res.send();
+            }).catch((err) => {
+                res.status(500);
+                res.send(err);
+            })
+        } else {
+        res.status(400).send("inconsistent");
+        }
+    } else {
+    res.status(400).send("bad request");
+    }
+
+
 });

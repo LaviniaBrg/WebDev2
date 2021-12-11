@@ -1,1 +1,54 @@
-<p>artikel-bearbeitung works!</p>
+<!--(click)="deleteArtikel(artikel.ArtikelNr)"
+    (click)="updateArtikel(artikel.ArtikelNr)"
+    (click)="addArtikel(artikel.ArtikelNr)"
+-->
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-control [nzSpan]="8" [nzOffset]="4">
+      <button nz-button nzType="primary" >löschen</button>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="8" [nzOffset]="4">
+      <button nz-button nzType="primary" >neuen Artikel anlegen</button>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="8" [nzOffset]="4">
+      <button nz-button nzType="primary" >speichern</button>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired nzFor="ArtikelNr">
+      Artikelummer
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Artikelnummer ein" >
+      <input type="number" nz-input formControlName="ArtikelNr" placeholder= ArtikelNr/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired nzFor="ArtikelName">
+      Artikelname
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie einen Artikelnamen ein" >
+      <input type="text" nz-input formControlName="ArtikelName" placeholder= ArtikelName/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired nzFor="ArtikelBeschreibung">
+      Artikelbeschreibung
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Artikelbeschreibung ein" >
+      <input type="text" nz-input formControlName="Artikelbeschreibung" placeholder= ArtikelBeschreibung/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired nzFor="ArtikelPreis">
+      Artikelpreis
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie einen Artikelpreis ein" >
+      <input type="number" nz-input formControlName="ArtikelPreis" placeholder= ArtikelPreis/>
+    </nz-form-control>
+  </nz-form-item>
+</form>
