@@ -27,7 +27,7 @@ router.delete('/:ArtikelNr', (req, res) => {
 
 router.post('/', (req, res) => {
     if (req.body.ArtikelNr !== undefined) {
-        let ArtikelNr = req.body.KundenNr;
+        let ArtikelNr = req.body.ArtikelNr;
         ArtikelService.updateArtikel(ArtikelNr).then((ArtikelUebersicht) => {
             res.status(200);
             res.json(ArtikelUebersicht);

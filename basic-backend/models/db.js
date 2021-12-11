@@ -179,10 +179,10 @@ async function init() {
 
 export function createUser(username, email, password) {
     return new Promise((resolve, reject) => {
-        db.run('INSERT INTO Authentifikation(Username, Email, Password) VALUES(?, ?, ?)', 
+        db.run('INSERT INTO Authentifikation(Username, Email, Password) VALUES(?, ?, ?)',
             [username, email, password],
             (err) => {
-                if (err) 
+                if (err)
                     reject(err);
                 else
                     resolve();
@@ -198,7 +198,7 @@ export function loginUser(username, email, password) {
             (err, rows) => {
                 if (err)
                     reject(err)
-                else if (rows.length === 0) 
+                else if (rows.length === 0)
                     resolve(false)
                 else if (rows.length > 0)
                     resolve(true)
