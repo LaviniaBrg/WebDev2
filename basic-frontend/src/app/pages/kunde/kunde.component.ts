@@ -20,34 +20,35 @@ export class KundeComponent implements OnInit {
     })
   }
 
-  deleteKunde(KundenNr: number){
-    this.apiService.deleteKunde(KundenNr).subscribe(kunde => {
-      this.eintraege = kunde;
+  deleteKunde(KundeNr: number) {
+    this.apiService.deleteKunde(KundeNr).subscribe(kunde => {
+      this.eintraege =kunde;
       console.log("gelöschter", kunde);
-    } )
+    })
   }
 
-  neuerKunde(KundenNr: number, KundenAnrede: string, KundenVorname: string, KundenNachname: string, ReAdressNr: number, LiAdressNr: number){
+  addKunde(KundenNr: number, KundenAnrede: string, KundenVorname: string, KundenNachname:string, ReAdressNr: number, LiAdressNr: number) {
     const kunde: Kunde = {
-      KundenNr: 0,
-      KundenAnrede: "Herr",
-      KundenVorname: "Theo",
-      KundenNachname: "Krinitz",
-      ReAdressNr: 69,
-      LiAdressNr: 69
+      KundenNr: KundenNr,
+      KundenAnrede: KundenAnrede,
+      KundenVorname: KundenVorname,
+      KundenNachname: KundenNachname,
+      ReAdressNr: ReAdressNr,
+      LiAdressNr: LiAdressNr
     };
     this.apiService.addKunde(kunde);
   }
 
-  AktualisierterKunde(KundenNr: number, KundenAnrede: string, KundenVorname: string, KundenNachname: string, ReAdressNr: number, LiAdressNr: number){
-    const kunde : Kunde = {
-      KundenNr : 0,
-      KundenAnrede : "Herr",
-      KundenVorname : "Theo",
-      KundenNachname : "Krinitz",
-      ReAdressNr : 69,
-      LiAdressNr : 69
+  updateKunde(KundenNr: number, KundenAnrede: string, KundenVorname: string, KundenNachname:string, ReAdressNr: number, LiAdressNr: number) {
+    const kunde: Kunde = {
+      KundenNr: KundenNr,
+      KundenAnrede: KundenAnrede,
+      KundenVorname: KundenVorname,
+      KundenNachname: KundenNachname,
+      ReAdressNr: ReAdressNr,
+      LiAdressNr: LiAdressNr
     };
     this.apiService.updateKunde(kunde);
   }
+
 }

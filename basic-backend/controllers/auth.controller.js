@@ -1,7 +1,7 @@
 import { createUser, loginUser } from "../models/db.js";
 import { secret } from "../config/auth.config.js"
 import { Router } from 'express';
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken/index.js";
 
 const router = Router();
 

@@ -1,70 +1,69 @@
-<!--(click)="deleteKunde(kunde.KundenNr)"
-    (click)="updateKunde(kunde.KundenNr)"
-    (click)="addKunde(kunde.KundenNr)"
--->
-<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+<form nz-form [formGroup]="validateForm">
   <nz-form-item>
-    <nz-form-control [nzSpan]="8" [nzOffset]="4">
-      <button nz-button nzType="primary" >löschen</button>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="KundenNr">
+      Kundennummer
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Kundennummer ein">
+      <input type="number" nz-input formControlName="KundenNr" placeholder="KundenNr"/>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-control [nzSpan]="8" [nzOffset]="4">
-      <button nz-button nzType="primary" >neuen Kunden anlegen</button>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="KundenAnrede">
+      Kundenanrede
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Kundenanrede ein">
+      <input type="text" nz-input formControlName="KundenAnrede" placeholder="KundenAnrede"/>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-control [nzSpan]="8" [nzOffset]="4">
-      <button nz-button nzType="primary" >speichern</button>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="KundenVorname">
+      Kundenvorname
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie einen Kundenvornamen ein">
+      <input type="text" nz-input formControlName="KundenVorname" placeholder="KundenVorname"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="KundenNachname">
+      Kundennachname
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie einen Kundennachnamen ein">
+      <input type="text" nz-input formControlName="KundenNachname" placeholder="KundenNachname"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="ReAdressNr">
+      Nummer der Rechnungsadresse
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Rechnungsadressnummer ein">
+      <input type="number" nz-input formControlName="ReAdresseNr" placeholder="ReAdressNr"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="LiAdressNr">
+      Nummer der Lieferungsadresse
+    </nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Lieferungsadressnummer ein">
+      <input type="number" nz-input formControlName="LiAdressNr" placeholder="LiAdressNr"/>
     </nz-form-control>
   </nz-form-item>
 
+
   <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired nzFor="KundenNr">
-      Kundennummer
-    </nz-form-label>
-    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Kundennummer ein" >
-      <input type="number" nz-input formControlName="KundenNr" placeholder= KundenNr/>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-  <nz-form-label [nzSpan]="4" nzRequired nzFor="KundenAnrede">
-    Kundenanrede
-  </nz-form-label>
-  <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Kundenanrede ein" >
-    <input type="text" nz-input formControlName="KundenAnrede" placeholder= KundenAnrede/>
-  </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired nzFor="KundenVorname">
-      Kundenvorname
-    </nz-form-label>
-    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie einen Kundenvornamen ein" >
-      <input type="text" nz-input formControlName="KundenVorname" placeholder= KundenVorname/>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired nzFor="KundenNachname">
-      Kundennachname
-    </nz-form-label>
-    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie einen Kundennachnamen ein" >
-      <input type="text" nz-input formControlName="KundenNachname" placeholder= KundenNachname/>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired nzFor="ReAdressNr">
-      Nummer der Rechnungsadresse
-    </nz-form-label>
-    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Rechnungsadressnummer ein" >
-      <input type="number" nz-input formControlName="ReAdressNr" placeholder= ReAdressNr/>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired nzFor="LiAdressNr">
-      Nummer der Lieferungsadresse
-    </nz-form-label>
-    <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Lieferungsadressnummer ein" >
-      <input type="number" nz-input formControlName="LiAdressNr" placeholder= LiAdressNr/>
+    <nz-form-control [nzSpan]="8" [nzOffset]="8">
+      <!--<button nz-button nzType="dashed" (click)="deleteKunde(KundenNr)">löschen</button>-->
+      <!--<button nz-button nzType="primary" (click)="addKunde(kunde.KundenNr,
+                                                           kunde.KundenAnrede,
+                                                           kunde.KundenVorname,
+                                                           kunde.KundenNachname,
+                                                           kunde.ReAdressNr,
+                                                           kunde.LiAdressNr)">neuen Kunden anlegen</button>
+      <button nz-button nzType="primary" (click)="updateKunde(kunde.KundenNr,
+                                                              kunde.KundenAnrede,
+                                                              kunde.KundenVorname,
+                                                              kunde.KundenNachname,
+                                                              kunde.ReAdressNr,
+                                                              kunde.LiAdressNr)"><b>speichern</b></button>-->
     </nz-form-control>
   </nz-form-item>
 </form>
