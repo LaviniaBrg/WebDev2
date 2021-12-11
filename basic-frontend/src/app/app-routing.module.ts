@@ -19,8 +19,6 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'user', component: BoardUserComponent },
   { path: 'kunden/kundeBearbeiten', loadChildren: () => import('./pages/kunde/kunde-bearbeiten/kunde-bearbeiten.module').then(m => m.KundeBearbeitenModule) },
   { path: 'artikel/artikelBearbeiten', loadChildren: () => import('./pages/artikel/artikel-bearbeiten/artikel-bearbeiten.module').then(m => m.ArtikelBearbeitenModule) },
   { path: 'bestellungen/bestellungBearbeiten', loadChildren: () => import('./pages/bestellung/bestellung-bearbeiten/bestellung-bearbeiten.module').then(m => m.BestellungBearbeitenModule) }

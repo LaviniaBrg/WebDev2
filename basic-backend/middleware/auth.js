@@ -5,7 +5,7 @@ export function authMiddleware(req, res, next) {
     const token = req.header('Authorization');
     if (token){
         try {
-            req.user = jwt.verify(token, secret);
+            req.user = jwt.verify(token, secret, [], []);
         } catch (error) {
             req.user = undefined;
             res.status(403);
