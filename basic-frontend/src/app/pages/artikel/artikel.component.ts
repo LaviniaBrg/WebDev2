@@ -10,11 +10,9 @@ import {Artikel} from "../../models/artikel.model";
 export class ArtikelComponent implements OnInit {
 
   public eintraege: Artikel[];
-  public geloeschterEintrag: Artikel[];
-  public neuerEintrag: Artikel[];
-  public aktualisierterEintrag: Artikel[];
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {
+  }
 
   ngOnInit(): void {
     this.apiService.getArtikel().subscribe(artikel => {
@@ -22,26 +20,30 @@ export class ArtikelComponent implements OnInit {
     })
   }
 
-  deleteArtikel(ArtikelNr: number){
+  deleteArtikel(ArtikelNr: number) {
     this.apiService.deleteArtikel(ArtikelNr).subscribe(artikel => {
-      this.geloeschterEintrag = artikel;
+      this.eintraege = artikel;
       console.log("gelöschter", artikel);
-    } )
+    })
   }
 
-  neuerArtikel(ArtikelNr: number){
-    this.apiService.addArtikel(ArtikelNr).subscribe(artikel => {
-      this.neuerEintrag = artikel;
-      console.log("neuer", artikel);
-    } )
+  neuerArtikel(ArtikelNr: number, ArtikelName: string, ArtikelPreis: number) {
+    const artikel: Artikel = {
+      ArtikelNr: 0,
+      ArtikelName: "Haare grün",
+      ArtikelBeschreibung: "50 cm lang grüne Naturwelle 100g",
+      ArtikelPreis: 49.90
+    };
+    this.apiService.addArtikel(artikel);
   }
 
-  AktualisierterArtikel(ArtikelNr: number){
-    this.apiService.updateArtikel(ArtikelNr).subscribe(artikel => {
-      this.aktualisierterEintrag = artikel;
-      console.log("aktualisierter", artikel);
-    } )
+  AktualisierterArtikel(ArtikelNr: number, ArtikelName: string, ArtikelPreis: number) {
+    const artikel: Artikel = {
+      ArtikelNr: 0,
+      ArtikelName: "Haare grün",
+      ArtikelBeschreibung: "50 cm lang grüne Naturwelle 100g",
+      ArtikelPreis: 49.90
+    };
+    this.apiService.updateArtikel(artikel);
   }
-
 }
-

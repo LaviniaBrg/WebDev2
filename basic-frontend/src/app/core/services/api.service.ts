@@ -22,12 +22,12 @@ export class ApiService {
     return this.http.delete<any>(`${this.baseUrl}/artikel`, {body: {ArtikelNr: artikelNr}})
   }
 
-  addArtikel(artikelNr: number) {
-    return this.http.put<any>(`${this.baseUrl}/artikel`, {body: {ArtikelNr: artikelNr}})
+  addArtikel(artikel: Artikel) {
+    return this.http.post<any>(`${this.baseUrl}/artikel`, {body: JSON.stringify(artikel)})
   }
 
-  updateArtikel(artikelNr: number) {
-    return this.http.post<any>(`${this.baseUrl}/artikel`, {body: {ArtikelNr: artikelNr}})
+  updateArtikel(artikel: Artikel) {
+    return this.http.put<any>(`${this.baseUrl}/artikel`, {body: JSON.stringify(artikel)})
   }
 
   getKunden() {
@@ -55,11 +55,11 @@ export class ApiService {
     return this.http.delete<any>(`${this.baseUrl}/bestellungen`, {body: {BestellNr: bestellNr}})
   }
 
-  addBestellung(bestellNr: number) {
-    return this.http.put<any>(`${this.baseUrl}/bestellungen`, {body: {BestellNr: bestellNr}})
+  addBestellung(bestellung: Bestellung) {
+    return this.http.post<any>(`${this.baseUrl}/bestellungen`, {body: JSON.stringify(bestellung)})
   }
 
-  updateBestellung(bestellNr: number) {
-    return this.http.post<any>(`${this.baseUrl}/bestellungen`, {body: {BestellNr: bestellNr}})
+  updateBestellung(bestellung: Bestellung) {
+    return this.http.put<any>(`${this.baseUrl}/bestellungen`, {body: JSON.stringify(bestellung)})
   }
 }

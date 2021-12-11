@@ -9,12 +9,10 @@ export async function deleteArtikel(ArtikelNr) {
     const ArtikelUebersicht = await ArtikelModel.deleteArtikel(ArtikelNr);
     return ArtikelUebersicht;
 }
-export async function updateArtikel(ArtikelNr) {
-    const ArtikelUebersicht = await ArtikelModel.aupdateArtikel(ArtikelNr);
-    return ArtikelUebersicht;
+export async function updateArtikel(ArtikelNr, ArtikelName, ArtikelBeschreibung, ArtikelPreis) {
+    await ArtikelModel.aupdateArtikel(ArtikelNr, ArtikelName, ArtikelBeschreibung, ArtikelPreis);
 }
 
-export async function addArtikel(ArtikelNr) {
-    const ArtikelUebersicht = await ArtikelModel.addArtikel(ArtikelNr);
-    return ArtikelUebersicht;
+export async function addArtikel(ArtikelName, ArtikelBeschreibung, ArtikelPreis) {
+    await ArtikelModel.addArtikel(ArtikelName, ArtikelBeschreibung, ArtikelPreis);
 }

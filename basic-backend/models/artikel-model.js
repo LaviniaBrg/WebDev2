@@ -32,7 +32,7 @@ export async function deleteArtikel(ArtikelNr){
 export async function updateArtikel(ArtikelNr, ArtikelName, ArtikelBeschreibung, ArtikelPreis){
     return new Promise((resolve, reject)=>{
         db.run("UPDATE Artikel SET Artikelname =?, ArtikelBeschreibung =?, ArtikelPreis=? WHERE ArtikelNr=?;",
-            [ArtikelNr, ArtikelName, ArtikelBeschreibung, ArtikelPreis, ArtikelNr], (err, results) =>{
+            [ArtikelName, ArtikelBeschreibung, ArtikelPreis, ArtikelNr], (err, results) =>{
                 if (err){
                     reject(err);
                 } else {
@@ -42,10 +42,10 @@ export async function updateArtikel(ArtikelNr, ArtikelName, ArtikelBeschreibung,
     });
 }
 
-export async function addArtikel(ArtikelNr, ArtikelName, ArtikelBeschreibung, ArtikelPreis){
+export async function addArtikel(ArtikelName, ArtikelBeschreibung, ArtikelPreis){
     return new Promise((resolve, reject)=>{
-        db.run("INSERT INTO Artikel VALUES (ArtikelNr=?, Artikelname =?, ArtikelBeschreibung =?, ArtikelPreis=?);",
-            [ArtikelNr, ArtikelName, ArtikelBeschreibung, ArtikelPreis], (err, results) =>{
+        db.run("INSERT INTO Artikel (ArtikelName, ArtikelBeschreibung, ArtikelPreis) VALUES ( ?, ?, ?);",
+            [ArtikelName, ArtikelBeschreibung, ArtikelPreis], (err, results) =>{
                 if (err){
                     reject(err);
                 } else {

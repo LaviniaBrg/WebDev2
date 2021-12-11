@@ -28,7 +28,6 @@ export class KundeBearbeitenComponent implements OnInit {
   constructor(private fb: FormBuilder, private apiService: ApiService) {}
 
   ngOnInit(): void {
-    console.log();
+    console.log("Test");
   }
 }
-

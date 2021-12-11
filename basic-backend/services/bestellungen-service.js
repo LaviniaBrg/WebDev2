@@ -1,4 +1,3 @@
-
 import * as BestellungenModel from '../models/bestellungen-model.js';
 
 export async function fetchAlleBestellungen() {
@@ -11,12 +10,10 @@ export async function deleteBestellung(BestellNr){
     return BestellungenUebersicht;
 }
 
-export async function updateBestellung(BestellNr){
-    const BestellungenUebersicht = await BestellungenModel.updateBestellung(BestellNr);
-    return BestellungenUebersicht;
+export async function updateBestellung(BestellNr, BestellStatus, BestellDatum, LieferDatumGeplant, VersandDatum, KundenNr, ReAdressNr, LiAdressNr){
+    await BestellungenModel.updateBestellung(BestellNr, BestellStatus, BestellDatum, LieferDatumGeplant, VersandDatum, KundenNr, ReAdressNr, LiAdressNr);
 }
 
-export async function addBestellung(BestellNr){
-    const BestellungenUebersicht = await BestellungenModel.addBestellung(BestellNr);
-    return BestellungenUebersicht;
+export async function addBestellung(BestellStatus, BestellDatum, LieferDatumGeplant, VersandDatum, KundenNr, ReAdressNr, LiAdressNr){
+    await BestellungenModel.addBestellung(BestellStatus, BestellDatum, LieferDatumGeplant, VersandDatum, KundenNr, ReAdressNr, LiAdressNr);
 }

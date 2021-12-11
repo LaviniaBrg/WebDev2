@@ -13,9 +13,11 @@ router.use(cors());
 router.use(express.json());
 router.use(logToConsole);
 router.use('/artikel', artikelRouter);
+router.use('/artikel/:ArtikelNr', artikelRouter);
 router.use('/kunden', kundenRouter);
 router.use('/kunden/:KundenNr', kundenRouter);
 router.use('/bestellungen', bestellungenRouter);
+router.use('/bestellungen/:BestellNr', bestellungenRouter);
 router.use('/authentifizieren', authRouter);
 
 router.use((req, res) => {

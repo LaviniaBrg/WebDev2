@@ -29,10 +29,10 @@ export async function deleteBestellung(BestellNr){
     });
 }
 
-export async function updateBestellung(BestellNr, BestellStatus, BestellDatum, LieferDatumGeplant, VersandDatum, ReAdressNr, LiAdressNr){
+export async function updateBestellung(BestellNr, BestellStatus, BestellDatum, LieferDatumGeplant, VersandDatum, KundenNr, ReAdressNr, LiAdressNr){
     return new Promise((resolve, reject)=>{
         db.run("UPDATE Bestellungen SET BestellStatus =?, BestellDatum=?, LieferDatumGeplant =?, VersandDatum=?, KundenNr=?, ReAdressNr=?, LiAdressNr=? WHERE BestellNr=?;",
-            [BestellStatus, BestellDatum, LieferDatumGeplant, VersandDatum, ReAdressNr, LiAdressNr, BestellNr], (err, results) =>{
+            [BestellStatus, BestellDatum, LieferDatumGeplant, VersandDatum, KundenNr, ReAdressNr, LiAdressNr, BestellNr], (err, results) =>{
                 if (err){
                     reject(err);
                 } else {
@@ -42,10 +42,10 @@ export async function updateBestellung(BestellNr, BestellStatus, BestellDatum, L
     });
 }
 
-export async function addBestellung(BestellNr, BestellStatus, BestellDatum, LieferDatumGeplant, VersandDatum, ReAdressNr, LiAdressNr){
+export async function addBestellung(BestellStatus, BestellDatum, LieferDatumGeplant, VersandDatum, KundenNr, ReAdressNr, LiAdressNr){
     return new Promise((resolve, reject)=>{
-        db.run("INSERT INTO Bestellungen VALUES (BestellNr =?, BestellStatus =?, BestellDatum=?, LieferDatumGeplant =?, VersandDatum=?, KundenNr =?, ReAdressNr=?, LiAdressNr=?);",
-            [BestellNr, BestellStatus, BestellDatum, LieferDatumGeplant, VersandDatum, ReAdressNr, LiAdressNr], (err, results) =>{
+        db.run("INSERT INTO Bestellungen (BestellStatus, BestellDatum, LieferDatumGeplant, VersandDatum, KundenNr, ReAdressNr, LiAdressNr) VALUES (?, ?, ?, ?, ?, ?, ?);",
+            [BestellStatus, BestellDatum, LieferDatumGeplant, VersandDatum, KundenNr, ReAdressNr, LiAdressNr], (err, results) =>{
                 if (err){
                     reject(err);
                 } else {
