@@ -14,11 +14,11 @@ router.post('/', (req, res) => {
     if (username && password && email) {
         createUser(username, email, password)
             .then(() => {
-                let user = {username: username, email: email};
+                let user = {username: username};
                 let authToken = jwt.sign(user, secret, {expiresIn: '420d'});
 
                 res.status(201);
-                res.send({username: username, email: email, token: authToken})
+                res.send({username: username, token: authToken})
             })
             .catch(() => {
                 // user existiert bereits
@@ -32,17 +32,16 @@ router.post('/', (req, res) => {
 router.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    const email = req.body.email;
 
-    if (username && password && email) {
-        loginUser(username, email, password)
+    if (username && password) {
+        loginUser(username, password)
             .then((isValid) => {
                 if (isValid) {
-                    let user = {username: username, email: email};
+                    let user = {username: username};
                     let authToken = jwt.sign(user, secret, {expiresIn: '420d'});
 
                     res.status(200);
-                    res.send({username: username, email: email, token: authToken})
+                    res.send({username: username, token: authToken})
                 }
                 else {
                     res.status(403);
