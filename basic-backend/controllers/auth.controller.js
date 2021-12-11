@@ -1,7 +1,8 @@
-import { createUser, loginUser } from "../models/db.js";
-import { secret } from "../config/auth.config.js"
-import { Router } from 'express';
-import jwt from "jsonwebtoken/index.js";
+import {createUser, loginUser} from "../models/db.js";
+import {secret} from "../config/auth.config.js"
+import {Router} from 'express';
+import jwt from 'jsonwebtoken';
+import {authMiddleware} from "../middleware/auth.js";
 
 const router = Router();
 
@@ -13,11 +14,11 @@ router.post('/', (req, res) => {
     if (username && password && email) {
         createUser(username, email, password)
             .then(() => {
-                let user = {username: username, email: email};
-                let authToken = jwt.sign(user, secret, {expiresIn: '420d'});
+                let user = {username: username};
+                let authToken = jwt.sign(user, secret, {expiresIn: '420d'}, []);
 
                 res.status(201);
-                res.send({username: username, email: email, token: authToken})
+                res.send({username: username, token: authToken})
             })
             .catch(() => {
                 // user existiert bereits
@@ -31,21 +32,19 @@ router.post('/', (req, res) => {
 router.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    const email = req.body.email;
 
-    if (username && password && email) {
-        loginUser(username, email, password)
+    if (username && password) {
+        loginUser(username, password)
             .then((isValid) => {
                 if (isValid) {
-                    let user = {username: username, email: email};
+                    let user = {username: username};
                     let authToken = jwt.sign(user, secret, {expiresIn: '420d'});
 
                     res.status(200);
-                    res.send({username: username, email: email, token: authToken})
-                }
-                else {
+                    res.send({username: username, token: authToken})
+                } else {
                     res.status(403);
-                    res.send(); 
+                    res.send();
                 }
             })
             .catch((err) => {
@@ -60,26 +59,10 @@ router.get('/test', authMiddleware, (req, res) => {
     if (req.user) {
         res.status(200);
         res.send(req.user)
-    }
-    else {
+    } else {
         res.status(403);
-        res.send(); 
+        res.send();
     }
 })
-
-function authMiddleware(req, res, next) {
-    const token = req.header('Authorization');
-    if (token){
-        try {
-            req.user = jwt.verify(token, secret);
-        } catch (error) {
-            req.user = undefined;
-            res.status(403);
-            res.send();
-        }
-    }
-    next();
-}
-
 
 export {router as authRouter};

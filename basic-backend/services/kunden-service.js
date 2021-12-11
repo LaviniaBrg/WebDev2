@@ -5,6 +5,11 @@ export async function fetchAlleKunden() {
     return KundenUebersicht;
 }
 
+export async function fetchEinenKunden() {
+    const KundenUebersicht = await KundenModel.getEinenKunden();
+    return KundenUebersicht;
+}
+
 export async function deleteKunde(KundenNr){
     const KundenUebersicht = await KundenModel.deleteKunde(KundenNr);
     return KundenUebersicht;
