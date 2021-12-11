@@ -191,10 +191,10 @@ export function createUser(username, email, password) {
     })
 }
 
-export function loginUser(username, email, password) {
+export function loginUser(username, password) {
     return new Promise((resolve, reject) => {
-        db.all('SELECT * FROM Authentifikation WHERE Username = ? AND Email = ? AND Password = ?',
-            [username, email, password],
+        db.all('SELECT * FROM Authentifikation WHERE Username = ? AND Password = ?',
+            [username, password],
             (err, rows) => {
                 if (err)
                     reject(err)
