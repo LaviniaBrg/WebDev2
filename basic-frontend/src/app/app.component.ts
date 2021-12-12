@@ -12,7 +12,6 @@ export class AppComponent implements OnInit {
     isLoggedIn = false;
     username?: string;
     URLParts: Array<string> = [];
-    private roles: string[] = [];
 
     constructor(private tokenStorageService: TokenStorageService) {
         /*, location: Location, router: Router
@@ -30,8 +29,6 @@ export class AppComponent implements OnInit {
 
         if (this.isLoggedIn) {
             const user = this.tokenStorageService.getUser();
-            this.roles = user.roles;
-
             this.username = user.username;
         }
     }

@@ -20,9 +20,9 @@ import {LoginComponent} from './pages/login/login.component';
 import {RegisterComponent} from './pages/register/register.component';
 import {HomeComponent} from './pages/home/home.component';
 import {ProfileComponent} from './pages/profile/profile.component';
-import {BoardUserComponent} from './board-user/board-user.component';
 
-import {authInterceptorProviders} from './_helpers/auth.interceptor';
+
+
 import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
 
 //import { KundeComponent } from './pages/kunde/kunde.component';
@@ -40,8 +40,7 @@ registerLocaleData(de);
         LoginComponent,
         RegisterComponent,
         HomeComponent,
-        ProfileComponent,
-        BoardUserComponent
+        ProfileComponent
     ],
     imports: [
         CommonModule,
@@ -55,7 +54,7 @@ registerLocaleData(de);
         NzMenuModule,
         NzBreadCrumbModule
     ],
-    providers: [{provide: NZ_I18N, useValue: de_DE}, authInterceptorProviders],
+    providers: [{provide: NZ_I18N, useValue: de_DE}],
     bootstrap: [AppComponent]
 })
 export class AppModule {

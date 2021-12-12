@@ -24,7 +24,6 @@
                 <div
                     *ngIf="username.errors && f.submitted"
                     class="alert alert-danger"
-                    role="alert"
                 >
                     Benutzername wird benötigt
                 </div>
@@ -42,7 +41,6 @@
                 <div
                     *ngIf="password.errors && f.submitted"
                     class="alert alert-danger"
-                    role="alert"
                 >
                     <div *ngIf="password.errors.required">Passwort wird benötigt</div>
                     <div *ngIf="password.errors.minlength">
@@ -56,9 +54,8 @@
             <div class="form-group">
                 <div
                     *ngIf="f.submitted && isLoginFailed"
-                    class="alert alert-danger"
-                    role="alert">
-                    Login fehlgeschlagen
+                    class="alert alert-danger">
+                    Benutzername oder Passwort falsch
                 </div>
             </div>
         </form>

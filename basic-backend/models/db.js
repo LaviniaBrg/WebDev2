@@ -182,9 +182,10 @@ export function createUser(username, email, password) {
         db.run('INSERT INTO Authentifikation(Username, Email, Password) VALUES(?, ?, ?)',
             [username, email, password],
             (err) => {
-                if (err)
+                if (err) {
+                    console.log(err);
                     reject(err);
-                else
+                } else
                     resolve();
             }
         )

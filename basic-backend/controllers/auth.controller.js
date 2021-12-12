@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
                 res.status(201);
                 res.send({username: username, token: authToken})
             })
-            .catch(() => {
+            .catch((err) => {
                 // user existiert bereits
                 res.status(409);
                 res.send();
