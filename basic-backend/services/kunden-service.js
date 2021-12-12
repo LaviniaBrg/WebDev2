@@ -5,13 +5,13 @@ export async function fetchAlleKunden() {
     return KundenUebersicht;
 }
 
-export async function fetchEinenKunden() {
-    const KundenUebersicht = await KundenModel.getEinenKunden();
+export async function fetchEinenKunden(KundenNr) {
+    const KundenUebersicht = await KundenModel.getEinenKunden(KundenNr);
     return KundenUebersicht;
 }
 
 export async function deleteKunde(KundenNr) {
-    const KundenUebersicht = await KundenModel.deleteKunde(KundenNr);
+    const KundenUebersicht = await KundenModel.deleteKunde(KundenNr).catch((err) => {throw(err);});
     return KundenUebersicht;
 }
 

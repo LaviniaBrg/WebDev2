@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../../core/services/api.service";
 import {Kunde} from "../../models/kunde.model";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
     selector: 'app-kunde',
@@ -10,6 +11,7 @@ import {Kunde} from "../../models/kunde.model";
 export class KundeComponent implements OnInit {
 
     public eintraege: Kunde[];
+    public errorMessage: string = '';
 
     constructor(private apiService: ApiService) {
     }
@@ -17,39 +19,18 @@ export class KundeComponent implements OnInit {
     ngOnInit(): void {
         this.apiService.getKunden().subscribe(kunde => {
             this.eintraege = kunde;
-            console.log(kunde);
         })
     }
 
     deleteKunde(KundeNr: number) {
-        this.apiService.deleteKunde(KundeNr).subscribe(kunde => {
-            this.eintraege = kunde;
-            console.log("gelöschter", kunde);
+        this.apiService.deleteKunde(KundeNr).subscribe( () => {
+            this.apiService.getKunden().subscribe( kunde => {
+                this.eintraege = kunde;
+            })
+        }, (err: HttpErrorResponse) => {
+            if(err.status === 409) {
+                this.errorMessage = 'Kunde löschen nicht möglich, Kunde wird verwendet';
+            }
         })
     }
-
-    addKunde(KundenNr: number, KundenAnrede: string, KundenVorname: string, KundenNachname: string, ReAdressNr: number, LiAdressNr: number) {
-        const kunde: Kunde = {
-            KundenNr: KundenNr,
-            KundenAnrede: KundenAnrede,
-            KundenVorname: KundenVorname,
-            KundenNachname: KundenNachname,
-            ReAdressNr: ReAdressNr,
-            LiAdressNr: LiAdressNr
-        };
-        this.apiService.addKunde(kunde);
-    }
-
-    updateKunde(KundenNr: number, KundenAnrede: string, KundenVorname: string, KundenNachname: string, ReAdressNr: number, LiAdressNr: number) {
-        const kunde: Kunde = {
-            KundenNr: KundenNr,
-            KundenAnrede: KundenAnrede,
-            KundenVorname: KundenVorname,
-            KundenNachname: KundenNachname,
-            ReAdressNr: ReAdressNr,
-            LiAdressNr: LiAdressNr
-        };
-        this.apiService.updateKunde(kunde);
-    }
-
 }

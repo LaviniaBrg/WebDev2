@@ -12,11 +12,10 @@ export async function getAlleKunden() {
     });
 }
 
-export async function getEinenKunden() {
+export async function getEinenKunden(KundenNr) {
     return new Promise((resolve, reject) => {
-        console.log(KundenNr);
         const sql = "SELECT * FROM Kunden WHERE KundenNr = ?;"
-        db.run(sql, [KundenNr], function (err, results) {
+        db.get(sql, [KundenNr], function (err, results) {
             if (err) {
                 reject(err);
             } else {
@@ -32,10 +31,15 @@ export async function deleteKunde(KundenNr) {
         const sql = "DELETE FROM Kunden WHERE KundenNr = ?;"
         db.run(sql, [KundenNr], function (err) {
             if (err) {
-                console.log(err);
-                reject(err);
+                if(err.errno === 19){
+                    reject(409);
+                }
+                else{
+                    console.log(err);
+                    reject(err);
+                }
             } else if (this.changes === 0) {
-                reject();
+                reject(404);
             } else {
                 resolve();
             }
@@ -59,11 +63,11 @@ export async function updateKunde(KundenNr, KundenAnrede, KundenVorname, KundenN
 export async function addKunde(KundenAnrede, KundenVorname, KundenNachname, ReAdressNr, LiAdressNr) {
     return new Promise((resolve, reject) => {
         db.run("INSERT INTO Kunden (KundenAnrede, KundenVorname, KundenNachname, ReAdressNr, LiAdressNr) VALUES ( ?, ?, ?, ?, ?);",
-            [KundenAnrede, KundenVorname, KundenNachname, ReAdressNr, LiAdressNr], (err, results) => {
+            [KundenAnrede, KundenVorname, KundenNachname, ReAdressNr, LiAdressNr], (err) => {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(results);
+                    resolve();
                 }
             })
     });

@@ -16,10 +16,11 @@ router.get('/', (req, res) => {
 router.get('/:KundenNr', (req, res) => {
     const KundenNr = parseInt(req.params.KundenNr);
     console.log(KundenNr);
-    KundenService.fetchEinenKunden(KundenNr).then(() => {
-        res.status(204);
-        res.send();
+    KundenService.fetchEinenKunden(KundenNr).then((data) => {
+        res.status(200);
+        res.json(data);
     }).catch((err) => {
+        console.log(err);
         res.status(500);
         res.send(err);
     })
@@ -27,12 +28,16 @@ router.get('/:KundenNr', (req, res) => {
 
 router.delete('/:KundenNr', (req, res) => {
     const KundenNr = parseInt(req.params.KundenNr);
-    console.log(KundenNr);
     KundenService.deleteKunde(KundenNr).then(() => {
         res.status(204);
         res.send();
     }).catch((err) => {
-        res.status(500);
+        if (typeof (err) === 'number'){
+            res.status(err);
+        }
+        else{
+            res.status(500);
+        }
         res.send(err);
     })
 });
@@ -54,9 +59,10 @@ router.post('/', (req, res) => {
             ReAdressNr,
             LiAdressNr).then(function () {
             res.status(201).send();
+            res.send();
         }).catch((err) => {
             res.status(500);
-            res.send(err);
+            res.send();
         })
     } else {
         res.status(400);
@@ -84,7 +90,7 @@ router.put('/:KundenNr', (req, res) => {
                 KundenNachname,
                 ReAdressNr,
                 LiAdressNr).then(() => {
-                res.status(201);
+                res.status(204);
                 res.send();
             }).catch((err) => {
                 res.status(500);
