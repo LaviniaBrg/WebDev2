@@ -10,7 +10,7 @@ export const db = new sqlite.Database('./databases/db.sqlite', (err) => {
     }
 });
 
-function run (sqlString, params) {
+function run(sqlString, params) {
     return new Promise((resolve, reject) => {
         db.run(sqlString, params, function (err) {
             if (err) {
@@ -22,11 +22,11 @@ function run (sqlString, params) {
     });
 }
 
-function get(sqlstring, parameters){
+function get(sqlstring, parameters) {
     return new Promise((resolve, reject) => {
         db.get(sqlstring, parameters, (err, row) => {
             if (err) {
-                rejec(err)
+                reject(err)
             } else {
                 resolve(row)
             }
@@ -129,7 +129,7 @@ async function init() {
         console.log("Datenbank wird wiederverwendet")
     } else {
         await run(`INSERT INTO DummyZurPruefung (id)
-                   VALUES (?);`, [1]) //Item zum merken ob Elemente schon vorhanden sind
+                   VALUES (?);`, [1]) //Item zum Merken ob Elemente schon vorhanden sind
 
         await run(`INSERT INTO Authentifikation VALUES('test', 'test@test.test', '123456');`, []);
 
@@ -182,9 +182,10 @@ export function createUser(username, email, password) {
         db.run('INSERT INTO Authentifikation(Username, Email, Password) VALUES(?, ?, ?)',
             [username, email, password],
             (err) => {
-                if (err)
+                if (err) {
+                    console.log(err);
                     reject(err);
-                else
+                } else
                     resolve();
             }
         )
@@ -193,16 +194,16 @@ export function createUser(username, email, password) {
 
 export function loginUser(username, password) {
     return new Promise((resolve, reject) => {
-        db.all('SELECT * FROM Authentifikation WHERE Username = ? AND Password = ?',
-            [username, password],
-            (err, rows) => {
-                if (err)
-                    reject(err)
-                else if (rows.length === 0)
-                    resolve(false)
-                else if (rows.length > 0)
-                    resolve(true)
-            }
+            db.all('SELECT * FROM Authentifikation WHERE Username = ? AND Password = ?',
+                [username, password],
+                (err, rows) => {
+                    if (err)
+                        reject(err)
+                    else if (rows.length === 0)
+                        resolve(false)
+                    else if (rows.length > 0)
+                        resolve(true)
+                }
             )
         }
     )

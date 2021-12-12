@@ -1,5 +1,6 @@
-import { Router } from 'express';
+import {Router} from 'express';
 import * as KundenService from "../services/kunden-service.js";
+
 export const router = Router();
 
 router.get('/', (req, res) => {
@@ -12,10 +13,10 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/:KundenNr',(req, res) =>{
+router.get('/:KundenNr', (req, res) => {
     const KundenNr = parseInt(req.params.KundenNr);
     console.log(KundenNr);
-    KundenService.fetchEinenKunden(KundenNr).then( () => {
+    KundenService.fetchEinenKunden(KundenNr).then(() => {
         res.status(204);
         res.send();
     }).catch((err) => {
@@ -24,10 +25,10 @@ router.get('/:KundenNr',(req, res) =>{
     })
 });
 
-router.delete('/:KundenNr',(req, res) =>{
+router.delete('/:KundenNr', (req, res) => {
     const KundenNr = parseInt(req.params.KundenNr);
     console.log(KundenNr);
-    KundenService.deleteKunde(KundenNr).then( () => {
+    KundenService.deleteKunde(KundenNr).then(() => {
         res.status(204);
         res.send();
     }).catch((err) => {
@@ -36,17 +37,17 @@ router.delete('/:KundenNr',(req, res) =>{
     })
 });
 
-router.post('/', (req, res)=>{
+router.post('/', (req, res) => {
     const KundenAnrede = req.body.KundenAnrede;
     const KundenVorname = req.body.KundenVorname;
     const KundenNachname = req.body.KundenNachname;
     const ReAdressNr = parseInt(req.body.ReAdressNr);
     const LiAdressNr = parseInt(req.body.LiAdressNr);
-    if(KundenAnrede
+    if (KundenAnrede
         && KundenVorname
         && KundenNachname
         && ReAdressNr
-        && LiAdressNr){
+        && LiAdressNr) {
         KundenService.addKunde(KundenAnrede,
             KundenVorname,
             KundenNachname,
@@ -63,26 +64,26 @@ router.post('/', (req, res)=>{
     }
 });
 
-router.put('/:KundenNr', (req, res) =>{
+router.put('/:KundenNr', (req, res) => {
     const KundenNr = parseInt(req.params.KundenNr);
     const KundenAnrede = req.body.KundenAnrede
     const KundenVorname = req.body.KundenVorname;
     const KundenNachname = req.body.KundenNachname;
     const ReAdressNr = parseInt(req.body.ReAdressNr);
     const LiAdressNr = parseInt(req.body.LiAdressNr);
-    if(KundenNr
+    if (KundenNr
         && KundenAnrede
         && KundenVorname
         && KundenNachname
         && ReAdressNr
-        && LiAdressNr){
-        if(parseInt(req.params.KundenNr) === parseInt(req.body.KundenNr)){
+        && LiAdressNr) {
+        if (parseInt(req.params.KundenNr) === parseInt(req.body.KundenNr)) {
             KundenService.updateKunde(KundenNr,
                 KundenAnrede,
                 KundenVorname,
                 KundenNachname,
                 ReAdressNr,
-                LiAdressNr).then( () => {
+                LiAdressNr).then(() => {
                 res.status(201);
                 res.send();
             }).catch((err) => {

@@ -1,20 +1,20 @@
 <nz-table #basicTable [nzData]="['']">
-  <thead>
-  <tr>
-    <th>Artikelnummer</th>
-    <th>Name</th>
-    <th>Beschreibung</th>
-    <th>Preis</th>
-    <th>Bearbeiten</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let artikel of eintraege">
-    <td>{{artikel.ArtikelNr}}</td>
-    <td>{{artikel.ArtikelName}}</td>
-    <td>{{artikel.ArtikelBeschreibung}}</td>
-    <td>{{artikel.ArtikelPreis}}</td>
-    <td><i nz-icon nzType="edit" nzTheme="outline" routerLink='artikelBearbeiten'></i></td>
-  </tr>
-  </tbody>
+    <thead>
+    <tr>
+        <th>Nr.</th>
+        <th>Name</th>
+        <th>Beschreibung</th>
+        <th>Preis</th>
+        <th>Bearbeiten</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let artikel of eintraege">
+        <td>{{artikel.ArtikelNr}}</td>
+        <td>{{artikel.ArtikelName}}</td>
+        <td>{{artikel.ArtikelBeschreibung}}</td>
+        <td>{{artikel.ArtikelPreis}}</td>
+        <td><i [routerLink]="['artikelBearbeiten', artikel.ArtikelNr]" nz-icon nzTheme="outline" nzType="edit"></i></td>
+    </tr>
+    </tbody>
 </nz-table>

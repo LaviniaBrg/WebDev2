@@ -80,10 +80,10 @@ router.put('/:ArtikelNr', (req, res) => {
                 res.send(err);
             })
         } else {
-        res.status(400).send("inconsistent");
+            res.status(400).send("inconsistent");
         }
     } else {
-    res.status(400).send("bad request");
+        res.status(400).send("bad request");
     }
 
 

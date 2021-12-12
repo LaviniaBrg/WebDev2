@@ -369,8 +369,8 @@ components:
           type: integer
           example: 1
         lid:
-            type: string
-            example: 'mwer'
+          type: string
+          example: 'mwer'
         fach:
           type: string
           example: "Mathe"
@@ -390,7 +390,7 @@ components:
           example: 4.0
         zuordnung:
           type: string
-          enum: ['mdl', 'schrftl']
+          enum: [ 'mdl', 'schrftl' ]
         kid:
           type: integer
           example: 1

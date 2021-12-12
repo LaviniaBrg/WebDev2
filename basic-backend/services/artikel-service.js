@@ -14,6 +14,7 @@ export async function deleteArtikel(ArtikelNr) {
     const ArtikelUebersicht = await ArtikelModel.deleteArtikel(ArtikelNr);
     return ArtikelUebersicht;
 }
+
 export async function updateArtikel(ArtikelNr, ArtikelName, ArtikelBeschreibung, ArtikelPreis) {
     await ArtikelModel.aupdateArtikel(ArtikelNr, ArtikelName, ArtikelBeschreibung, ArtikelPreis);
 }

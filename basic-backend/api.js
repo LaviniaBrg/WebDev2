@@ -1,13 +1,12 @@
-import { Router } from 'express';
-import express from 'express';
-export const router = Router();
-
-import { router as bestellungenRouter } from './controllers/bestellungen-controller.js';
-import { router as artikelRouter } from './controllers/artikel-controller.js';
-import { router as kundenRouter } from './controllers/kunden-controller.js';
-import { logToConsole } from './util/logger.js';
+import express, {Router} from 'express';
+import {router as bestellungenRouter} from './controllers/bestellungen-controller.js';
+import {router as artikelRouter} from './controllers/artikel-controller.js';
+import {router as kundenRouter} from './controllers/kunden-controller.js';
+import {logToConsole} from './util/logger.js';
 import cors from "cors";
-import { authRouter } from './controllers/auth.controller.js';
+import {authRouter} from './controllers/auth.controller.js';
+
+export const router = Router();
 
 router.use(cors());
 router.use(express.json());

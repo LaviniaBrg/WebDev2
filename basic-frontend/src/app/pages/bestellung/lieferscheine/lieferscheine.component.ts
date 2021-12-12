@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-lieferscheine',
-  templateUrl: './lieferscheine.component.html',
-  styleUrls: ['./lieferscheine.component.css']
+    selector: 'app-lieferscheine',
+    templateUrl: './lieferscheine.component.html',
+    styleUrls: ['./lieferscheine.component.css']
 })
 export class LieferscheineComponent implements OnInit {
 
-  constructor() { }
+    constructor() {
+    }
 
-  // @ts-ignore
-  ngOnInit(): void;
+    // @ts-ignore
+    ngOnInit(): void;
 
 }

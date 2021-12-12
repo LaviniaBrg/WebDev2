@@ -1,32 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup} from '@angular/forms';
-import {Artikel} from "../../../models/artikel.model";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ApiService} from "../../../core/services/api.service";
+import {ActivatedRoute} from "@angular/router";
+import {Artikel} from "../../../models/artikel.model";
 
 @Component({
-  selector: 'app-artikel-bearbeiten',
-  templateUrl: './artikel-bearbeiten.component.html',
-  styleUrls: ['./artikel-bearbeiten.component.css']
+    selector: 'app-artikel-bearbeiten',
+    templateUrl: './artikel-bearbeiten.component.html',
+    styleUrls: ['./artikel-bearbeiten.component.css']
 })
 export class ArtikelBearbeitenComponent implements OnInit {
-  validateForm: FormGroup;
+    artikelForm: FormGroup;
+    artikel: Artikel;
 
-  submitForm(): void {
-    if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
-    } else {
-      Object.values(this.validateForm.controls).forEach(control => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
-        }
-      });
+    constructor(
+        private fb: FormBuilder,
+        private apiService: ApiService,
+        private route: ActivatedRoute
+    ) {
     }
-  }
 
-  constructor(private fb: FormBuilder, private apiService: ApiService) {}
+    submitForm(): void {
+        if (this.artikelForm.valid) {
+            console.log('submit', this.artikelForm.value);
+        } else {
+            Object.values(this.artikelForm.controls).forEach(control => {
+                if (control.invalid) {
+                    control.markAsDirty();
+                    control.updateValueAndValidity({onlySelf: true});
+                }
+            });
+        }
+    }
 
-  ngOnInit(): void {
-    console.log("Test");
-  }
+    ngOnInit(): void {
+        const ArtikelId = this.route.snapshot.paramMap.get('id');
+        this.apiService.get1Artikel(ArtikelId).subscribe((artikel) => {
+            this.artikel = artikel;
+            console.log(artikel)
+        });
+
+        this.artikelForm = this.fb.group({
+            ArtikelNr: ['', Validators.pattern('[1-9]([0-9]*)')],
+            ArtikelName: [''],
+            ArtikelBeschreibung: [''],
+            ArtikelPreis: ['', Validators.pattern('[1-9]([0-9]*).([0-9]{2})')],
+        })
+
+    }
 }
