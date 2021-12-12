@@ -53,7 +53,7 @@ router.post('/', (req, res) => {
         && KundenNachname
         && ReAdressNr
         && LiAdressNr) {
-        KundenService.addKunde(KundenAnrede,
+KundenService.addKunde(KundenAnrede,
             KundenVorname,
             KundenNachname,
             ReAdressNr,

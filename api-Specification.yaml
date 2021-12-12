@@ -5,451 +5,416 @@ info:
   title: Verwaltungs-API
 tags:
   - name: Kunden
-    description: course based requests
-  - name: students
-    description: student based requests
-  - name: dates
-    description: date based requests
-  - name: notes
-    description: note based requests
+    description: Anfragen um Kunden
+  - name: Artikel
+    description: Anfragen um Artikel
+  - name: Bestellung
+    description: Anfragen um Bestellungen
+  - name: User
+    description: Anfragen um Benutzer
 paths:
-  /kurse/:
-    post:
-      tags:
-        - course
-      summary: Creates a new course
-      description:
-        Creates new course
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Kurs'
-        description: course to add
-      responses:
-        '201':
-          description: course added
-        '400':
-          description: 'invalid input, object invalid'
-        '500':
-          description: 'internal server error'
-
-
-  /kurse/{kursid}:
-    put:
-      tags:
-        - course
-      summary: Overwrites a course
-      description:
-        Deletes a certain course
-      parameters:
-        - in: path
-          name: kursid
-          required: true
-          description: Id of one specific course
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Kurs'
-        description: course that will overwrite
-      responses:
-        '200':
-          description: course overwritten
-        '400':
-          description: Bad input parameter
-        '500':
-          description: internal server error
-
-    delete:
-      tags:
-        - course
-      summary: Deletes a course
-      description:
-        Overwrites a certain course
-      parameters:
-        - in: path
-          name: kursid
-          required: true
-          description: Id of one specific course
-          schema:
-            type: integer
-      responses:
-        '204':
-          description: Delete successful
-        '500':
-          description: internal server error
-
-  /kurse/termine/{lehrerid}:
+  /artikel/:
     get:
       tags:
-        - course
-        - dates
-      summary: Gets list of all courses including all dates
-      description:
-        Simply returns every single existing course by a teacher
-      parameters:
-        - in: path
-          name: lehrerid
-          required: true
-          description: Id of one specific teacher
-          schema:
-            type: string
+        - Artikel
+      summary: Bekomme ein Array von allen Artikeln
+      description: Bekomme ein Array von allen Artikeln
       responses:
         '200':
-          description: List of all list of all courses including all dates, may be empty
+          description: Liste aller Artikel
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Kurs'
-        '404':
-          description: Bad input parameter
+                  $ref: '#/components/schemas/Artikel'
+        '500':
+          description: Serverfehler
+    post:
+      tags:
+        - Artikel
+      summary: Erstellung eines Artikels
+      description: Erstellung eines Artikels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Artikel'
+      responses:
+        '201':
+          description: Artikel hinzugefügt
+        '400':
+          description: invalider Artikel
+        '500':
+          description: Serverfehler
 
-  /kurse/schueler/{lehrerid}:
+  /artikel/{ArtikelNr}:
     get:
       tags:
-        - course
-        - students
-      summary: Gets list of all courses including all students including all notes
-      description:
-        Simply returns every single existing course by a teacher with all studends and notes in that course
+        - Artikel
+      summary: Bekomme einen bestimmten Artikel
+      description: Bekomme einen bestimmten Artikel
       parameters:
         - in: path
-          name: lehrerid
+          name: ArtikelNr
           required: true
-          description: Id of one specific teacher
           schema:
-            type: string
+            type: integer
       responses:
         '200':
-          description: List of all list of all courses including all students, may be empty
+          description: Bekomme nur einen Artikel
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Artikel'
+        '500':
+          description: Serverfehler
+    delete:
+      tags:
+        - Artikel
+      summary: Artikel löschen
+      description: löscht einen Artikel
+      parameters:
+        - in: path
+          name: ArtikelNr
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Löschen erfolgreich
+        '500':
+          description: Serverfehler
+
+    put:
+      tags:
+        - Artikel
+      summary: Artikel updaten
+      description: Artikel updaten
+      parameters:
+        - in: path
+          name: ArtikelNr
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Artikel'
+      responses:
+        '204':
+          description: Artikel erfolgreich updated
+        '400':
+          description: invalider oder inkonsistenter Artikel
+        '500':
+          description: Serverfehler
+
+  /kunde/:
+    get:
+      tags:
+        - Kunde
+      summary: Bekomme ein Array von allen Kunden
+      description: Bekomme ein Array von allen Kunden
+      responses:
+        '200':
+          description: Liste aller Kunde
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Kursschueler'
-        '404':
-          description: Bad input parameter
-
-  /termine:
+                  $ref: '#/components/schemas/Kunde'
+        '500':
+          description: Serverfehler
     post:
       tags:
-        - dates
-      summary: Creates a new date
-      description:
-        Creates new date
+        - Kunde
+      summary: Erstellung eines Kundes
+      description: Erstellung eines Kundes
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Termin'
-        description: date to add
+              $ref: '#/components/schemas/Kunde'
       responses:
         '201':
-          description: date added
+          description: Kunde hinzugefügt
         '400':
-          description: 'invalid input, object invalid'
+          description: invalider Kunde
         '500':
-          description: 'internal server error'
+          description: Serverfehler
 
-
-  /termine/{terminid}:
-    put:
+  /kunde/{KundenNr}:
+    get:
       tags:
-        - date
-      summary: Overwrites a date
-      description:
-        Overwrites a certain date
+        - Kunde
+      summary: Bekomme einen bestimmten Kunden
+      description: Bekomme einen bestimmten Kunden
       parameters:
         - in: path
-          name: terminid
+          name: KundenNr
           required: true
-          description: Id of one specific date
           schema:
             type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Termin'
-        description: date that will overwrite
       responses:
         '200':
-          description: date overwritten
-        '400':
-          description: Bad input parameter
+          description: Bekomme nur einen Kunden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kunde'
         '500':
-          description: internal server error
-
+          description: Serverfehler
     delete:
       tags:
-        - date
-      summary: Deletes a date
-      description:
-        Deletes a certain date
+        - Kunde
+      summary: Kunde löschen
+      description: löscht einen Kunden
       parameters:
         - in: path
-          name: terminid
+          name: KundenNr
           required: true
-          description: Id of one specific date
           schema:
             type: integer
       responses:
         '204':
-          description: Delete successful
+          description: Löschen erfolgreich
         '500':
-          description: internal server error
+          description: Serverfehler
 
-  /schueler:
-    post:
-      tags:
-        - students
-      summary: Creates a new student
-      description:
-        Creates new student
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Schueler'
-        description: student to add
-      responses:
-        '201':
-          description: student added
-        '400':
-          description: 'invalid input, object invalid'
-        '500':
-          description: 'internal server error'
-
-
-  /schueler/{schuelerid}:
     put:
       tags:
-        - students
-      summary: Overwrites a student
-      description:
-        Overwrites a certain student
+        - Kunde
+      summary: Kunde updaten
+      description: Kunde updaten
       parameters:
         - in: path
-          name: schuelerid
+          name: KundenNr
           required: true
-          description: Id of one specific student
           schema:
             type: integer
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Schueler'
-        description: student that will overwrite
+              $ref: '#/components/schemas/Kunde'
+      responses:
+        '204':
+          description: Kunde erfolgreich updated
+        '400':
+          description: invalider oder inkonsistenter Kunde
+        '500':
+          description: Serverfehler
+
+  /bestellungen/:
+    get:
+      tags:
+        - Bestellung
+      summary: Bekomme ein Array von allen Bestellungen
+      description: Bekomme ein Array von allen Bestellungen
       responses:
         '200':
-          description: student overwritten
-        '400':
-          description: Bad input parameter
+          description: Liste aller Bestellungen
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bestellung'
         '500':
-          description: internal server error
-
-    delete:
+          description: Serverfehler
+    post:
       tags:
-        - students
-      summary: Deletes a student
-      description:
-        Deletes a certain student
+        - Bestellung
+      summary: Erstellung einer Bestellung
+      description: Erstellung einer Bestellung
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Bestellung'
+      responses:
+        '201':
+          description: Bestellung hinzugefügt
+        '400':
+          description: invalide Bestellung
+        '500':
+          description: Serverfehler
+
+  /bestellungen/{BestellNr}:
+    get:
+      tags:
+        - Bestellung
+      summary: Bekomme einen bestimmte Bestellung
+      description: Bekomme einen bestimmte Bestellung
       parameters:
         - in: path
-          name: schuelerid
+          name: BestellNr
           required: true
-          description: Id of one specific student
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Bekomme nur eine Bestellung
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bestellung'
+        '500':
+          description: Serverfehler
+    delete:
+      tags:
+        - Bestellung
+      summary: Bestellung löschen
+      description: löscht eine Bestellung
+      parameters:
+        - in: path
+          name: BestellNr
+          required: true
           schema:
             type: integer
       responses:
         '204':
-          description: Delete successful
+          description: Löschen erfolgreich
         '500':
-          description: internal server error
+          description: Serverfehler
 
-  /noten:
-    post:
-      tags:
-        - notes
-      summary: Creates a new note
-      description:
-        Creates new note
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Note'
-        description: note to add
-      responses:
-        '201':
-          description: note added
-        '400':
-          description: 'invalid input, object invalid'
-        '500':
-          description: 'internal server error'
-
-  /noten/{notenid}:
     put:
       tags:
-        - notes
-      summary: Overwrites a note
-      description:
-        Overwrites a certain note
+        - Bestellung
+      summary: Bestellung updaten
+      description: Bestellung updaten
       parameters:
         - in: path
-          name: notenid
+          name: BestellNr
           required: true
-          description: Id of one specific note
           schema:
             type: integer
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Note'
-        description: note that will overwrite
-      responses:
-        '200':
-          description: note overwritten
-        '400':
-          description: Bad input parameter
-        '500':
-          description: internal server error
-
-    delete:
-      tags:
-        - notes
-      summary: Deletes a note
-      description:
-        Deletes a certain note
-      parameters:
-        - in: path
-          name: notenid
-          required: true
-          description: Id of one specific note
-          schema:
-            type: integer
+              $ref: '#/components/schemas/Bestellung'
       responses:
         '204':
-          description: Delete successful
+          description: Bestellung erfolgreich updated
+        '400':
+          description: invalide oder inkonsistente Bestellung
         '500':
-          description: internal server error
+          description: Serverfehler
 
+  /authentifizieren/:
+    post:
+      tags:
+        - User
+      summary: Erstellung eines Users
+      description: Erstellung eines Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: User erstellt
+        '409':
+          description: User existiert bereits
 
+  /authentifizieren/login/:
+    post:
+      tags:
+        - User
+      summary: Authentifizierung von User und Passwort
+      description: Authentifizierung von User und Passwort
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Authentifizierung erfolgreich
+        '403':
+          description: invalide oder inkonsistente Authentifizierung
 
 components:
   schemas:
-    Termin:
+    Artikel:
       type: object
       properties:
-        tid:
+        ArtikelNr:
           type: integer
-          example: 1
-        kid:
-          type: integer
-          example: 1
-        bezeichnung:
+          example: 402
+        ArtikelName:
           type: string
-        start:
-          type: object
-        end:
-          type: object
-
-    Kurs:
-      type: object
-      properties:
-        kid:
-          type: integer
-          example: 1
-        lid:
+          example: 'Haare blond'
+        ArtikelBeschreibung:
           type: string
-          example: 'mwer'
-        fach:
-          type: string
-          example: "Mathe"
-        name:
-          type: string
-          example: "TINF20D"
-        termine:
-          type: array
-          items:
-            $ref: '#/components/schemas/Termin'
-
-    Note:
-      type: object
-      properties:
-        note:
+          example: '50 cm lang mittelblond Naturwelle 100g'
+        ArtikelPreis:
           type: number
-          example: 4.0
-        zuordnung:
+          example: 49.90
+
+    Kunde:
+      type: object
+      properties:
+        KundenNr:
+          type: integer
+          example: 420
+        KundenAnrede:
           type: string
-          enum: [ 'mdl', 'schrftl' ]
-        kid:
+          example: 'Frau'
+        KundenVorname:
+          type: string
+          example: 'Lavinia'
+        KundenNachname:
+          type: string
+          example: 'Berger'
+        ReAdressNr:
           type: integer
           example: 1
-        sid:
-          type: integer
-          example: 1
-        nid:
+        LiAdressNr:
           type: integer
           example: 1
 
-    Schueler:
+    Bestellung:
       type: object
       properties:
-        sid:
+        BestellNr:
+          type: integer
+          example: 11
+        BestellStatus:
+          type: string
+          example: 'abgeschlossen'
+        BestellDatum:
+          type: string
+          example: '13.02.2010'
+        LieferDatumGeplant:
+          type: string
+          example: '16.02.2010'
+        VersandDatum:
+          type: string
+          example: '14.02.2010'
+        KundenNr:
+          type: integer
+          example: 1
+        ReAdressNr:
           type: integer
           example: 42
-        vName:
-          type: string
-          example: 'Max'
-        nName:
-          type: string
-          example: 'Mustermann'
-        kid:
+        LiAdressNr:
           type: integer
-          example: 1
-        noten:
-          type: array
-          items:
-            $ref: '#/components/schemas/Note'
+          example: 42
 
-    Kursschueler:
+    User:
       type: object
       properties:
-        kid:
-          type: integer
-          example: 1
-        lid:
+        Username:
           type: string
           example: 'mwer'
-        fach:
+        Passwort:
           type: string
-          example: "Mathe"
-        name:
+          example: 'passwort1'
+        Email:
           type: string
-          example: "TINF20D"
-        schueler:
-          type: array
-          items:
-            $ref: '#/components/schemas/Schueler'
-
-    Lehrer:
-      type: object
-      properties:
-        username:
-          type: string
-          example: 'mwer'
-        password:
-          type: string
-          example: 'Password1'
-        anzeigename:
-          type: string
-          example: 'Werdon'
+          example: 'beispiel@gmail.com'
