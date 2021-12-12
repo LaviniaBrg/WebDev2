@@ -1,9 +1,9 @@
 export interface Bestellung {
     BestellNr: number,
     BestellStatus: string,
-    BestellDatum: number,
-    LieferDatumGeplant: number,
-    VersandDatum: number,
+    BestellDatum: string,
+    LieferDatumGeplant: string,
+    VersandDatum: string,
     KundenNr: number,
     ReAdressNr: number,
     LiAdressNr: number,

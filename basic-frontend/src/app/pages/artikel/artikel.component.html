@@ -1,13 +1,12 @@
 <div>
     <button nz-button nzType="primary" routerLink="artikelErstellen"><i nz-icon nzType="plus" nzTheme="outline"></i>
-</button>
-<span class="error">{{errorMessage}}</span>
+    </button>
+    <span class="error">{{errorMessage}}</span>
 </div>
-
 <br>
 <nz-table #basicTable [nzData]="['']">
     <thead>
-       <tr>
+    <tr>
         <th>Nr.</th>
         <th>Name</th>
         <th>Beschreibung</th>
@@ -21,8 +20,10 @@
         <td>{{artikel.ArtikelName}}</td>
         <td>{{artikel.ArtikelBeschreibung}}</td>
         <td>{{artikel.ArtikelPreis}}</td>
-        <td><i class="bearbeitenButton" [routerLink]="['artikelBearbeiten', artikel.ArtikelNr]" nz-icon nzTheme="outline" nzType="edit"></i>
-            <i class="bearbeitenButton" (click)="deleteArtikel(artikel.ArtikelNr)" nz-icon nzTheme="outline" nzType="delete"></i>
+        <td><i class="bearbeitenButton" [routerLink]="['artikelBearbeiten', artikel.ArtikelNr]" nz-icon
+               nzTheme="outline" nzType="edit"></i>
+            <i class="bearbeitenButton" (click)="deleteArtikel(artikel.ArtikelNr)" nz-icon nzTheme="outline"
+               nzType="delete"></i>
         </td>
     </tr>
     </tbody>

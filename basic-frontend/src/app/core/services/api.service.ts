@@ -60,19 +60,19 @@ export class ApiService {
         return this.http.get<Bestellung[]>(`${this.baseUrl}/bestellungen`)
     }
 
-    getBestellung(BestellId: string) {
-        return this.http.get<Bestellung>(`${this.baseUrl}/bestellung/${BestellId}`)
+    getBestellung(BestellNr: number) {
+        return this.http.get<Bestellung>(`${this.baseUrl}/bestellungen/${BestellNr}`)
     }
 
-    deleteBestellung(bestellNr: number) {
-        return this.http.delete<any>(`${this.baseUrl}/bestellungen`, {body: {BestellNr: bestellNr}})
+    deleteBestellung(BestellNr: number) {
+        return this.http.delete<void>(`${this.baseUrl}/bestellungen/${BestellNr}`)
     }
 
     addBestellung(bestellung: Bestellung) {
-        return this.http.post<any>(`${this.baseUrl}/bestellungen`, {body: JSON.stringify(bestellung)})
+        return this.http.post<void>(`${this.baseUrl}/bestellungen/`, bestellung)
     }
 
     updateBestellung(bestellung: Bestellung) {
-        return this.http.put<any>(`${this.baseUrl}/bestellungen`, {body: JSON.stringify(bestellung)})
+        return this.http.put<void>(`${this.baseUrl}/bestellungen/${bestellung.BestellNr}`, bestellung)
     }
 }

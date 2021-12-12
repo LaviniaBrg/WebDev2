@@ -11,12 +11,15 @@ import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzInputModule} from "ng-zorro-antd/input";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
+import { BestellungErstellenComponent } from './bestellung-erstellen/bestellung-erstellen.component';
+import {NzTypographyModule} from "ng-zorro-antd/typography";
 
 
 @NgModule({
     declarations: [
         BestellungComponent,
-        BestellungBearbeitenComponent
+        BestellungBearbeitenComponent,
+        BestellungErstellenComponent
     ],
     imports: [
         CommonModule,
@@ -29,7 +32,8 @@ import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
         NzInputModule,
         NzSelectModule,
         NzDatePickerModule,
-        FormsModule
+        FormsModule,
+        NzTypographyModule
     ]
 })
 export class BestellungModule {

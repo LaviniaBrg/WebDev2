@@ -16,10 +16,11 @@ router.get('/', (req, res) => {
 router.get('/:BestellNr', (req, res) => {
     const BestellNr = parseInt(req.params.BestellNr);
     console.log(BestellNr);
-    BestellungenService.fetchEineBestellung(BestellNr).then(() => {
-        res.status(204);
-        res.send();
+    BestellungenService.fetchEineBestellung(BestellNr).then((data) => {
+        res.status(200);
+        res.json(data);
     }).catch((err) => {
+        console.log(err);
         res.status(500);
         res.send(err);
     })
@@ -32,8 +33,13 @@ router.delete('/:BestellNr', (req, res) => {
         res.status(204);
         res.send();
     }).catch((err) => {
-        res.status(500);
-        res.send(err);
+        if (typeof (err) === 'number') {
+            res.status(err);
+        }
+        else {
+            res.status(500);
+        }
+        res.send();
     })
 });
 
@@ -47,8 +53,6 @@ router.post('/', (req, res) => {
     const LiAdressNr = parseInt(req.body.LiAdressNr);
     if (BestellStatus
         && BestellDatum
-        && LieferDatumGeplant
-        && VersandDatum
         && KundenNr
         && ReAdressNr
         && LiAdressNr) {

@@ -20,6 +20,7 @@ import {LoginComponent} from './pages/login/login.component';
 import {RegisterComponent} from './pages/register/register.component';
 import {HomeComponent} from './pages/home/home.component';
 import {ProfileComponent} from './pages/profile/profile.component';
+import {NzImageModule} from "ng-zorro-antd/experimental/image";
 
 registerLocaleData(de);
 
@@ -43,7 +44,8 @@ registerLocaleData(de);
         BrowserAnimationsModule,
         IconsProviderModule,
         NzLayoutModule,
-        NzMenuModule
+        NzMenuModule,
+        NzImageModule
     ],
     providers: [{provide: NZ_I18N, useValue: de_DE}],
     bootstrap: [AppComponent]

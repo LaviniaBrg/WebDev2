@@ -5,13 +5,13 @@ export async function fetchAlleBestellungen() {
     return BestellungenUebersicht;
 }
 
-export async function fetchEineBestellung() {
-    const BestellungenUebersicht = await BestellungenModel.getEineBestellung();
+export async function fetchEineBestellung(BestellNr) {
+    const BestellungenUebersicht = await BestellungenModel.getEineBestellung(BestellNr);
     return BestellungenUebersicht;
 }
 
 export async function deleteBestellung(BestellNr) {
-    const BestellungenUebersicht = await BestellungenModel.deleteBestellung(BestellNr);
+    const BestellungenUebersicht = await BestellungenModel.deleteBestellung(BestellNr).catch((err) => {throw(err);});
     return BestellungenUebersicht;
 }
 

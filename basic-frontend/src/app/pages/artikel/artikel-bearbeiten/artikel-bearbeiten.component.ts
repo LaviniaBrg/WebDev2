@@ -69,6 +69,5 @@ export class ArtikelBearbeitenComponent implements OnInit {
             ArtikelBeschreibung: ['', Validators.maxLength(250)],
             ArtikelPreis: ['', Validators.pattern('[1-9]([0-9]*).([0-9]{1,2})?')]
         })
-
     }
 }
