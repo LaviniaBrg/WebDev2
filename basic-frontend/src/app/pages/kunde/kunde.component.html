@@ -1,24 +1,24 @@
 <nz-table #basicTable [nzData]="['']">
-  <thead>
+    <thead>
     <tr>
-      <th>Nr.</th>
-      <th>Anrede</th>
-      <th>Vorname</th>
-      <th>Nachname</th>
-      <th>RechnungsadressNr.</th>
-      <th>LieferadressNr.</th>
-      <th>Bearbeiten</th>
+        <th>Nr.</th>
+        <th>Anrede</th>
+        <th>Vorname</th>
+        <th>Nachname</th>
+        <th>RechnungsadressNr.</th>
+        <th>LieferadressNr.</th>
+        <th>Bearbeiten</th>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     <tr *ngFor="let kunde of eintraege">
-      <td>{{ kunde.KundenNr }}</td>
-      <td>{{ kunde.KundenAnrede }}</td>
-      <td>{{ kunde.KundenVorname }}</td>
-      <td>{{ kunde.KundenNachname }}</td>
-      <td>{{ kunde.ReAdressNr }}</td>
-      <td>{{ kunde.LiAdressNr }}</td>
-      <td><i nz-icon nzType="edit" nzTheme="outline" [routerLink] = "['kundeBearbeiten', kunde.KundenNr]"></i></td>
+        <td>{{ kunde.KundenNr }}</td>
+        <td>{{ kunde.KundenAnrede }}</td>
+        <td>{{ kunde.KundenVorname }}</td>
+        <td>{{ kunde.KundenNachname }}</td>
+        <td>{{ kunde.ReAdressNr }}</td>
+        <td>{{ kunde.LiAdressNr }}</td>
+        <td><i [routerLink]="['kundeBearbeiten', kunde.KundenNr]" nz-icon nzTheme="outline" nzType="edit"></i></td>
     </tr>
-  </tbody>
+    </tbody>
 </nz-table>

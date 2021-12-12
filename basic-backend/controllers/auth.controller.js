@@ -26,7 +26,6 @@ router.post('/', (req, res) => {
                 res.send();
             })
     }
-
 });
 
 router.post('/login', (req, res) => {

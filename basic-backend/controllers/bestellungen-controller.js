@@ -1,5 +1,6 @@
-import { Router } from 'express';
+import {Router} from 'express';
 import * as BestellungenService from "../services/bestellungen-service.js";
+
 export const router = Router();
 
 router.get('/', (req, res) => {
@@ -12,10 +13,10 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/:BestellNr',(req, res) =>{
+router.get('/:BestellNr', (req, res) => {
     const BestellNr = parseInt(req.params.BestellNr);
     console.log(BestellNr);
-    BestellungenService.fetchEineBestellung(BestellNr).then( () => {
+    BestellungenService.fetchEineBestellung(BestellNr).then(() => {
         res.status(204);
         res.send();
     }).catch((err) => {
@@ -24,10 +25,10 @@ router.get('/:BestellNr',(req, res) =>{
     })
 });
 
-router.delete('/:BestellNr',(req, res) =>{
+router.delete('/:BestellNr', (req, res) => {
     const BestellNr = parseInt(req.params.BestellNr);
     console.log(BestellNr);
-    BestellungenService.deleteBestellung(BestellNr).then( () => {
+    BestellungenService.deleteBestellung(BestellNr).then(() => {
         res.status(204);
         res.send();
     }).catch((err) => {
@@ -36,7 +37,7 @@ router.delete('/:BestellNr',(req, res) =>{
     })
 });
 
-router.post('/', (req, res)=>{
+router.post('/', (req, res) => {
     const BestellStatus = req.body.BestellStatus;
     const BestellDatum = req.body.BestellDatum;
     const LieferDatumGeplant = req.body.LieferDatumGeplant;
@@ -44,13 +45,13 @@ router.post('/', (req, res)=>{
     const KundenNr = parseInt(req.body.KundenNr);
     const ReAdressNr = parseInt(req.body.ReAdressNr);
     const LiAdressNr = parseInt(req.body.LiAdressNr);
-    if(BestellStatus
+    if (BestellStatus
         && BestellDatum
         && LieferDatumGeplant
         && VersandDatum
         && KundenNr
         && ReAdressNr
-        && LiAdressNr){
+        && LiAdressNr) {
         BestellungenService.addBestellung(BestellStatus,
             BestellDatum,
             LieferDatumGeplant,
@@ -69,7 +70,7 @@ router.post('/', (req, res)=>{
     }
 });
 
-router.put('/:BestellNr', (req, res) =>{
+router.put('/:BestellNr', (req, res) => {
     const BestellNr = parseInt(req.params.BestellNr);
     const BestellStatus = req.body.BestellStatus;
     const BestellDatum = req.body.BestellDatum;
@@ -78,15 +79,15 @@ router.put('/:BestellNr', (req, res) =>{
     const KundenNr = parseInt(req.body.KundenNr);
     const ReAdressNr = parseInt(req.body.ReAdressNr);
     const LiAdressNr = parseInt(req.body.LiAdressNr);
-    if( BestellNr
+    if (BestellNr
         && BestellStatus
         && BestellDatum
         && LieferDatumGeplant
         && VersandDatum
         && KundenNr
         && ReAdressNr
-        && LiAdressNr){
-        if(parseInt(req.params.BestellNr) === parseInt(req.body.BestellNr)){
+        && LiAdressNr) {
+        if (parseInt(req.params.BestellNr) === parseInt(req.body.BestellNr)) {
             BestellungenService.updateBestellung(BestellNr,
                 BestellStatus,
                 BestellDatum,
@@ -94,7 +95,7 @@ router.put('/:BestellNr', (req, res) =>{
                 VersandDatum,
                 KundenNr,
                 ReAdressNr,
-                LiAdressNr).then( () => {
+                LiAdressNr).then(() => {
                 res.status(201);
                 res.send();
             }).catch((err) => {

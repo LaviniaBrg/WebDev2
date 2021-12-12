@@ -1,91 +1,91 @@
 <nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar"
-            nzCollapsible
-            nzWidth="200px"
-            nzBreakpoint="md"
-            [(nzCollapsed)]="isCollapsed"
-            [nzTrigger]="null">
-    <div class="sidebar-logo">
-      <a routerLink="/welcome">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-        <h1>Verwaltung</h1>
-      </a>
-    </div>
+    <nz-sider [(nzCollapsed)]="isCollapsed"
+              [nzTrigger]="null"
+              class="menu-sidebar"
+              nzBreakpoint="md"
+              nzCollapsible
+              nzWidth="200px">
+        <div class="sidebar-logo">
+            <a routerLink="/welcome">
+                <img alt="logo" src="https://ng.ant.design/assets/img/logo.svg">
+                <h1>Verwaltung</h1>
+            </a>
+        </div>
 
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="shopping-cart">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Startseite</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/artikel">Artikel</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/kunden">Kunden</a>
-          </li>
-        </ul>
-      </li>
-
-      <li nz-submenu nzOpen nzTitle="Versand" nzIcon="shop">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/bestellungen">Bestellungen</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/bestellungen/lieferscheine">Lieferscheine</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/bestellungen/rechnungen">Rechnungen</a>
-          </li>
-        </ul>
-      </li>
-
-      <li nz-submenu nzOpen nzTitle="Zugang" nzIcon="user" *ngIf="!isLoggedIn">
-        <ul>
-          <ul>
-            <li nz-menu-item nzMatchRouter>
-              <a routerLink="register">Registrieren</a>
+        <ul [nzInlineCollapsed]="isCollapsed" nz-menu nzMode="inline" nzTheme="dark">
+            <li nz-submenu nzIcon="shopping-cart" nzOpen nzTitle="Dashboard">
+                <ul>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/welcome">Startseite</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/artikel">Artikel</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/kunden">Kunden</a>
+                    </li>
+                </ul>
             </li>
-            <li nz-menu-item nzMatchRouter>
-              <a routerLink="login">Einloggen</a>
-            </li>
-          </ul>
-        </ul>
-      </li>
 
-      <li nz-submenu nzOpen nzTitle="User: {{ username }}" *ngIf="isLoggedIn" nzIcon="user">
-        <ul>
-          <!--<li nz-menu-item nzMatchRouter *ngIf="isLoggedIn">
-            <a routerLink="profile">{{ username }}</a>
-          </li>-->
-          <li nz-menu-item nzMatchRouter *ngIf="isLoggedIn">
-            <a href class="nav-link" (click)="logout()">LogOut</a>
-          </li>
+            <li nz-submenu nzIcon="shop" nzOpen nzTitle="Versand">
+                <ul>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/bestellungen">Bestellungen</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/bestellungen/lieferscheine">Lieferscheine</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/bestellungen/rechnungen">Rechnungen</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li *ngIf="!isLoggedIn" nz-submenu nzIcon="user" nzOpen nzTitle="Zugang">
+                <ul>
+                    <ul>
+                        <li nz-menu-item nzMatchRouter>
+                            <a routerLink="register">Registrieren</a>
+                        </li>
+                        <li nz-menu-item nzMatchRouter>
+                            <a routerLink="login">Einloggen</a>
+                        </li>
+                    </ul>
+                </ul>
+            </li>
+
+            <li *ngIf="isLoggedIn" nz-submenu nzIcon="user" nzOpen nzTitle="User: {{ username }}">
+                <ul>
+                    <!--<li nz-menu-item nzMatchRouter *ngIf="isLoggedIn">
+                      <a routerLink="profile">{{ username }}</a>
+                    </li>-->
+                    <li *ngIf="isLoggedIn" nz-menu-item nzMatchRouter>
+                        <a (click)="logout()" class="nav-link" href>LogOut</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
-      </li>
-    </ul>
-  </nz-sider>
-  <nz-layout>
-    <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-            <i class="trigger"
+    </nz-sider>
+    <nz-layout>
+        <nz-header>
+            <div class="app-header">
+        <span (click)="isCollapsed = !isCollapsed" class="header-trigger">
+            <i [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+               class="trigger"
                nz-icon
-               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
             ></i>
         </span>
-      </div>
-    </nz-header>
-    <nz-content>
-      <nz-breadcrumb>
-        <nz-breadcrumb-item> <a routerLink=""></a></nz-breadcrumb-item>
-        <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
-      </nz-breadcrumb>
-      <div class="inner-content">
-        <router-outlet></router-outlet>
-      </div>
-    </nz-content>
-    <app-footer></app-footer>
-  </nz-layout>
+            </div>
+        </nz-header>
+        <nz-content>
+            <nz-breadcrumb>
+                <nz-breadcrumb-item><a routerLink=""></a></nz-breadcrumb-item>
+                <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+            </nz-breadcrumb>
+            <div class="inner-content">
+                <router-outlet></router-outlet>
+            </div>
+        </nz-content>
+        <app-footer></app-footer>
+    </nz-layout>
 </nz-layout>

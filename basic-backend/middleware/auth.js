@@ -3,7 +3,7 @@ import {secret} from "../config/auth.config.js";
 
 export function authMiddleware(req, res, next) {
     const token = req.header('Authorization');
-    if (token){
+    if (token) {
         try {
             req.user = jwt.verify(token, secret, [], []);
         } catch (error) {

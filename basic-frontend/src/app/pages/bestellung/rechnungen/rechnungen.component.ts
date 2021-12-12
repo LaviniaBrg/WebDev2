@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-rechnungen',
-  templateUrl: './rechnungen.component.html',
-  styleUrls: ['./rechnungen.component.css']
+    selector: 'app-rechnungen',
+    templateUrl: './rechnungen.component.html',
+    styleUrls: ['./rechnungen.component.css']
 })
 export class RechnungenComponent implements OnInit {
 
-  constructor() { }
+    constructor() {
+    }
 
-  // @ts-ignore
-  ngOnInit(): void;
+    // @ts-ignore
+    ngOnInit(): void;
 
 }

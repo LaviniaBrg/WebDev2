@@ -1,14 +1,13 @@
-import { config } from 'dotenv';
-import path from 'path';
+import {config} from 'dotenv';
+import path, {dirname} from 'path';
 import express from 'express';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import { router as api } from './api.js';
+import {fileURLToPath} from 'url';
+import {router as api} from './api.js';
 
 const __filename = fileURLToPath(
     import.meta.url);
 const __dirname = dirname(__filename);
-config({ path: './config/app.env' });
+config({path: './config/app.env'});
 
 const app = express();
 
@@ -20,5 +19,5 @@ app.use((req, res) => {
 });
 
 app.listen(process.env.NODE_PORT, () => {
-    console.log(`App listening at http://localhost:${process.env.NODE_PORT}`)
+    console.log(`App listening at Port ${process.env.NODE_PORT}`)
 });
