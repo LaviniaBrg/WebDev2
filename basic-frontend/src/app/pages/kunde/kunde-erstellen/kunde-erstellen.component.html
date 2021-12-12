@@ -1,4 +1,4 @@
-<form (ngSubmit)="submitForm()" [formGroup]="alterKundenForm" nz-form (keydown.enter)="submitForm()">
+<form (ngSubmit)="addKunde()" [formGroup]="KundenForm" nz-form>
     <nz-form-item>
         <nz-form-control [nzOffset]="8" [nzSpan]="4">
             <table>
@@ -11,14 +11,6 @@
                     </button>
                 </td>
             </table>
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-        <nz-form-label [nzSpan]="4" nzFor="KundenNr">
-            Nr.
-        </nz-form-label>
-        <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Kundennummer ein">
-            <span nz-typography>{{kunde.KundenNr}}</span>
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -35,8 +27,7 @@
             Vorname
         </nz-form-label>
         <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie einen Kundenvornamen ein">
-            <input formControlName="KundenVorname" nz-input placeholder="KundenVorname" type="text"
-                   [(ngModel)]="kunde.KundenVorname">
+            <input formControlName="KundenVorname" nz-input placeholder="KundenVorname" type="text" [(ngModel)]="kunde.KundenVorname">
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -44,8 +35,7 @@
             Nachname
         </nz-form-label>
         <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie einen Kundennachnamen ein">
-            <input formControlName="KundenNachname" nz-input placeholder="KundenNachname" type="text"
-                   [(ngModel)]="kunde.KundenNachname">
+            <input formControlName="KundenNachname" nz-input placeholder="KundenNachname" type="text" [(ngModel)]="kunde.KundenNachname">
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -53,8 +43,7 @@
             RechnungsadressNr.
         </nz-form-label>
         <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Rechnungsadressnummer ein">
-            <input formControlName="ReAdressNr" nz-input placeholder="ReAdressNr" type="number"
-                   [(ngModel)]="kunde.ReAdressNr">
+            <input formControlName="ReAdressNr" nz-input placeholder="ReAdressNr" type="number" [(ngModel)]="kunde.ReAdressNr">
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -62,8 +51,7 @@
             LieferungsadressNr.
         </nz-form-label>
         <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Lieferungsadressnummer ein">
-            <input formControlName="LiAdressNr" nz-input placeholder="LiAdressNr" type="number"
-                   [(ngModel)]="kunde.LiAdressNr">
+            <input formControlName="LiAdressNr" nz-input placeholder="LiAdressNr" type="number" [(ngModel)]="kunde.LiAdressNr">
         </nz-form-control>
     </nz-form-item>
     <p style="color: red">* erforderlich</p>

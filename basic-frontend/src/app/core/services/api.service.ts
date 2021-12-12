@@ -39,20 +39,20 @@ export class ApiService {
         return this.http.get<Kunde[]>(`${this.baseUrl}/kunden`)
     }
 
-    getKunde(KundenId: string) {
-        return this.http.get<Kunde>(`${this.baseUrl}/kunden/${KundenId}`)
+    get1Kunde(KundenNr: string) {
+        return this.http.get<Kunde>(`${this.baseUrl}/kunden/${KundenNr}`)
     }
 
     deleteKunde(kundenNr: number) {
-        return this.http.delete<any>(`${this.baseUrl}/kunden`, {body: {KundenNr: kundenNr}})
+        return this.http.delete<void>(`${this.baseUrl}/kunden/${kundenNr}`)
     }
 
     addKunde(kunde: Kunde) {
-        return this.http.post<any>(`${this.baseUrl}/kunden`, {body: JSON.stringify(kunde)})
+        return this.http.post<void>(`${this.baseUrl}/kunden`, kunde)
     }
 
     updateKunde(kunde: Kunde) {
-        return this.http.put<any>(`${this.baseUrl}/kunden/${kunde.KundenNr}`, {body: JSON.stringify(kunde)})
+        return this.http.put<void>(`${this.baseUrl}/kunden/${kunde.KundenNr}`, kunde)
 
     }
 

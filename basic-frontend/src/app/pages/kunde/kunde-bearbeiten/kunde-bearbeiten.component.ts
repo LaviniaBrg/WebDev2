@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Kunde} from "../../../models/kunde.model";
 import {ApiService} from "../../../core/services/api.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {KundenService} from "../../../_services/kunden.service";
 
 @Component({
     selector: 'app-kunde-bearbeiten',
@@ -10,25 +11,55 @@ import {ActivatedRoute} from "@angular/router";
     styleUrls: ['./kunde-bearbeiten.component.css']
 })
 export class KundeBearbeitenComponent implements OnInit {
-    kundeForm: FormGroup;
-    kunde: Kunde;
+    alterKundenForm: FormGroup = new FormGroup({
+        KundenAnrede: new FormControl(),
+        KundenVorname: new FormControl(),
+        KundenNachname: new FormControl(),
+        ReAdressNr: new FormControl(),
+        LiAdressNr: new FormControl()
+    });
+    kunde: Kunde = {
+        KundenNr: 0,
+        KundenAnrede: '',
+        KundenVorname: '',
+        KundenNachname: '',
+        ReAdressNr: 0,
+        LiAdressNr: 0
+    }
     AnredeOptionen = [
-        {label: 'Herr', value: 'Herr'},
-        {label: 'Frau', value: 'Frau'}
+        {label: 'Frau', value: 'Frau'},
+        {label: 'Herr', value: 'Herr'}
     ];
 
     constructor(
         private fb: FormBuilder,
         private apiService: ApiService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router,
+        private KundenService: KundenService
     ) {
     }
 
     submitForm(): void {
-        if (this.kundeForm.valid) {
-            console.log('submit', this.kundeForm.value);
+        if (this.alterKundenForm.valid) {
+            const kunde: Kunde = {
+                KundenNr: this.kunde.KundenNr,
+                KundenAnrede: this.alterKundenForm.value.KundenAnrede,
+                KundenVorname: this.alterKundenForm.value.KundenVorname,
+                KundenNachname: this.alterKundenForm.value.KundenNachname,
+                ReAdressNr: this.alterKundenForm.value.ReAdressNr,
+                LiAdressNr: this.alterKundenForm.value.LiAdressNr
+            }
+
+            console.log(kunde);
+
+            this.apiService.updateKunde(kunde).subscribe( () => {
+                this.router.navigate(['/kunden'])
+            })
+
+            console.log('Submit', this.alterKundenForm.value);
         } else {
-            Object.values(this.kundeForm.controls).forEach(control => {
+            Object.values(this.alterKundenForm.controls).forEach(control => {
                 if (control.invalid) {
                     control.markAsDirty();
                     control.updateValueAndValidity({onlySelf: true});
@@ -39,13 +70,11 @@ export class KundeBearbeitenComponent implements OnInit {
 
     ngOnInit(): void {
         const KundenNr = this.route.snapshot.paramMap.get('KundenNr');
-        this.apiService.getKunde(KundenNr).subscribe((kunde) => {
-            this.kunde = kunde;
-            console.log(kunde)
+        this.apiService.get1Kunde(KundenNr).subscribe((kunde) => {
+            this.kunde = kunde
         });
 
-        this.kundeForm = this.fb.group({
-            KundenNr: ['', Validators.pattern('[1-9]([0-9]*)')],
+        this.alterKundenForm = this.fb.group({
             Anrede: [''],
             Vorname: [''],
             Nachname: [''],

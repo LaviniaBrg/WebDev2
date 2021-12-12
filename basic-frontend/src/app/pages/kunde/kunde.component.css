@@ -2,3 +2,16 @@ th,
 td {
     border: 1px solid black;
 }
+
+.bearbeitenButton{
+    padding-right: 15px;
+}
+
+.bearbeitenButton:hover {
+    cursor: pointer;
+}
+
+.error {
+    margin-left: 20px;
+    color: red;
+}
