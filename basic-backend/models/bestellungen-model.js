@@ -50,7 +50,7 @@ export async function deleteBestellung(BestellNr) {
 export async function updateBestellung(BestellNr, BestellStatus, BestellDatum, LieferDatumGeplant, VersandDatum, KundenNr, ReAdressNr, LiAdressNr) {
     return new Promise((resolve, reject) => {
         db.run("UPDATE Bestellungen SET BestellStatus =?, BestellDatum=?, LieferDatumGeplant =?, VersandDatum=?, KundenNr=?, ReAdressNr=?, LiAdressNr=? WHERE BestellNr=?;",
-            [BestellStatus, BestellDatum, LieferDatumGeplant, VersandDatum, KundenNr, ReAdressNr, LiAdressNr, BestellNr], (err, results) => {
+            [BestellStatus, BestellDatum, (LieferDatumGeplant? LieferDatumGeplant:''), (VersandDatum? VersandDatum:''), KundenNr, ReAdressNr, LiAdressNr, BestellNr], (err, results) => {
                 if (err) {
                     reject(err);
                 } else {

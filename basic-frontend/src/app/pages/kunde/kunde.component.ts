@@ -23,12 +23,12 @@ export class KundeComponent implements OnInit {
     }
 
     deleteKunde(KundeNr: number) {
-        this.apiService.deleteKunde(KundeNr).subscribe( () => {
-            this.apiService.getKunden().subscribe( kunde => {
+        this.apiService.deleteKunde(KundeNr).subscribe(() => {
+            this.apiService.getKunden().subscribe(kunde => {
                 this.eintraege = kunde;
             })
         }, (err: HttpErrorResponse) => {
-            if(err.status === 409) {
+            if (err.status === 409) {
                 this.errorMessage = 'Kunde löschen nicht möglich, Kunde wird verwendet';
             }
         })

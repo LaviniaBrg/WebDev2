@@ -26,6 +26,7 @@ export class KundeErstellenComponent implements OnInit {
         ReAdressNr: 0,
         LiAdressNr: 0
     };
+
     AnredeOptionen = [
         {label: 'Frau', value: 'Frau'},
         {label: 'Herr', value: 'Herr'}
@@ -39,11 +40,11 @@ export class KundeErstellenComponent implements OnInit {
 
     ngOnInit(): void {
         this.KundenForm = this.fb.group({
-            Anrede: [null],
-            Vorname: [null],
-            Nachname: [null],
-            RechnungsadressNr: [null, Validators.pattern('[1-9]([0-9]*)')],
-            LieferungsadressNr: [null, Validators.pattern('[1-9]([0-9]*)')],
+            KundenAnrede: [''],
+            KundenVorname: [''],
+            KundenNachname: [''],
+            ReAdressNr: ['', Validators.pattern('[1-9]([0-9]*)')],
+            LiAdressNr: ['', Validators.pattern('[1-9]([0-9]*)')],
         })
     }
 

@@ -53,15 +53,15 @@ router.post('/login', (req, res) => {
     }
 
 })
-
-router.get('/test', authMiddleware, (req, res) => {
-    if (req.user) {
-        res.status(200);
-        res.send(req.user)
-    } else {
-        res.status(403);
-        res.send();
-    }
-})
+//zum testen
+// router.get('/test', authMiddleware, (req, res) => {
+//     if (req.user) {
+//         res.status(200);
+//         res.send(req.user)
+//     } else {
+//         res.status(403);
+//         res.send();
+//     }
+// })
 
 export {router as authRouter};

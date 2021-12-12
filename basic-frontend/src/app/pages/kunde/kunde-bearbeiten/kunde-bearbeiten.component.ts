@@ -26,6 +26,7 @@ export class KundeBearbeitenComponent implements OnInit {
         ReAdressNr: 0,
         LiAdressNr: 0
     }
+
     AnredeOptionen = [
         {label: 'Frau', value: 'Frau'},
         {label: 'Herr', value: 'Herr'}
@@ -75,11 +76,11 @@ export class KundeBearbeitenComponent implements OnInit {
         });
 
         this.alterKundenForm = this.fb.group({
-            Anrede: [''],
-            Vorname: [''],
-            Nachname: [''],
-            RechnungsadressNr: ['', Validators.pattern('[1-9]([0-9]*)')],
-            LieferungsadressNr: ['', Validators.pattern('[1-9]([0-9]*)')],
+            KundenAnrede: [''],
+            KundenVorname: [''],
+            KundenNachname: [''],
+            ReAdressNr: ['', Validators.pattern('[1-9]([0-9]*)')],
+            LiAdressNr: ['', Validators.pattern('[1-9]([0-9]*)')],
         })
     }
 }

@@ -86,8 +86,6 @@ router.put('/:BestellNr', (req, res) => {
     if (BestellNr
         && BestellStatus
         && BestellDatum
-        && LieferDatumGeplant
-        && VersandDatum
         && KundenNr
         && ReAdressNr
         && LiAdressNr) {

@@ -18,8 +18,7 @@
             Anrede
         </nz-form-label>
         <nz-form-control [nzSpan]="8" nzErrorTip="Bitte wählen Sie eine Kundenanrede">
-            <input nz-input formControlName="KundenAnrede" placeholder="KundenAnrede" type="text"
-                   [(ngModel)]="kunde.KundenAnrede">
+            <nz-select [nzOptions]="AnredeOptionen" formControlName="KundenAnrede" nzPlaceHolder="bitte wählen" [(ngModel)]="kunde.KundenAnrede"></nz-select>
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
