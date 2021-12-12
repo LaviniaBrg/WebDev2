@@ -21,14 +21,6 @@ import {RegisterComponent} from './pages/register/register.component';
 import {HomeComponent} from './pages/home/home.component';
 import {ProfileComponent} from './pages/profile/profile.component';
 
-
-
-import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
-
-//import { KundeComponent } from './pages/kunde/kunde.component';
-//import { ArtikelComponent } from './pages/artikel/artikel.component';
-//import { BestellungComponent } from './pages/bestellung/bestellung.component';
-
 registerLocaleData(de);
 
 @NgModule({
@@ -51,8 +43,7 @@ registerLocaleData(de);
         BrowserAnimationsModule,
         IconsProviderModule,
         NzLayoutModule,
-        NzMenuModule,
-        NzBreadCrumbModule
+        NzMenuModule
     ],
     providers: [{provide: NZ_I18N, useValue: de_DE}],
     bootstrap: [AppComponent]

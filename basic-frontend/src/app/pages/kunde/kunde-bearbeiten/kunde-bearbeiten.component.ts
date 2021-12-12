@@ -38,8 +38,8 @@ export class KundeBearbeitenComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        const KundenId = this.route.snapshot.paramMap.get('id');
-        this.apiService.getKunde(KundenId).subscribe((kunde) => {
+        const KundenNr = this.route.snapshot.paramMap.get('KundenNr');
+        this.apiService.getKunde(KundenNr).subscribe((kunde) => {
             this.kunde = kunde;
             console.log(kunde)
         });

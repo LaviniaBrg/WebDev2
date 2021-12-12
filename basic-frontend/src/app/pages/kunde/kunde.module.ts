@@ -5,7 +5,6 @@ import {KundeComponent} from './kunde.component';
 import {NzTableModule} from "ng-zorro-antd/table";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzIconModule} from "ng-zorro-antd/icon";
-import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
 import {KundeBearbeitenComponent} from "./kunde-bearbeiten/kunde-bearbeiten.component";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzInputModule} from "ng-zorro-antd/input";
@@ -25,7 +24,6 @@ import {NzSelectModule} from "ng-zorro-antd/select";
         NzTableModule,
         NzButtonModule,
         NzIconModule,
-        NzBreadCrumbModule,
         NzFormModule,
         NzInputModule,
         FormsModule,

@@ -7,18 +7,20 @@ import {NzTableModule} from "ng-zorro-antd/table";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzLayoutModule} from "ng-zorro-antd/layout";
 import {NzMenuModule} from "ng-zorro-antd/menu";
-import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
 import {ArtikelBearbeitenComponent} from "./artikel-bearbeiten/artikel-bearbeiten.component";
 import {NzFormModule} from "ng-zorro-antd/form";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzInputModule} from "ng-zorro-antd/input";
+import { ArtikelErstellenComponent } from './artikel-erstellen/artikel-erstellen.component';
+import {NzTypographyModule} from "ng-zorro-antd/typography";
 
 
 @NgModule({
     declarations: [
         ArtikelComponent,
-        ArtikelBearbeitenComponent
+        ArtikelBearbeitenComponent,
+        ArtikelErstellenComponent
     ],
     imports: [
         CommonModule,
@@ -27,11 +29,12 @@ import {NzInputModule} from "ng-zorro-antd/input";
         NzIconModule,
         NzLayoutModule,
         NzMenuModule,
-        NzBreadCrumbModule,
         NzFormModule,
         ReactiveFormsModule,
         NzButtonModule,
-        NzInputModule
+        NzInputModule,
+        FormsModule,
+        NzTypographyModule
     ]
 })
 export class ArtikelModule {

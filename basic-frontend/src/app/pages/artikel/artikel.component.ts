@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../../core/services/api.service";
 import {Artikel} from "../../models/artikel.model";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
     selector: 'app-artikel',
@@ -10,6 +11,7 @@ import {Artikel} from "../../models/artikel.model";
 export class ArtikelComponent implements OnInit {
 
     public eintraege: Artikel[];
+    public errorMessage: string = '';
 
     constructor(private apiService: ApiService) {
     }
@@ -21,29 +23,14 @@ export class ArtikelComponent implements OnInit {
     }
 
     deleteArtikel(ArtikelNr: number) {
-        this.apiService.deleteArtikel(ArtikelNr).subscribe(artikel => {
-            this.eintraege = artikel;
-            console.log("gelöschter", artikel);
+        this.apiService.deleteArtikel(ArtikelNr).subscribe(() => {
+            this.apiService.getArtikel().subscribe(artikel => {
+                this.eintraege = artikel;
+            })
+        }, (err: HttpErrorResponse) => {
+            if (err.status === 409) {
+                this.errorMessage = 'Artikel löschen nicht möglich, Artikel wird verwendet';
+            }
         })
-    }
-
-    neuerArtikel(ArtikelNr: number, ArtikelName: string, ArtikelPreis: number) {
-        const artikel: Artikel = {
-            ArtikelNr: 0,
-            ArtikelName: "Haare grün",
-            ArtikelBeschreibung: "50 cm lang grüne Naturwelle 100g",
-            ArtikelPreis: 49.90
-        };
-        this.apiService.addArtikel(artikel);
-    }
-
-    AktualisierterArtikel(ArtikelNr: number, ArtikelName: string, ArtikelPreis: number) {
-        const artikel: Artikel = {
-            ArtikelNr: 0,
-            ArtikelName: "Haare grün",
-            ArtikelBeschreibung: "50 cm lang grüne Naturwelle 100g",
-            ArtikelPreis: 49.90
-        };
-        this.apiService.updateArtikel(artikel);
     }
 }

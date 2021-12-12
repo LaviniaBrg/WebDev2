@@ -14,33 +14,38 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:ArtikelNr', (req, res) => {
-    const ArtikelNr = parseInt(req.params.KundenNr);
+    const ArtikelNr = parseInt(req.params.ArtikelNr);
     console.log(ArtikelNr);
-    ArtikelService.fetchEinenArtikel(ArtikelNr).then(() => {
-        res.status(204);
-        res.send();
+    ArtikelService.fetchEinenArtikel(ArtikelNr).then((data) => {
+        res.status(200);
+        res.json(data);
     }).catch((err) => {
+        console.log(err);
         res.status(500);
         res.send(err);
     })
 });
 
 router.delete('/:ArtikelNr', (req, res) => {
-    const ArtikelNr = parseInt(req.params.KundenNr);
-    console.log(ArtikelNr);
+    const ArtikelNr = parseInt(req.params.ArtikelNr);
     ArtikelService.deleteArtikel(ArtikelNr).then(() => {
         res.status(204);
         res.send();
     }).catch((err) => {
-        res.status(500);
-        res.send(err);
+        if (typeof (err) === 'number') {
+            res.status(err);
+        }
+        else {
+            res.status(500);
+        }
+        res.send();
     })
 });
 
 router.post('/', (req, res) => {
     const ArtikelName = req.body.ArtikelName;
     const ArtikelBeschreibung = req.body.ArtikelBeschreibung;
-    const ArtikelPreis = parseInt(req.body.ArtikelPreis);
+    const ArtikelPreis = parseFloat(req.body.ArtikelPreis);
     if (ArtikelName
         && ArtikelBeschreibung
         && ArtikelPreis) {
@@ -48,7 +53,7 @@ router.post('/', (req, res) => {
             ArtikelBeschreibung,
             ArtikelPreis).then(function () {
             res.status(201).send();
-            res.json(ArtikelUebersicht);
+            res.send();
         }).catch((err) => {
             res.status(500);
             res.send();
@@ -63,7 +68,7 @@ router.put('/:ArtikelNr', (req, res) => {
     const ArtikelNr = parseInt(req.params.ArtikelNr);
     const ArtikelName = req.body.ArtikelName;
     const ArtikelBeschreibung = req.body.ArtikelBeschreibung;
-    const ArtikelPreis = parseInt(req.body.ArtikelPreis);
+    const ArtikelPreis = parseFloat(req.body.ArtikelPreis);
     if (ArtikelNr
         && ArtikelName
         && ArtikelBeschreibung
@@ -73,7 +78,7 @@ router.put('/:ArtikelNr', (req, res) => {
                 ArtikelName,
                 ArtikelBeschreibung,
                 ArtikelPreis).then(() => {
-                res.status(201);
+                res.status(204);
                 res.send();
             }).catch((err) => {
                 res.status(500);
@@ -85,6 +90,4 @@ router.put('/:ArtikelNr', (req, res) => {
     } else {
         res.status(400).send("bad request");
     }
-
-
 });

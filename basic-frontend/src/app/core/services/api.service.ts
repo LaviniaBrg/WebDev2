@@ -19,20 +19,20 @@ export class ApiService {
         return this.http.get<Artikel[]>(`${this.baseUrl}/artikel`)
     }
 
-    get1Artikel(ArtikelId: string) {
-        return this.http.get<Artikel>(`${this.baseUrl}/artikel/${ArtikelId}`)
+    get1Artikel(ArtikelNr: string) {
+        return this.http.get<Artikel>(`${this.baseUrl}/artikel/${ArtikelNr}`)
     }
 
     deleteArtikel(artikelNr: number) {
-        return this.http.delete<any>(`${this.baseUrl}/artikel`, {body: {ArtikelNr: artikelNr}})
+        return this.http.delete<void>(`${this.baseUrl}/artikel/${artikelNr}`)
     }
 
     addArtikel(artikel: Artikel) {
-        return this.http.post<any>(`${this.baseUrl}/artikel`, {body: JSON.stringify(artikel)})
+        return this.http.post<void>(`${this.baseUrl}/artikel`, artikel)
     }
 
     updateArtikel(artikel: Artikel) {
-        return this.http.put<any>(`${this.baseUrl}/artikel`, {body: JSON.stringify(artikel)})
+        return this.http.put<void>(`${this.baseUrl}/artikel/${artikel.ArtikelNr}`, artikel)
     }
 
     getKunden() {

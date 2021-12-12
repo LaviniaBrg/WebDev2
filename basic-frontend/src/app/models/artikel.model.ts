@@ -1,3 +1,4 @@
+
 export interface Artikel {
     ArtikelNr: number,
     ArtikelName: string,

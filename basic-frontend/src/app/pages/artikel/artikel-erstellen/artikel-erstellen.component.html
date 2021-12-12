@@ -1,24 +1,15 @@
-<form (ngSubmit)="submitForm()" [formGroup]="alterArtikelForm" nz-form (keydown.enter)="submitForm()">
+<form (ngSubmit)="addArtikel()" [formGroup]="ArtikelForm" nz-form>
     <nz-form-item>
-        <nz-form-control [nzSpan]="8" [nzOffset]="4">
+        <nz-form-control [nzSpan]="8" [nzOffset]="4" >
             <table>
                 <td>
                     <button nz-button nzType="primary" routerLink="/artikel"><i nz-icon nzType="rollback" nzTheme="outline"></i>
                     </button>
                 </td>
                 <td>
-                    <button nz-button nzType="primary" type="submit"><i nz-icon nzTheme="outline" nzType="save"></i>
-                    </button>
+                    <button nz-button nzType="primary"  type="submit"><i nz-icon nzTheme="outline" nzType="save"></i></button>
                 </td>
             </table>
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-        <nz-form-label [nzSpan]="4" nzFor="ArtikelNr">
-            Nr.
-        </nz-form-label>
-        <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Artikelnummer ein">
-            <span nz-typography>{{artikel.ArtikelNr}}</span>
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -26,8 +17,7 @@
             Name
         </nz-form-label>
         <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie einen Artikelnamen ein">
-            <input nz-input formControlName="ArtikelName" placeholder="ArtikelName" type="text"
-                   [(ngModel)]="artikel.ArtikelName">
+            <input nz-input formControlName="ArtikelName" placeholder="ArtikelName" type="text" [(ngModel)]="artikel.ArtikelName">
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -35,8 +25,7 @@
             Beschreibung
         </nz-form-label>
         <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie eine Artikelbeschreibung ein">
-            <input nz-input formControlName="ArtikelBeschreibung" placeholder="ArtikelBeschreibung" type="text"
-                   [(ngModel)]="artikel.ArtikelBeschreibung">
+            <input nz-input formControlName="ArtikelBeschreibung" placeholder="ArtikelBeschreibung" type="text" [(ngModel)]="artikel.ArtikelBeschreibung">
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -44,8 +33,7 @@
             Preis
         </nz-form-label>
         <nz-form-control [nzSpan]="8" nzErrorTip="Bitte geben Sie einen Artikelpreis ein">
-            <input nz-input formControlName="ArtikelPreis" placeholder="ArtikelPreis" type="number"
-                   [(ngModel)]="artikel.ArtikelPreis">
+            <input nz-input formControlName="ArtikelPreis" placeholder="ArtikelPreis" type="number" [(ngModel)]="artikel.ArtikelPreis">
         </nz-form-control>
     </nz-form-item>
     <p style="color: red">* erforderlich</p>

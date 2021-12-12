@@ -54,8 +54,8 @@ export class BestellungBearbeitenComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        const BestellId = this.route.snapshot.paramMap.get('id');
-        this.apiService.getBestellung(BestellId).subscribe((bestellung) => {
+        const BestellNr = this.route.snapshot.paramMap.get('BestellNr');
+        this.apiService.getBestellung(BestellNr).subscribe((bestellung) => {
             this.bestellung = bestellung;
             console.log(bestellung)
         });

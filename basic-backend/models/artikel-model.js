@@ -12,11 +12,10 @@ export async function getAlleArtikel() {
     });
 }
 
-export async function getEinenArtikel() {
+export async function getEinenArtikel(ArtikelNr) {
     return new Promise((resolve, reject) => {
-        console.log(ArtikelNr);
         const sql = "SELECT * FROM Artikel WHERE ArtikelNr = ?;"
-        db.run(sql, [ArtikelNr], function (err, results) {
+        db.get(sql, [ArtikelNr], function (err, results) {
             if (err) {
                 reject(err);
             } else {
@@ -32,10 +31,15 @@ export async function deleteArtikel(ArtikelNr) {
         const sql = "DELETE FROM Artikel WHERE ArtikelNr = ?;"
         db.run(sql, [ArtikelNr], function (err) {
             if (err) {
-                console.log(err);
-                reject(err);
+                if (err.errno === 19) {
+                    reject(409);
+                }
+                else {
+                    console.log(err);
+                    reject(err);
+                }
             } else if (this.changes === 0) {
-                reject();
+                reject(404);
             } else {
                 resolve();
             }
@@ -59,11 +63,11 @@ export async function updateArtikel(ArtikelNr, ArtikelName, ArtikelBeschreibung,
 export async function addArtikel(ArtikelName, ArtikelBeschreibung, ArtikelPreis) {
     return new Promise((resolve, reject) => {
         db.run("INSERT INTO Artikel (ArtikelName, ArtikelBeschreibung, ArtikelPreis) VALUES ( ?, ?, ?);",
-            [ArtikelName, ArtikelBeschreibung, ArtikelPreis], (err, results) => {
+            [ArtikelName, ArtikelBeschreibung, ArtikelPreis], (err) => {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(results);
+                    resolve();
                 }
             })
     });
